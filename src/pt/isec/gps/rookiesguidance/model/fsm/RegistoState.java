@@ -6,4 +6,9 @@ public class RegistoState extends RookiesGuidanceStateAdapter{
     public RegistoState(RookiesGuidanceContext context, GestaoData data) {
         super(context, data);
     }
+
+    @Override
+    public RookiesGuidanceState getState() {
+        return  RookiesGuidanceState.REGISTO;
+    }
 }

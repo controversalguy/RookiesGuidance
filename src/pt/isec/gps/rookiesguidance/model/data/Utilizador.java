@@ -1,40 +1,43 @@
 package pt.isec.gps.rookiesguidance.model.data;
 
+import pt.isec.gps.rookiesguidance.model.data.infodata.Curso;
+
+import java.util.Objects;
+
 public class Utilizador {
 
     private boolean isGestor;
-    private long nrAluno; // id do aluno- 2019133920
-    private String nomeAluno;    //nome do aluno
-    private String emailAluno;   // email do aluno
-    private String curso;   // curso do aluno
+    private long id; // id do aluno- 2019133920
+    private String nome;    //nome do aluno
+    private String email;   // email do aluno
+    private Curso curso;   // curso do aluno
     private String password;
 
-    public Utilizador(boolean isGestor, long nrAluno, String nomeAluno, String emailAluno, String curso) {
+    public Utilizador(boolean isGestor, long id, String nome, String email, Curso curso) {
         this.isGestor = isGestor;
-        this.nrAluno = nrAluno;
-        this.nomeAluno = nomeAluno;
-        this.emailAluno = emailAluno;
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
         this.curso = curso;
     }
-
 
     public boolean isGestor() {
         return isGestor;
     }
 
-    public long getNrAluno() {
-        return nrAluno;
+    public long getId() {
+        return id;
     }
 
-    public String getNomeAluno() {
-        return nomeAluno;
+    public String getNome() {
+        return nome;
     }
 
-    public String getEmailAluno() {
-        return emailAluno;
+    public String getEmai() {
+        return email;
     }
 
-    public String getCurso() {
+    public Curso getCurso() {
         return curso;
     }
 
@@ -46,16 +49,27 @@ public class Utilizador {
         this.password = password;
     }
 
-    public void setCurso(String curso) {
+    public void setCurso(Curso curso) {
         this.curso = curso;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !(o instanceof Utilizador)) return false;
+        Utilizador user = (Utilizador) o;
+        return Objects.equals(id,user.getId());
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+    @Override
     public String toString() {
         return
-                "nrAluno:" + nrAluno +
-                ", nomeAluno:'" + nomeAluno +
-                ", emailAluno:'" + emailAluno +
+                "nrAluno:" + id +
+                ", nomeAluno:'" + nome +
+                ", emailAluno:'" + email +
                 ", curso:'" + curso ;
     }
 }

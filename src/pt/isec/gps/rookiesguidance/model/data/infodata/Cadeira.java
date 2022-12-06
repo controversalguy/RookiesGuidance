@@ -7,7 +7,10 @@ public class Cadeira {
     private ArrayList<String> professores;
     private ArrayList<String> salas;
     private String nome;
-
+    private int ano;
+    public int getAno() {
+        return ano;
+    }
     public ArrayList<String> getProfessores() {
         return professores;
     }

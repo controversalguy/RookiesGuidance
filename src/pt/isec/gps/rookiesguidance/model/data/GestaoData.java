@@ -1,33 +1,123 @@
 package pt.isec.gps.rookiesguidance.model.data;
 
+import pt.isec.gps.rookiesguidance.bd.ConnDB;
+import pt.isec.gps.rookiesguidance.model.data.infodata.Curso;
 import pt.isec.gps.rookiesguidance.model.data.infodata.Informacao;
 
+import java.sql.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GestaoData {
-    private Informacao informacoes;
-    private ArrayList<Novidade> novidades;
-    private ArrayList<Evento> eventos;
+    ConnDB dbconn;
 
-    public boolean addlocalA(String local){return informacoes.getLocalAlimentacao().add(local);}
-    public boolean addlocalE(String local){return informacoes.getLocalEstudo().add(local);}
-//    public boolean removeLocalA(int pos){
-//
-//    }
-//    public boolean removeLocalE(int pos){
-//
-//    }
-//    public boolean addNovidade(Novidade nov){
-//        novidades.add(nov);
-//    }
-//    public boolean remNovidade(Novidade nov){
-//        novidades.remove(nov);
-//    }
-//    public boolean addEvento(Evento ev){
-//        eventos.add(ev);
-//    }
-//    public boolean remEvento(Evento ev){
-//        eventos.remove(ev);
-//    }
+
+    public GestaoData() throws SQLException {
+        dbconn = new ConnDB();
+    }
+
+    public boolean adicionaUtilizador(int nrAluno, String nome, String email, String password, String curso) throws SQLException {
+        if (dbconn.registaNovoUtilizador(nrAluno, nome, email, password, curso))
+            return true;
+
+        return false;
+    }
+
+    public boolean adicionalocalA(String local,int tipo,long idGestor)throws SQLException {
+        if(dbconn.addlocal(local,tipo,idGestor))
+            return true;
+        return false;
+    }
+
+    public boolean adicionalocalE(String local,int tipo,long idGestor)throws SQLException{
+        if(dbconn.addlocal(local,tipo,idGestor))
+            return true;
+        return false;
+    }
+
+    public boolean removeLocalA(int pos,long idGestor)throws SQLException {
+        if(dbconn.removelocal(pos,idGestor))
+            return true;
+        return false;
+    }
+
+    public boolean removeLocalE(int pos,long idGestor) throws SQLException{
+        if(dbconn.removelocal(pos,idGestor))
+            return true;
+        return false;
+    }
+
+    public boolean adicionaNovidade(Novidade nov)throws SQLException{
+        if(dbconn.addNovidade(nov.getTitulo(), nov.getDescricao(),nov.getId()))
+            return true;
+        return false;
+    }
+
+    public boolean removeNovidade(Novidade nov,long idGestor)throws SQLException{
+        if(dbconn.removeNovidade(nov.getId(),idGestor))
+            return true;
+        return false;
+    }
+
+    public boolean adicionaEvento(Evento ev,long idGestor)throws SQLException{
+        if(dbconn.adicionaEvento(idGestor, ev.getTipo(),ev.getLocalizacao(), ev.getData()))
+            return true;
+        return false;
+    }
+
+    public boolean removeEvento(Evento ev,long idGestor)throws SQLException{
+        if(dbconn.removeEvento(ev.getId(),idGestor))
+            return true;
+        return false;
+    }
+
+    public boolean editaEvento(int id,String campo,int tipo,long idGestor)throws SQLException{
+        if(dbconn.editaEvento(id,campo,tipo,idGestor))
+            return true;
+        return false;
+    }
+
+    public boolean adicionaPergunta(Pergunta p,long idGestor)throws SQLException{
+        if(dbconn.adicionaPergunta(p.getPergunta(),idGestor))
+            return true;
+        return false;
+    }
+
+    public boolean removePergunta(int pos,long idGestor)throws SQLException{
+        if(dbconn.removePergunta(pos,idGestor))
+            return true;
+        return false;
+    }
+
+    public boolean adicionaResposta(int id, String resposta,long idGestor)throws SQLException{
+        if(dbconn.adicionaResposta(resposta,id,idGestor))
+            return true;
+        return false;
+    }
+
+    public boolean inscreveEmEvento(long idUser, int idEvento) throws SQLException{
+        if(dbconn.inscreveEmEvento(idUser,idEvento))
+            return true;
+        return false;
+    }
+
+    public boolean editaPassword(long idUser, String campo) throws SQLException {
+        if(dbconn.editaUtilizador(idUser,campo, 0))
+            return true;
+        return false;
+    }
+
+    public boolean editaCurso(long idUser, String campo) throws SQLException {
+        if(dbconn.editaUtilizador(idUser,campo, 1))
+            return true;
+        return false;
+    }
+
+    public boolean removePerfil(int idUser)throws SQLException {
+        if(dbconn.removeUtilizador(idUser))
+            return true;
+        return false;
+    }
 
 }

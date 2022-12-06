@@ -8,8 +8,8 @@ public class Informacao {
     private ArrayList<String> localAlimentacao;
     private ArrayList<String> localEstudo;
 
-    public Informacao(ArrayList<Curso> cursos, ArrayList<String> localAlimentacao, ArrayList<String> localEstudo) {
-        this.cursos = cursos;
+    public Informacao() {
+        this.cursos = new ArrayList<>();
         this.localAlimentacao = new ArrayList<>();
         this.localEstudo = new ArrayList<>();
     }
@@ -18,11 +18,13 @@ public class Informacao {
         return cursos;
     }
 
-    public ArrayList<String> getLocalAlimentacao() {
+    public ArrayList<String> getLocalA() {
+
         return localAlimentacao;
+
     }
 
-    public ArrayList<String> getLocalEstudo() {
+    public ArrayList<String> getLocalE() {
         return localEstudo;
     }
 

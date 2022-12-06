@@ -6,4 +6,9 @@ public class LoginState extends RookiesGuidanceStateAdapter{
     public LoginState(RookiesGuidanceContext context, GestaoData data) {
         super(context, data);
     }
+
+    @Override
+    public RookiesGuidanceState getState() {
+        return RookiesGuidanceState.LOGIN;
+    }
 }

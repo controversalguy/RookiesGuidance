@@ -7,6 +7,8 @@ public class AutenticadorState extends RookiesGuidanceStateAdapter{
         super(context, data);
     }
 
-
-
+    @Override
+    public RookiesGuidanceState getState() {
+        return RookiesGuidanceState.AUTENTICADOR;
+    }
 }

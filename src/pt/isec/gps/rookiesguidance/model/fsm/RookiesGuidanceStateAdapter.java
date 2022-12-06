@@ -13,4 +13,5 @@ abstract public class RookiesGuidanceStateAdapter implements IRookiesGuidanceSta
     }
 
 
+
 }

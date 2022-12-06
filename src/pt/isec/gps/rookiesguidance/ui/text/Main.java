@@ -1,16 +1,21 @@
 package pt.isec.gps.rookiesguidance.ui.text;
 
-import pt.isec.gps.rookiesguidance.bd.ComandosDB;
+import javafx.application.Application;
 import pt.isec.gps.rookiesguidance.bd.ConnDB;
+import pt.isec.gps.rookiesguidance.ui.gui.MainJFX;
 
 import java.sql.SQLException;
 
 public class Main {
-    public static void main(String[] args) throws SQLException {
-        ComandosDB cmd = new ComandosDB();
-//        cmd.criaTabela();
-//        cmd.registo(2020020798,"Joao Cunha","a2020020798@isec.pt","123456","LEI");
-        if( cmd.EfetuaLogin("a2020020798@isec.pt","123456") != -1)
-            System.out.println("Login efetuado com sucesso");
-        }
+    public static void main(String[] args){
+        Application.launch(MainJFX.class,args);
+    }
+//        ConnDB cDb = new ConnDB();
+//        cDb.criaTabelas();
+////        if (cDb.removeRegisto(2019133920))
+////            System.out.println("Eliminado aluno com sucesso!");
+//        if (cDb.registaNovoUtilizador(2019133920, "Francisco Simões", "a2019133920@isec.pt", "IS3C..0", "LEI"))
+//            System.out.println("Registado com Sucesso!");
+//        //cDb.addNovidade("luva pedreiro","RECEBAAAAAAAAAAAAAAAAAA",2019133920);
+//    }
 }

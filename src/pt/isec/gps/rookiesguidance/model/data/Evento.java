@@ -1,13 +1,24 @@
 package pt.isec.gps.rookiesguidance.model.data;
 
+import jdk.jfr.Event;
+
+import java.util.Objects;
+
 public class Evento {
 
     private String tipo;
-    private String local;
+    private String localizacao;
     private String hora;
     private String data;
     private int id;
 
+    private static int count = 0;
+
+    public Evento(String tipo, String localizacao, String hora, String data){
+        this.id = count++;
+        this.tipo = tipo;
+
+    }
     public String getTipo() {
         return tipo;
     }
@@ -16,12 +27,12 @@ public class Evento {
         this.tipo = tipo;
     }
 
-    public String getLocal() {
-        return local;
+    public String getLocalizacao() {
+        return localizacao;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
+    public void setLocalizacao(String local) {
+        this.localizacao = local;
     }
 
     public String getHora() {
@@ -46,5 +57,18 @@ public class Evento {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !(o instanceof Novidade)) return false;
+        Evento ev = (Evento) o;
+        return Objects.equals(id,ev.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
