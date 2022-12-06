@@ -28,10 +28,10 @@ public class ConnDB {
             String evento = """
                     CREATE TABLE IF NOT EXISTS evento
                     (id INTEGER NOT NULL,
-                    id_gestor INTEGER NOT NULL,
                     tipo TEXT NOT NULL,
                     data_hora TEXT NOT NULL,
-                    local TEXT NOT NULL)
+                    local TEXT NOT NULL,
+                    id_gestor INTEGER NOT NULL)
                     """;
 
             String utilizador = """
@@ -105,7 +105,7 @@ public class ConnDB {
         rs.close();
         return false;
     } // feito
-    public boolean registaNovoUtilizador(int nrAluno, String nome, String email, String password, String curso) throws SQLException {
+    public boolean registaNovoUtilizador(int nrAluno, String nome, String curso, String email, String password) throws SQLException {
         if (nome == null || email == null || password == null || curso == null)
             return false;
 
@@ -130,7 +130,7 @@ public class ConnDB {
             verificaExistente += " WHERE numero='" + nrAluno + "'";
             ResultSet resultSet = statement.executeQuery(verificaExistente);
             if (!resultSet.next()) {
-                String sqlQuery = "INSERT INTO utilizador VALUES ('" + nrAluno + "','" + nome + "','" + email + "','" + password + "','" + curso + "','" + isGestor + "','"
+                String sqlQuery = "INSERT INTO utilizador VALUES ('" + nrAluno + "','" +  nome + "','" + curso + "','" +  email + "','" + password + "','" + isGestor + "','"
                         + 0 + "')";
                 statement.executeUpdate(sqlQuery);
                 statement.close();
@@ -233,7 +233,7 @@ public class ConnDB {
                 String verificaExistente = "SELECT * FROM novidade WHERE id=" + id;
                 ResultSet resultSet = statement.executeQuery(verificaExistente);
                 if (resultSet.next()) { // se existir a novidade com o id recebido
-                    statement.executeUpdate("DELETE FROM novidade WHERE id=" + id);
+                    statement.executeUpdate("DELETE FROM novidade "); //WHERE id=" + id
                     resultSet.close();
                     statement.close();
                     return true;
@@ -254,7 +254,7 @@ public class ConnDB {
             String verificaExistente = "SELECT * FROM utilizador WHERE numero = '" + idGestor + "' AND isGestor = '" + 1 + "'";
             ResultSet rs = statement.executeQuery(verificaExistente);
             if (rs.next()) { // se esse utilizador for gestor
-                String verificaEvento = "SELECT * FROM evento WHERE localizacao = '" + localizacao + "' AND data_hora = '" + data_hora + "'";
+                String verificaEvento = "SELECT * FROM evento WHERE local = '" + localizacao + "' AND data_hora = '" + data_hora + "'";
                 ResultSet resultSet = statement.executeQuery(verificaEvento);
                 if (!resultSet.next()) { // se não houver já um evento a essa hora nesse local
                     String sqlQuery = "INSERT INTO evento VALUES ((SELECT COUNT(*) FROM evento),'" + tipo + "','" + data_hora + "','" + localizacao + "','" + idGestor + "')";
@@ -341,7 +341,7 @@ public class ConnDB {
                 ResultSet rs = statement.executeQuery(verificaExistente);
 
                 if (!rs.next()) {
-                    String sqlQuery = "INSERT INTO pergunta VALUES ((SELECT COUNT(*) FROM pergunta),'" + pergunta + "','" +idUtilizador + "',)";
+                    String sqlQuery = "INSERT INTO pergunta VALUES ((SELECT COUNT(*) FROM pergunta),'" + pergunta + "','" +idUtilizador + "')";
                     statement.executeUpdate(sqlQuery);
                     statement.close();
                     return true;
@@ -454,10 +454,10 @@ public class ConnDB {
 
             switch (tipo) {
                 case 0 -> {
-                    sqlQuery = "UPDATE utilizador SET password='" + campo + "' WHERE id='" + idUtilizador + "'";
+                    sqlQuery = "UPDATE utilizador SET password='" + campo + "' WHERE numero='" + idUtilizador + "'";
                 }
                 case 1 -> {
-                    sqlQuery = "UPDATE evento SET curso='" + campo + "' WHERE id='" + idUtilizador + "'";
+                    sqlQuery = "UPDATE utilizador SET curso='" + campo + "' WHERE numero='" + idUtilizador + "'";
                 }
             }
 
@@ -479,8 +479,8 @@ public class ConnDB {
         String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idUtilizador + "'";
         ResultSet resultSet = statement.executeQuery(verificaUtilizador);
         if (resultSet.next()) { // se esse utilizador existe
-            statement.executeUpdate("DELETE FROM utilizador WHERE id=" + idUtilizador);
-            statement.executeUpdate(sqlQuery);
+            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + idUtilizador);
+
             resultSet.close();
             statement.close();
             return true;

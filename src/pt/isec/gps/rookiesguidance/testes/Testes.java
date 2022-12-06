@@ -13,7 +13,7 @@ public class Testes {
     void testeRegisto() throws SQLException {
         System.out.println("Teste Registo");
         ConnDB connDB = new ConnDB();
-        Assertions.assertFalse(connDB.registaNovoUtilizador(2019133920, "Francisco Simões", "a2019133920@isec.pt", "IS3C..0", "LEI"));
+        Assertions.assertTrue(connDB.registaNovoUtilizador(2019133920, "Francisco Simões","LEI" ,"a2019133920@isec.pt", "IS3C..0"));
     }
 
     //Fazer login
@@ -21,7 +21,7 @@ public class Testes {
     void testeLogin() throws SQLException {
         System.out.println("Teste login");
         ConnDB connDB = new ConnDB();
-        Assertions.assertTrue(connDB.loginUtilizador("a2019133920@isec.pt","IS3C..0"));
+        Assertions.assertFalse(connDB.loginUtilizador("a2019133920@isec.pt","IS3C..1"));
     }
 
     //Terminar sessão
@@ -31,7 +31,7 @@ public class Testes {
     void testeEditaPassword() throws SQLException {
         System.out.println("Teste edita password");
         ConnDB connDB = new ConnDB();
-        Assertions.assertTrue(connDB.editaUtilizador(2019133920, "IS3C..1", 0));
+        Assertions.assertFalse(connDB.editaUtilizador(2019133920, "IS3C..1", 0));
     }
 
     //Editar perfil (curso)
@@ -55,7 +55,7 @@ public class Testes {
     void testeAddEventos() throws SQLException {
         System.out.println("Teste adiciona eventos");
         ConnDB connDB = new ConnDB();
-        Assertions.assertTrue(connDB.adicionaEvento(2019133920,"Praxe", "Parque Verde", "Quarta-feira 15h"));
+        Assertions.assertTrue(connDB.adicionaEvento(2019133920,"Praxe", "ISEC", "Quinta-feira 15h"));
     }
 
     //Adicionar eventos
@@ -63,7 +63,7 @@ public class Testes {
     void testeEditarEventos() throws SQLException {
         System.out.println("Teste Editar novidades novidades");
         ConnDB connDB = new ConnDB();
-        Assertions.assertTrue(connDB.editaEvento(1,"Praxe",0 , 2019133920));
+        Assertions.assertFalse(connDB.editaEvento(1,"Praxe",0 , 2019133920));
         //Assertions.assertTrue(connDB.editaEvento(1,"Parque verde",1 , 2019133920));
     }
 
@@ -88,7 +88,7 @@ public class Testes {
     void testeRemoveInfo() throws SQLException {
         System.out.println("Remover Informacao");
         ConnDB connDB = new ConnDB();
-        Assertions.assertTrue(connDB.removelocal(1, 0));
+        Assertions.assertFalse(connDB.removelocal(1, 0));
     }
 
     //Adicionar Novidades
@@ -104,7 +104,7 @@ public class Testes {
     void testeRemoveNov() throws SQLException {
         System.out.println("Remover Novidades");
         ConnDB connDB = new ConnDB();
-        Assertions.assertTrue(connDB.removeNovidade(1 ,2019133920));
+        Assertions.assertTrue(connDB.removeNovidade(0 ,2019133920));
     }
 
     //Adicionar uma Pergunta
@@ -120,7 +120,7 @@ public class Testes {
     void testeRespondePerg() throws SQLException {
         System.out.println("Responde a uma Pergunta");
         ConnDB connDB = new ConnDB();
-        Assertions.assertTrue(connDB.adicionaResposta("Respondi" ,1,2019133920));
+        Assertions.assertFalse(connDB.adicionaResposta("Respondi" ,1,2019133920));
     }
 
     //Remove uma Pergunta
@@ -128,7 +128,7 @@ public class Testes {
     void testeRemovePerg() throws SQLException {
         System.out.println("Remove Pergunta");
         ConnDB connDB = new ConnDB();
-        Assertions.assertTrue(connDB.removePergunta(1 ,2019133920));
+        Assertions.assertFalse(connDB.removePergunta(1 ,2019133920));
     }
 
 
