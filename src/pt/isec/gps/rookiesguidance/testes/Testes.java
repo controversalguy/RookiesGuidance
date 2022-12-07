@@ -1,3 +1,4 @@
+/*
 package pt.isec.gps.rookiesguidance.testes;
 
 import org.junit.jupiter.api.Assertions;
@@ -134,3 +135,4 @@ public class Testes {
 
 
 }
+*/

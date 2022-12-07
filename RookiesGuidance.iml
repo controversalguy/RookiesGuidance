@@ -43,5 +43,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="Java" level="application" />
+    <orderEntry type="library" name="lib" level="application" />
   </component>
 </module>
