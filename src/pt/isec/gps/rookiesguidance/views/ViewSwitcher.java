@@ -22,6 +22,7 @@ public class ViewSwitcher {
 
         try {
             Parent root = FXMLLoader.load(ViewSwitcher.class.getResource(view.getFilename()));
+
             scene.setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();

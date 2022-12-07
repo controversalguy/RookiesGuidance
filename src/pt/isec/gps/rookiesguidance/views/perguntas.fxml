@@ -10,7 +10,7 @@
 
 <AnchorPane depthTest="DISABLE" prefHeight="400.0" prefWidth="680.0" style="-fx-background-color: #ffffff;"
             xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="pt.isec.gps.rookiesguidance.views.Controller.HomePageController">
+            fx:controller="pt.isec.gps.rookiesguidance.views.Controller.PerguntasController">
     <HBox prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #38819c;">
         <ImageView fitHeight="79.0" fitWidth="154.0" pickOnBounds="true" preserveRatio="true">
             <cursor>

@@ -29,7 +29,8 @@ public class MainJFX extends Application {
 
         ViewSwitcher.setScene(scene);
         ViewSwitcher.switchTo(View.LOGIN);
-
+        stage.setMinWidth(690);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
 
