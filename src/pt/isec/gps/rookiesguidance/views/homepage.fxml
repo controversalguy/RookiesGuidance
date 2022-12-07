@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="677.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.HomePageController">
+    <HBox prefHeight="63.0" prefWidth="677.0" style="-fx-background-color: #38819c;">
+        <ImageView fitHeight="79.0" fitWidth="154.0" pickOnBounds="true" preserveRatio="true">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <image>
+                <Image url="@../images/RookiesBanner.png" />
+            </image>
+        </ImageView>
+        <Button layoutX="350.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="71.0" style="-fx-background-color: #38819c;" text="Eventos" textFill="WHITE" />
+      <Button mnemonicParsing="false" prefHeight="61.0" prefWidth="89.0" style="-fx-background-color: #38819c;" text="Informações" textFill="WHITE" />
+      <Button layoutX="235.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="80.0" style="-fx-background-color: #38819c;" text="Perguntas" textFill="WHITE" />
+      <Button layoutX="306.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="71.0" style="-fx-background-color: #38819c;" text="Perfil" textFill="WHITE" />
+        <Button layoutX="390.0" layoutY="10.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="110.0" text="Terminar sessão" textFill="WHITE">
+            <HBox.margin>
+                <Insets left="120.0" right="10.0" top="20.0" />
+            </HBox.margin>
+        </Button>
+    </HBox>
+</AnchorPane>
