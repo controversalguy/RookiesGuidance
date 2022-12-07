@@ -9,12 +9,11 @@ public class LoginController {
 
     @FXML
     void buttonPressed() {
-        ViewSwitcher.switchTo(View.MAIN);
+        ViewSwitcher.switchTo(View.HOMEPAGE);
     }
 
     @FXML
     void onButtonRegisto() {
         ViewSwitcher.switchTo(View.REGISTO);
     }
-
 }

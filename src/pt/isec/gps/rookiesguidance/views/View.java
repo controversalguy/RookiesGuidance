@@ -3,6 +3,7 @@ package pt.isec.gps.rookiesguidance.views;
 public enum View {
     LOGIN("login.fxml"),
     REGISTO("registo.fxml"),
+    HOMEPAGE("homepage.fxml"),
     MAIN("main.fxml");
 
     private String filename;
