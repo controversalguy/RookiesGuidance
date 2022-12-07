@@ -24,12 +24,13 @@ public class MainJFX extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         Scene scene = new Scene(new Pane());
 
         ViewSwitcher.setScene(scene);
         ViewSwitcher.switchTo(View.LOGIN);
         stage.setMinWidth(690);
+        stage.setMinHeight(500);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
