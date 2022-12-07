@@ -13,38 +13,34 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;"
             xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="pt.isec.gps.rookiesguidance.views.Controller.LoginController">
-    <children>
-        <ImageView fitHeight="168.0" fitWidth="228.0" layoutX="227.0" layoutY="14.0" pickOnBounds="true"
-                   preserveRatio="true">
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
-            <image>
-                <Image url="@../images/Rookies.png"/>
-            </image>
-        </ImageView>
-        <Button layoutX="115.0" layoutY="188.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="158.0"
-                style="-fx-background-color: #53A7C6;" text="Login" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="15.0"/>
-            </font>
-        </Button>
-        <Button layoutX="343.0" layoutY="188.0" mnemonicParsing="false" onAction="#onButtonRegisto" prefHeight="26.0"
-                prefWidth="158.0" style="-fx-background-color: #38819c;" text="Registo" textFill="WHITE">
-            <font>
-                <Font size="15.0"/>
-            </font>
-        </Button>
-        <TextField accessibleHelp="email" layoutX="116.0" layoutY="248.0" prefHeight="26.0" prefWidth="390.0"
-                   promptText="Email"/>
-        <Button layoutX="251.0" layoutY="349.0" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="26.0"
-                prefWidth="117.0" style="-fx-background-color: #38819c;" text="Iniciar Sessão" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="12.0"/>
-            </font>
-        </Button>
-        <PasswordField layoutX="115.0" layoutY="303.0" prefHeight="26.0" prefWidth="390.0" promptText="Palavra-passe"/>
-        <Text layoutX="116.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email"/>
-        <Text layoutX="116.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Palavra-passe"/>
-    </children>
+    <ImageView fitHeight="168.0" fitWidth="228.0" layoutX="227.0" layoutY="14.0" pickOnBounds="true"
+               preserveRatio="true">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+            <Image url="@../images/Rookies.png"/>
+    </ImageView>
+    <Button layoutX="115.0" layoutY="188.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="158.0"
+            style="-fx-background-color: #53A7C6;" text="Login" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="15.0"/>
+        </font>
+    </Button>
+    <Button layoutX="343.0" layoutY="188.0" mnemonicParsing="false" onAction="#onButtonRegisto" prefHeight="26.0"
+            prefWidth="158.0" style="-fx-background-color: #38819c;" text="Registo" textFill="WHITE">
+        <font>
+            <Font size="15.0"/>
+        </font>
+    </Button>
+    <TextField accessibleHelp="email" layoutX="116.0" layoutY="248.0" prefHeight="26.0" prefWidth="390.0"
+               promptText="Email"/>
+    <Button layoutX="251.0" layoutY="349.0" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="26.0"
+            prefWidth="117.0" style="-fx-background-color: #38819c;" text="Iniciar Sessão" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="12.0"/>
+        </font>
+    </Button>
+    <PasswordField layoutX="115.0" layoutY="303.0" prefHeight="26.0" prefWidth="390.0" promptText="Palavra-passe"/>
+    <Text layoutX="116.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email"/>
+    <Text layoutX="116.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Palavra-passe"/>
 </AnchorPane>
