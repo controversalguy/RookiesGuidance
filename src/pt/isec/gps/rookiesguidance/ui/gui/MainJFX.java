@@ -25,14 +25,6 @@ public class MainJFX extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-      /*  RootPane root = new RootPane(sistemManager);
-        Scene scene = new Scene(root,700,750);
-        stage.setScene(scene);
-        stage.setTitle("Rookie's Guidance");
-        stage.setMinWidth(700);
-        stage.setMinHeight(750);
-        stage.show();*/
-
         Scene scene = new Scene(new Pane());
 
         ViewSwitcher.setScene(scene);
