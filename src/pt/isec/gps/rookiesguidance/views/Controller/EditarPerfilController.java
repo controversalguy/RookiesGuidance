@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import pt.isec.gps.rookiesguidance.views.View;
 import pt.isec.gps.rookiesguidance.views.ViewSwitcher;
 
-public class PerfilController {
+public class EditarPerfilController {
     @FXML
     void onEventosPressed() {
         ViewSwitcher.switchTo(View.EVENTOS);
@@ -29,7 +29,4 @@ public class PerfilController {
     void onTerminarSessaoPressed() {
         ViewSwitcher.switchTo(View.LOGIN);
     }
-
-    @FXML
-    void onEditarPerfilPressed() {ViewSwitcher.switchTo(View.EDITAR_PERFIL);}
 }

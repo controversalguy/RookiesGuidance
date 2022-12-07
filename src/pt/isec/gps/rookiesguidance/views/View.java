@@ -4,8 +4,8 @@ public enum View {
     LOGIN("login.fxml"),
     REGISTO("registo.fxml"),
     HOMEPAGE("homepage.fxml"),
-    MAIN("main.fxml"),
     PERFIL("perfil.fxml"),
+    EDITAR_PERFIL("editarPerfil.fxml"),
     EVENTOS("eventos.fxml"),
     INFORMACOES("informacoes.fxml"),
     PERGUNTAS("perguntas.fxml");
