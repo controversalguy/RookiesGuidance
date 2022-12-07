@@ -15,9 +15,7 @@
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
-            <image>
                 <Image url="@../images/RookiesBanner.png" />
-            </image>
         </ImageView>
         <Button layoutX="350.0" layoutY="10.0" mnemonicParsing="false" onAction="#onEventosPressed" prefHeight="61.0" prefWidth="71.0" style="-fx-background-color: #38819c;" text="Eventos" textFill="WHITE" />
         <Button mnemonicParsing="false" onAction="#onInformacoesPressed" prefHeight="61.0" prefWidth="89.0" style="-fx-background-color: #38819c;" text="Informações" textFill="WHITE" />

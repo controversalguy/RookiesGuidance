@@ -13,14 +13,11 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="480.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.RegistoController">
-    <children>
         <ImageView fitHeight="168.0" fitWidth="228.0" layoutX="226.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
-            <image>
                 <Image url="@../images/Rookies.png" />
-            </image>
         </ImageView>
         <Button layoutX="132.0" layoutY="120.0" mnemonicParsing="false" onAction="#onButtonLogin" prefHeight="26.0" prefWidth="158.0" style="-fx-background-color: #38819c;" text="Login" textFill="WHITE">
             <font>
@@ -52,5 +49,4 @@
             </items>
         </MenuButton>
         <TextField accessibleHelp="email" layoutX="115.0" layoutY="284.0" prefHeight="26.0" prefWidth="390.0" promptText="Email:" />
-    </children>
 </AnchorPane>
