@@ -7,25 +7,49 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane depthTest="DISABLE" prefHeight="400.0" prefWidth="680.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.HomePageController">
-    <HBox prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #38819c;">
-        <ImageView fitHeight="79.0" fitWidth="154.0" pickOnBounds="true" preserveRatio="true">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-            <image>
-                <Image url="@../images/RookiesBanner.png" />
-            </image>
-        </ImageView>
-        <Button layoutX="350.0" layoutY="10.0" mnemonicParsing="false" onAction="#onEventosPressed" prefHeight="61.0" prefWidth="71.0" style="-fx-background-color: #38819c;" text="Eventos" textFill="WHITE" />
-        <Button mnemonicParsing="false" onAction="#onInformacoesPressed" prefHeight="61.0" prefWidth="89.0" style="-fx-background-color: #38819c;" text="Informações" textFill="WHITE" />
-        <Button layoutX="235.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPerguntasPressed" prefHeight="61.0" prefWidth="80.0" style="-fx-background-color: #38819c;" text="Perguntas" textFill="WHITE" />
-        <Button layoutX="306.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPerfilPressed" prefHeight="61.0" prefWidth="71.0" style="-fx-background-color: #38819c;" text="Perfil" textFill="WHITE" />
-        <Button layoutX="390.0" layoutY="10.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="28.0" prefWidth="106.0" text="Terminar sessão" textFill="WHITE">
-            <HBox.margin>
-                <Insets left="120.0" right="10.0" top="20.0" />
-            </HBox.margin>
-        </Button>
-    </HBox>
+   <children>
+      <HBox prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #38819c;">
+         <children>
+            <ImageView fitHeight="79.0" fitWidth="154.0" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@../images/RookiesBanner.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="350.0" layoutY="10.0" mnemonicParsing="false" onAction="#onEventosPressed" prefHeight="62.0" prefWidth="81.0" style="-fx-background-color: #38819c;" text="Eventos" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#onInformacoesPressed" prefHeight="62.0" prefWidth="118.0" style="-fx-background-color: #38819c;" text="Informações" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="235.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPerguntasPressed" prefHeight="62.0" prefWidth="97.0" style="-fx-background-color: #38819c;" text="Perguntas" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="306.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPerfilPressed" prefHeight="62.0" prefWidth="76.0" style="-fx-background-color: #38819c;" text="Perfil" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="390.0" layoutY="10.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="28.0" prefWidth="129.0" text="Terminar sessão">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="120.0" right="10.0" top="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>

@@ -3,11 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane depthTest="DISABLE" prefHeight="400.0" prefWidth="680.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.PerfilController">
     <HBox prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #38819c;">
@@ -17,18 +19,46 @@
             </cursor>
             <Image url="@../images/RookiesBanner.png" />
         </ImageView>
-        <Button layoutX="350.0" layoutY="10.0" mnemonicParsing="false" onAction="#onEventosPressed" prefHeight="61.0" prefWidth="71.0" style="-fx-background-color: #38819c;" text="Eventos" textFill="WHITE" />
-        <Button mnemonicParsing="false" onAction="#onInformacoesPressed" prefHeight="61.0" prefWidth="89.0" style="-fx-background-color: #38819c;" text="Informações" textFill="WHITE" />
-        <Button layoutX="235.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPerguntasPressed" prefHeight="61.0" prefWidth="80.0" style="-fx-background-color: #38819c;" text="Perguntas" textFill="WHITE" />
-        <Button layoutX="306.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="71.0" style="-fx-background-color: #38819c;" text="Perfil">
+        <Button layoutX="350.0" layoutY="10.0" mnemonicParsing="false" onAction="#onEventosPressed" prefHeight="62.0" prefWidth="81.0" style="-fx-background-color: #38819c;" text="Eventos" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-        <Button layoutX="390.0" layoutY="10.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="28.0" prefWidth="106.0" text="Terminar sessão" textFill="WHITE">
+        <Button mnemonicParsing="false" onAction="#onInformacoesPressed" prefHeight="62.0" prefWidth="118.0" style="-fx-background-color: #38819c;" text="Informações" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+        <Button layoutX="235.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPerguntasPressed" prefHeight="62.0" prefWidth="97.0" style="-fx-background-color: #38819c;" text="Perguntas" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+        <Button layoutX="306.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPerfilPressed" prefHeight="62.0" prefWidth="76.0" style="-fx-background-color: #38819c;" text="Perfil">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+        <Button layoutX="390.0" layoutY="10.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="28.0" prefWidth="129.0" text="Terminar sessão">
             <HBox.margin>
                 <Insets left="120.0" right="10.0" top="20.0" />
             </HBox.margin>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
         </Button>
     </HBox>
-
+   <Text layoutX="284.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Perfil" textAlignment="CENTER" wrappingWidth="112.3363037109375">
+      <font>
+         <Font name="System Bold" size="23.0" />
+      </font>
+   </Text>
+   <TextField layoutX="235.0" layoutY="200.0" prefHeight="26.0" prefWidth="210.0" />
+   <TextField layoutX="234.0" layoutY="256.0" prefHeight="26.0" prefWidth="210.0" />
+   <Text layoutX="318.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número" />
+   <Text layoutX="325.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Curso" />
+   <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="196.0" layoutY="324.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: #38819c;" text="Editar Perfil" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font></Button>
+   <Button alignment="CENTER" layoutX="369.0" layoutY="324.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" style="-fx-background-color: #38819c;" text="Eliminar Perfil" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font></Button>
 </AnchorPane>
