@@ -1,29 +1,16 @@
 package pt.isec.gps.rookiesguidance.views.Controller;
 
-import com.sun.webkit.ColorChooser;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import org.w3c.dom.css.RGBColor;
 import pt.isec.gps.rookiesguidance.views.View;
 import pt.isec.gps.rookiesguidance.views.ViewSwitcher;
-
-import java.awt.*;
 import java.net.URL;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class PerguntasController implements Initializable {
@@ -50,7 +37,6 @@ public class PerguntasController implements Initializable {
         VBox group = new VBox(hBox1,adicionaPergunta);
         hBox.setBackground(new Background(new BackgroundFill(c, CornerRadii.EMPTY, Insets.EMPTY)));
         vBox.getChildren().add(group);
-
     }
 
 
@@ -84,43 +70,5 @@ public class PerguntasController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
     }
-//    @FXML
-//    public void respondePergunta1() {
-//        javafx.scene.control.TextField t = new javafx.scene.control.TextField();
-//        t.setMinSize(300, 20);
-//        HBox h = new HBox(new Text("Resposta:"),t);
-//        pergunta1.getChildren().add(h);
-//    }
-//    @FXML
-//    public void respondePergunta2() {
-//        javafx.scene.control.TextField t = new javafx.scene.control.TextField();
-//        t.setMinSize(300, 20);
-//        HBox h = new HBox(new Text("Resposta:"),t);
-//        pergunta2.getChildren().add(h);
-//        if(pergunta2.getHeight() != pergunta2.getMaxHeight()){
-//            pergunta2.setPrefHeight(pergunta2.getMaxHeight());
-//        }
-//    }
-//    @FXML
-//    public void respondePergunta3() {
-//        javafx.scene.control.TextField t = new javafx.scene.control.TextField();
-//        t.setMinSize(300, 20);
-//        HBox h = new HBox(new Text("Resposta:"),t);
-//        pergunta2.getChildren().add(h);
-//    }
-//    @FXML
-//    public void removePergunta1(){
-//
-//    }
-//    @FXML
-//    public void removePergunta2(){
-//
-//    }
-//    @FXML
-//    public void removePergunta3(){
-//
-//    }
-
 }

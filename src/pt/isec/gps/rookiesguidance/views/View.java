@@ -4,6 +4,7 @@ public enum View {
     LOGIN("login.fxml"),
     REGISTO("registo.fxml"),
     HOMEPAGE("homepage.fxml"),
+    HOMEPAGE_GESTORES("homepagegestores.xml"),
     PERFIL("perfil.fxml"),
     EDITAR_PERFIL("editarPerfil.fxml"),
     EVENTOS("eventos.fxml"),
