@@ -4,10 +4,9 @@ import javafx.application.Application;
 import pt.isec.gps.rookiesguidance.bd.ConnDB;
 import pt.isec.gps.rookiesguidance.ui.gui.MainJFX;
 
-import java.sql.SQLException;
 
 public class Main {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
        Application.launch(MainJFX.class,args);
         //ConnDB cdb = new ConnDB();
 ////       if (cdb.removeRegisto(2019133920))

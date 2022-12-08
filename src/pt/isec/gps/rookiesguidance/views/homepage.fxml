@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="stageHomePage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.HomePageController">
     <HBox prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #38819c;">
@@ -62,4 +63,21 @@
             </Button>
     </HBox>
     <HBox fx:id="PICKER" layoutX="33.0" layoutY="99.0" prefHeight="147.0" prefWidth="139.0" />
+   <Text layoutX="362.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sobre a aplicação" wrappingWidth="139.99996337890627">
+      <font>
+         <Font name="System Bold" size="16.0" />
+      </font>
+   </Text>
+   <Text layoutX="262.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nesta aplicação podes encontrar todas as informções necessárias relativamente à vida académica, o que proporcionará uma melhor gestão dos eventos como jantares, praxes e latada." textAlignment="JUSTIFY" wrappingWidth="399.73675537109375" />
+   <Text layoutX="388.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Novidades" textAlignment="JUSTIFY" wrappingWidth="87.19997558593752">
+      <font>
+         <Font name="System Bold" size="16.0" />
+      </font>
+   </Text>
+   <Button layoutX="532.0" layoutY="186.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="28.0" prefWidth="129.0" style="-fx-background-color: #38819c;" text="Adicionar novidade" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Button>
+   <HBox layoutX="262.0" layoutY="224.0" prefHeight="150.0" prefWidth="400.0" style="-fx-border-color: #000000; -fx-border-radius: 8;" />
 </AnchorPane>
