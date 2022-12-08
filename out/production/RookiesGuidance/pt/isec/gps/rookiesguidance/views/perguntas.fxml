@@ -14,8 +14,8 @@
 
 <ScrollPane maxWidth="750.0" maxHeight="-Infinity" minHeight="550.0" minWidth="750" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.PerguntasController">
   <content>
-   <AnchorPane minHeight="550" minWidth="750" maxHeight="Infinity" maxWidth="750">
-        <HBox layoutX="-6.0" prefHeight="63.0" prefWidth="686.0" style="-fx-background-color: #38819c;">
+      <AnchorPane minHeight="550" minWidth="750" maxHeight="Infinity" maxWidth="750">
+          <HBox prefHeight="63.0" prefWidth="750.0" style="-fx-background-color: #38819c;">
             <ImageView fx:id="homePageIcon" accessibleRole="BUTTON" fitHeight="79.0" fitWidth="154.0" onMouseClicked="#onIconPressed" pickOnBounds="true" preserveRatio="true">
                 <cursor>
                     <Cursor fx:constant="HAND" />
@@ -26,11 +26,17 @@
                 <cursor>
                     <Cursor fx:constant="HAND" />
                 </cursor>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
             <Button mnemonicParsing="false" onAction="#onInformacoesPressed" prefHeight="61.0" prefWidth="89.0" style="-fx-background-color: #38819c;         " text="Informações" textFill="WHITE">
                 <cursor>
                     <Cursor fx:constant="HAND" />
                 </cursor>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
             <Button layoutX="235.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPerguntasPressed" prefHeight="61.0" prefWidth="80.0" style="-fx-background-color: #38819c;" text="Perguntas">
                 <cursor>
@@ -43,14 +49,20 @@
                 <cursor>
                     <Cursor fx:constant="HAND" />
                 </cursor>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
-            <Button layoutX="390.0" layoutY="10.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="28.0" prefWidth="106.0" text="Terminar sessão" textFill="WHITE">
+            <Button layoutX="390.0" layoutY="10.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="28.0" prefWidth="132.0" text="Terminar sessão">
                 <cursor>
                     <Cursor fx:constant="HAND" />
                 </cursor>
                 <HBox.margin>
                     <Insets left="120.0" right="10.0" top="20.0" />
                 </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
         </HBox>
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />

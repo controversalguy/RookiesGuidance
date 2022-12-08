@@ -10,9 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane depthTest="DISABLE" prefHeight="400.0" prefWidth="680.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.InformacoesController">
+<AnchorPane depthTest="DISABLE" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.InformacoesController">
    <children>
-      <HBox prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #38819c;">
+      <HBox prefHeight="63.0" prefWidth="750.0" style="-fx-background-color: #38819c;">
          <children>
             <ImageView fx:id="homePageIcon" accessibleRole="BUTTON" fitHeight="79.0" fitWidth="154.0" onMouseClicked="#onIconPressed" pickOnBounds="true" preserveRatio="true">
                <cursor>

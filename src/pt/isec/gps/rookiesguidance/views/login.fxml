@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.LoginController">
+<AnchorPane prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.LoginController">
     <ImageView fitHeight="168.0" fitWidth="228.0" layoutX="227.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
         <cursor>
             <Cursor fx:constant="HAND" />
