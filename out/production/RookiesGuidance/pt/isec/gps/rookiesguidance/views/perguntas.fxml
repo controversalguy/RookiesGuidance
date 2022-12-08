@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane maxWidth="695.0" maxHeight="-Infinity" minHeight="690.0" minWidth="695.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.PerguntasController">
+<ScrollPane maxWidth="750.0" maxHeight="-Infinity" minHeight="550.0" minWidth="750" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.PerguntasController">
   <content>
-   <AnchorPane minHeight="402.0" minWidth="686.0" maxHeight="Infinity" maxWidth="686.0">
+   <AnchorPane minHeight="550" minWidth="750" maxHeight="Infinity" maxWidth="750">
         <HBox layoutX="-6.0" prefHeight="63.0" prefWidth="686.0" style="-fx-background-color: #38819c;">
             <ImageView fx:id="homePageIcon" accessibleRole="BUTTON" fitHeight="79.0" fitWidth="154.0" onMouseClicked="#onIconPressed" pickOnBounds="true" preserveRatio="true">
                 <cursor>

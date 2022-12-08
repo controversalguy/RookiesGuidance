@@ -9,9 +9,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ScrollPane?>
 
-<AnchorPane fx:id="stageHomePage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.HomePageController">
-    <HBox prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #38819c;">
+<ScrollPane maxWidth="750.0" maxHeight="-Infinity" minHeight="550.0" minWidth="750" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.HomePageController">
+    <content>
+        <AnchorPane minHeight="550" minWidth="750" maxHeight="Infinity" maxWidth="750">
+    <HBox prefHeight="63.0" prefWidth="742.0" style="-fx-background-color: #38819c;">
             <ImageView fx:id="homePageIcon" accessibleRole="BUTTON" fitHeight="79.0" fitWidth="154.0" onMouseClicked="#onIconPressed" pickOnBounds="true" preserveRatio="true">
                 <cursor>
                     <Cursor fx:constant="HAND" />
@@ -50,7 +53,7 @@
                     <Font name="System Bold" size="12.0" />
                 </font>
             </Button>
-            <Button layoutX="390.0" layoutY="10.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="28.0" prefWidth="129.0" text="Terminar sessão">
+            <Button layoutX="390.0" layoutY="10.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="28.0" prefWidth="115.0" text="Terminar sessão">
                 <cursor>
                     <Cursor fx:constant="HAND" />
                 </cursor>
@@ -62,22 +65,24 @@
                 </HBox.margin>
             </Button>
     </HBox>
-    <HBox fx:id="PICKER" layoutX="33.0" layoutY="99.0" prefHeight="147.0" prefWidth="139.0" />
-   <Text layoutX="362.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sobre a aplicação" wrappingWidth="139.99996337890627">
+    <HBox fx:id="PICKER" layoutX="33.0" layoutY="99.0" maxHeight="200" maxWidth="230" />
+   <Text layoutX="362.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sobre a aplicação" wrappingWidth="139.99996337890627">
       <font>
          <Font name="System Bold" size="16.0" />
       </font>
    </Text>
-   <Text layoutX="262.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nesta aplicação podes encontrar todas as informções necessárias relativamente à vida académica, o que proporcionará uma melhor gestão dos eventos como jantares, praxes e latada." textAlignment="JUSTIFY" wrappingWidth="399.73675537109375" />
-   <Text layoutX="388.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Novidades" textAlignment="JUSTIFY" wrappingWidth="87.19997558593752">
+   <Text layoutX="317.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nesta aplicação podes encontrar todas as informções necessárias relativamente à vida académica, o que proporcionará uma melhor gestão dos eventos como jantares, praxes e latada." textAlignment="JUSTIFY" wrappingWidth="395.19999999999993" />
+   <Text layoutX="388.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Novidades" textAlignment="JUSTIFY" wrappingWidth="87.19997558593752">
       <font>
          <Font name="System Bold" size="16.0" />
       </font>
    </Text>
-   <Button layoutX="532.0" layoutY="186.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="28.0" prefWidth="129.0" style="-fx-background-color: #38819c;" text="Adicionar novidade" textFill="WHITE">
+   <Button layoutX="590.0" layoutY="219.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="28.0" prefWidth="129.0" style="-fx-background-color: #38819c;" text="Adicionar novidade" textFill="WHITE">
       <font>
          <Font name="System Bold" size="12.0" />
       </font>
    </Button>
-   <HBox layoutX="262.0" layoutY="224.0" prefHeight="150.0" prefWidth="400.0" style="-fx-border-color: #000000; -fx-border-radius: 8;" />
+   <HBox layoutX="326.0" layoutY="269.0" prefHeight="230.0" prefWidth="395.0" style="-fx-border-color: #000000; -fx-border-radius: 8;" />
 </AnchorPane>
+    </content>
+</ScrollPane>
