@@ -9,9 +9,16 @@ import java.io.IOException;
 public class ViewSwitcher {
 
     private static Scene scene;
-
+    public static Parent root;
     public static void setScene(Scene scene) {
         ViewSwitcher.scene = scene;
+    }
+    public static Scene getScene() {
+        return scene.getRoot().getScene();
+    }
+
+    public static Parent getRoot() {
+        return scene.getRoot();
     }
 
     public static void switchTo(View view) {
@@ -21,8 +28,7 @@ public class ViewSwitcher {
         }
 
         try {
-            Parent root = FXMLLoader.load(ViewSwitcher.class.getResource(view.getFilename()));
-
+            root = FXMLLoader.load(ViewSwitcher.class.getResource(view.getFilename()));
             scene.setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
