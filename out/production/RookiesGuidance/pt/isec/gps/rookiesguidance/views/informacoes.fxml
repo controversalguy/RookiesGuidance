@@ -10,6 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.layout.VBox?>
 <AnchorPane depthTest="DISABLE" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.InformacoesController">
    <children>
       <HBox prefHeight="63.0" prefWidth="750.0" style="-fx-background-color: #38819c;">
@@ -132,6 +133,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
+
       <Text layoutX="325.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Alimentação">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -142,23 +144,29 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <HBox layoutX="323.0" layoutY="114.0" prefHeight="98.0" prefWidth="330.0" style="-fx-border-color: #000000; -fx-border-radius: 8;" />
-      <HBox layoutX="323.0" layoutY="253.0" prefHeight="98.0" prefWidth="330.0" style="-fx-border-color: #000000; -fx-border-radius: 8;" />
-      <Button layoutX="325.0" layoutY="360.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: #53A7C6;" text="Adicionar Informações" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button layoutX="509.0" layoutY="360.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="26.0" prefWidth="143.0" style="-fx-background-color: #53A7C6;" text="Remover Informações" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
+
+
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <VBox fx:id="vBox" layoutX="330.0" layoutY="100.0" prefHeight="250.0" prefWidth="507.0">
+         <children>
+            <Button fx:id="adicionaAlimentacao" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onAdicionarAlimentacaoPressed" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #38819c;" text="Adicionar Alimentacao" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="adicionaLocais" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onAdicionarLocaisPressed" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #38819c;" text="Adicionar Locais" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+
    </children>
 </AnchorPane>

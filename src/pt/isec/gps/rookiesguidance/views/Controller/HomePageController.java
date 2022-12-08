@@ -1,38 +1,18 @@
 
 package pt.isec.gps.rookiesguidance.views.Controller;
-
-        import javafx.application.Platform;
-        import javafx.collections.FXCollections;
-        import javafx.collections.ObservableList;
         import javafx.fxml.FXML;
         import javafx.fxml.Initializable;
         import javafx.geometry.Insets;
         import javafx.scene.Node;
-        import javafx.scene.Scene;
         import javafx.scene.control.*;
-        import javafx.scene.control.cell.PropertyValueFactory;
         import javafx.scene.control.skin.DatePickerSkin;
         import javafx.scene.image.ImageView;
         import javafx.scene.layout.*;
-        import javafx.scene.paint.Color;
-        import javafx.scene.text.Text;
-        import javafx.stage.Modality;
-        import javafx.stage.Popup;
-        import javafx.stage.PopupWindow;
-        import javafx.stage.Stage;
-        import javafx.stage.Window;
         import pt.isec.gps.rookiesguidance.views.View;
         import pt.isec.gps.rookiesguidance.views.ViewSwitcher;
-
-        import javax.swing.*;
         import java.net.URL;
         import java.time.LocalDate;
         import java.util.ResourceBundle;
-        import java.util.Timer;
-        import java.util.TimerTask;
-
-        import static pt.isec.gps.rookiesguidance.views.ViewSwitcher.getScene;
-
 public class HomePageController implements Initializable {
     @FXML
     private HBox PICKER;

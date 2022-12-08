@@ -3,14 +3,17 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane depthTest="DISABLE" prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.EventosController">
-   <HBox prefHeight="63.0" prefWidth="750.0" style="-fx-background-color: #38819c;">
+<AnchorPane depthTest="DISABLE" prefHeight="400.0" prefWidth="680.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.EventosController">
+   <HBox fx:id="PICKER" layoutX="51.0" layoutY="125.0" prefHeight="162.0" prefWidth="289.0" onMouseClicked="#handleButtonClick" />
+   <HBox prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #38819c;">
       <children>
          <ImageView fx:id="homePageIcon" accessibleRole="BUTTON" fitHeight="79.0" fitWidth="154.0" onMouseClicked="#onIconPressed" pickOnBounds="true" preserveRatio="true">
             <cursor>
@@ -65,4 +68,6 @@
          </Button>
       </children>
    </HBox>
+   <VBox layoutX="371.0" layoutY="77.0" prefHeight="309.0" prefWidth="295.0" />
+   <Label fx:id="teste" layoutX="37.0" layoutY="77.0" />
 </AnchorPane>
