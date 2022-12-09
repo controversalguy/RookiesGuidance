@@ -4,14 +4,16 @@ import javafx.application.Application;
 import pt.isec.gps.rookiesguidance.bd.ConnDB;
 import pt.isec.gps.rookiesguidance.ui.gui.MainJFX;
 
+import java.sql.SQLException;
+
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
        Application.launch(MainJFX.class,args);
-        //ConnDB cdb = new ConnDB();
+//        ConnDB cdb = new ConnDB();
+//        cdb.criaTabelas();
 ////       if (cdb.removeRegisto(2019133920))
 ////          System.out.println("Eliminado aluno com sucesso!");
-  //      cdb.criaTabelas();
         //if (cdb.registaNovoUtilizador(2019133920, "Francisco Simões","LEI" ,"a2019133920@isec.pt", "IS3C..0"))
             //System.out.println("Registado com Sucesso!");
 //        //}
