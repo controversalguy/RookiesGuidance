@@ -69,8 +69,7 @@ public class HomePageGestoresController implements Initializable {
         titulo.setPromptText("Titulo:");
         TextArea descricao = new TextArea();
         descricao.setPromptText("Descrição:");
-        titulo.setOnAction(ev-> {
-        });
+
         grid.add(new Label("Título:"), 0, 0);
         grid.add(titulo, 1, 0);
         grid.add(new Label("Descrição:"), 0, 1); //coluna 0 | linha 1
@@ -211,7 +210,7 @@ public class HomePageGestoresController implements Initializable {
         dialog.getDialogPane().setContent(grid);
 
         Optional<String> result = dialog.showAndWait();
-        System.out.println("result.get()" + result.get());
+
         if (!connDB.removeNovidade(Integer.parseInt(result.get()), LoginController.getNumero())) {
             ToastMessage.show(getScene().getWindow(), "Não existe novidades para remover");
             return;

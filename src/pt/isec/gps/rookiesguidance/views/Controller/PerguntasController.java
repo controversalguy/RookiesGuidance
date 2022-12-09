@@ -4,6 +4,8 @@ package pt.isec.gps.rookiesguidance.views.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -23,9 +25,9 @@ public class PerguntasController implements Initializable {
     @FXML
     void onAdicionarPerguntaPressed() {
         Text t = new Text("Pergunta:");
-        javafx.scene.control.Button bResponderPergunta= new javafx.scene.control.Button("Responder\n Pergunta");
-        javafx.scene.control.Button bRemoverPergunta= new javafx.scene.control.Button("Remover\n Pergunta");
-        javafx.scene.control.TextField tf = new javafx.scene.control.TextField();
+        Button bResponderPergunta= new Button("Responder\n Pergunta");
+        Button bRemoverPergunta= new Button("Remover\n Pergunta");
+        TextField tf = new TextField();
 
         bRemoverPergunta.setMaxSize(90, 40);
         bResponderPergunta.setMaxSize(90, 40);
