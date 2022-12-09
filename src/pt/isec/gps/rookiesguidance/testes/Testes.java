@@ -360,4 +360,193 @@ public class Testes {
             rs1.close();
         }
     }
+
+
+    //Adicionar Informacao
+    @Test
+    void testeAddInfo() throws SQLException {
+        System.out.println("Adicionar Informacao");
+        ConnDB connDB = new ConnDB();
+        Statement statement = connDB.dbConn.createStatement();
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        Assertions.assertTrue(connDB.addlocal("Cantina Amarela", 0, 2019133920));
+        if(rs.next()) {
+            statement.executeUpdate("DELETE FROM local WHERE id_gestor=" + 2019133920);
+            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
+            rs.close();
+        }
+    }
+
+    //Remover Informacao
+    @Test
+    void testeRemoveInfo() throws SQLException {
+        System.out.println("Remover Informacao");
+        ConnDB connDB = new ConnDB();
+        Statement statement = connDB.dbConn.createStatement();
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        Assertions.assertTrue(connDB.removelocal(0, 2019133920));
+        if(rs.next()) {
+            statement.executeUpdate("DELETE FROM local WHERE id_gestor=" + 2019133920);
+            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
+            rs.close();
+        }
+    }
+
+    //Remover Informacao inexistente
+    @Test
+    void testeRemoveInfoInexistente() throws SQLException {
+        System.out.println("Remover Informacao inexistente");
+        ConnDB connDB = new ConnDB();
+        Statement statement = connDB.dbConn.createStatement();
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        Assertions.assertTrue(connDB.removelocal(1, 2019133920));
+        if(rs.next()) {
+            statement.executeUpdate("DELETE FROM local WHERE id_gestor=" + 2019133920);
+            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
+            rs.close();
+        }
+    }
+
+    //Adicionar Novidades
+    @Test
+    void testeAddNov() throws SQLException {
+        System.out.println("Adicionar Novidades");
+        ConnDB connDB = new ConnDB();
+        Statement statement = connDB.dbConn.createStatement();
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        Assertions.assertTrue(connDB.addNovidade("Nova Merge do ISEC","Novas t-shirts, camisolas e casacos do ISEC" ,2019133920));
+        if(rs.next()) {
+            statement.executeUpdate("DELETE FROM novidades WHERE id_gestor=" + 2019133920);
+            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
+            rs.close();
+        }
+    }
+
+    //Remover Novidades
+    @Test
+    void testeRemoveNov() throws SQLException {
+        System.out.println("Remover Novidades");
+        ConnDB connDB = new ConnDB();
+        Statement statement = connDB.dbConn.createStatement();
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        String verificaNov = "INSERT INTO novidade VALUES ('" + "Nova Merge do ISEC" + "','" + "Novas t-shirts, camisolas e casacos do ISEC" + "','" +  2019133920 + "')";
+        ResultSet rs2 = statement.executeQuery(verificaNov);
+        Assertions.assertTrue(connDB.removeNovidade(0 ,2019133920));
+        if(rs.next()) {
+            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
+            rs.close();
+        }
+    }
+
+    //Remover Novidades inexistente
+    @Test
+    void testeRemoveNovInexistente() throws SQLException {
+        System.out.println("Remover Novidades inexistente");
+        ConnDB connDB = new ConnDB();
+        Statement statement = connDB.dbConn.createStatement();
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        String verificaNov = "INSERT INTO novidade VALUES ('" + "Nova Merge do ISEC" + "','" + "Novas t-shirts, camisolas e casacos do ISEC" + "','" +  2019133920 + "')";
+        ResultSet rs2 = statement.executeQuery(verificaNov);
+        Assertions.assertFalse(connDB.removeNovidade(1 ,2019133920));
+        if(rs.next()) {
+            statement.executeUpdate("DELETE FROM novidades WHERE id_gestor=" + 2019133920);
+            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
+            rs.close();
+        }
+    }
+
+    //Adicionar uma Pergunta
+    @Test
+    void testeAddPerg() throws SQLException {
+        System.out.println("Adicionar uma Pergunta");
+        ConnDB connDB = new ConnDB();
+        Statement statement = connDB.dbConn.createStatement();
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        Assertions.assertTrue(connDB.adicionaPergunta("Como funcionam as praxes?",2019133920));
+        if(rs.next()) {
+            statement.executeUpdate("DELETE FROM pergunta WHERE id_utilizador=" + 2019133920);
+            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
+            rs.close();
+        }
+    }
+
+    //Responde a uma Pergunta
+    @Test
+    void testeRespondePerg() throws SQLException {
+        System.out.println("Responde a uma Pergunta");
+        ConnDB connDB = new ConnDB();
+        Statement statement = connDB.dbConn.createStatement();
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        String verificaPergunta = "INSERT INTO pergunta VALUES ('" + "Como funcionam as praxes?" + "','" + 2019133920 + "')";
+        ResultSet rs2 = statement.executeQuery(verificaPergunta);
+        Assertions.assertTrue(connDB.adicionaResposta("Respondi" ,0,2019133920));
+        if(rs.next()) {
+            statement.executeUpdate("DELETE FROM resposta WHERE id_gestor=" + 2019133920);
+            statement.executeUpdate("DELETE FROM pergunta WHERE id_utilizador=" + 2019133920);
+            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
+            rs.close();
+        }
+    }
+
+    //Responde a uma Pergunta que já tem resposta
+    @Test
+    void testeRespondePergComMais1Resposta() throws SQLException {
+        System.out.println("Responde a uma Pergunta que já tem resposta");
+        ConnDB connDB = new ConnDB();
+        Statement statement = connDB.dbConn.createStatement();
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        String verificaPergunta = "INSERT INTO pergunta VALUES ('" + "Como funcionam as praxes?" + "','" + 2019133920 + "')";
+        ResultSet rs2 = statement.executeQuery(verificaPergunta);
+        String verificaResposta = "INSERT INTO resposta VALUES ('" + "Quartas 15h no ISEC" + "','" + 0 + "','" + 2019133920 + "')";
+        ResultSet rs3 = statement.executeQuery(verificaResposta);
+        Assertions.assertTrue(connDB.adicionaResposta("Segunda Resposta" ,0,2019133920));
+        if(rs.next()) {
+            statement.executeUpdate("DELETE FROM resposta WHERE id_gestor=" + 2019133920);
+            statement.executeUpdate("DELETE FROM pergunta WHERE id_utilizador=" + 2019133920);
+            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
+            rs.close();
+        }
+    }
+
+
+    //Remove uma Pergunta
+    @Test
+    void testeRemovePerg() throws SQLException {
+        System.out.println("Remove Pergunta");
+        ConnDB connDB = new ConnDB();
+        Statement statement = connDB.dbConn.createStatement();
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        String verificaPergunta = "INSERT INTO pergunta VALUES ('" + "Como funcionam as praxes?" + "','" + 2019133920 + "')";
+        ResultSet rs2 = statement.executeQuery(verificaPergunta);
+        Assertions.assertTrue(connDB.removePergunta(0 ,2019133920));
+        if(rs.next()) {
+            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
+            rs.close();
+        }
+    }
+
+    //Faz logout
+    @Test
+    void testeLogout() throws SQLException {
+        System.out.println("Teste faz logout");
+        ConnDB connDB = new ConnDB();
+        Statement statement = connDB.dbConn.createStatement();
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        Assertions.assertTrue(connDB.logout(2019133920));
+        if(rs.next()) {
+            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
+            rs.close();
+        }
+    }
 }
