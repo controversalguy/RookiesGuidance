@@ -107,7 +107,6 @@ public class HomePageGestoresController implements Initializable {
                     throw new RuntimeException(e);
                 }
 
-                novidadesvBox.getChildren().clear();
                 try {
                     novidadesText = new ArrayList<>();
                     novidades = connDB.getNovidades();

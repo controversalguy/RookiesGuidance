@@ -139,37 +139,57 @@ public class ConnDB {
             statement.close();
             return false;
     } // feito
-    public boolean addlocal(String local, int tipo, long idGestor) throws SQLException {
-        if (local == null) {
+
+    public boolean addlocal(String local, String tipo, long idGestor) throws SQLException {
+        if (local.length() == 0 || tipo.length() == 0) {
             System.out.println("Erro ao adicionar novo local!");
             return false;
         }
 
-            Statement statement = dbConn.createStatement();
-            String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idGestor + "' AND isGestor = '" + 1 + "'";
-            ResultSet rs = statement.executeQuery(verificaUtilizador);
-            if (rs.next()) { // se existir e for gestor
+        System.out.println("TIPO : " + tipo);
 
-                String verificaExistente = "SELECT * FROM local";
-                if (tipo == 0 || tipo == 1) {
-                    verificaExistente += " WHERE localizacao= '" + local + "' AND tipo = '" + tipo + "'";
-                    ResultSet resultSet = statement.executeQuery(verificaExistente);
-                    if (!resultSet.next()) {
-                        String sqlQuery = "INSERT INTO local VALUES ((SELECT COUNT(*) FROM local),'" + local + "','" + tipo + "','" + idGestor + "')";
-                        statement.executeUpdate(sqlQuery);
-                        resultSet.close();
-                        statement.close();
-                        return true;
-                    }
-                    System.out.println("Já Existe este local");
-                }
-                System.out.println("Impossivel inserir local");
+        Statement statement = dbConn.createStatement();
+        String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idGestor + "' AND isGestor = '" + 1 + "'";
+        ResultSet rs = statement.executeQuery(verificaUtilizador);
+        if (rs.next()) { // se existir e for gestor
+            String verificaExistente = "SELECT * FROM local";
+            verificaExistente += " WHERE localizacao= '" + local + "' AND tipo = '" + tipo + "'";
+            ResultSet resultSet = statement.executeQuery(verificaExistente);
+            if (!resultSet.next()) {
+                String sqlQuery = "INSERT INTO local VALUES ((SELECT COUNT(*) FROM local),'" + local + "','" + tipo + "','" + idGestor + "')";
+                statement.executeUpdate(sqlQuery);
+                resultSet.close();
+                statement.close();
+                return true;
             }
-            System.out.println("Gestor não existe!");
-            statement.close();
-            return false;
+            System.out.println("Já Existe este local");
+        }
+        System.out.println("Gestor não existe!");
+        statement.close();
+        return false;
 
     } // feito
+
+    public ArrayList<String> getLocais() throws SQLException {
+
+        Statement statement = dbConn.createStatement();
+        String verificaExistente = "SELECT * FROM local";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        ArrayList<String> locais = new ArrayList<>();
+        while (rs.next()){
+            String localizacao = rs.getString("localizacao");
+            String tipo = rs.getString("tipo");
+            locais.add(localizacao);
+            locais.add(tipo);
+        }
+        /*if(novidades.size() == 0)
+            return null;*/
+        return locais;
+    }
+
+
+
+
     public boolean removelocal(int id, long idGestor) throws SQLException {
             Statement statement = dbConn.createStatement();
             String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idGestor + "' AND isGestor = '" + 1 + "'";

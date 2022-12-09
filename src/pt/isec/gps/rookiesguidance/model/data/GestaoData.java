@@ -19,13 +19,13 @@ public class GestaoData {
         return false;
     }
 
-    public boolean adicionalocalA(String local,int tipo,long idGestor)throws SQLException {
+    public boolean adicionalocalA(String local,String tipo,long idGestor)throws SQLException {
         if(dbconn.addlocal(local,tipo,idGestor))
             return true;
         return false;
     }
 
-    public boolean adicionalocalE(String local,int tipo,long idGestor)throws SQLException{
+    public boolean adicionalocalE(String local,String tipo,long idGestor)throws SQLException{
         if(dbconn.addlocal(local,tipo,idGestor))
             return true;
         return false;

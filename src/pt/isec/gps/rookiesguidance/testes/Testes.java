@@ -370,7 +370,7 @@ public class Testes {
         Statement statement = connDB.dbConn.createStatement();
         String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
-        Assertions.assertTrue(connDB.addlocal("Cantina Amarela", 0, 2019133920));
+        Assertions.assertTrue(connDB.addlocal("Cantina Amarela", "Alimentação", 2019133920));
         if(rs.next()) {
             statement.executeUpdate("DELETE FROM local WHERE id_gestor=" + 2019133920);
             statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
