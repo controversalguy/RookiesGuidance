@@ -1,13 +1,8 @@
 package pt.isec.gps.rookiesguidance.model.data;
 
 import pt.isec.gps.rookiesguidance.bd.ConnDB;
-import pt.isec.gps.rookiesguidance.model.data.infodata.Curso;
-import pt.isec.gps.rookiesguidance.model.data.infodata.Informacao;
 
-import java.sql.Array;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class GestaoData {
     ConnDB dbconn;
@@ -49,7 +44,7 @@ public class GestaoData {
     }
 
     public boolean adicionaNovidade(Novidade nov)throws SQLException{
-        if(dbconn.addNovidade(nov.getTitulo(), nov.getDescricao(),nov.getId()))
+        if(dbconn.adicionaNovidade(nov.getTitulo(), nov.getDescricao(),nov.getId()))
             return true;
         return false;
     }

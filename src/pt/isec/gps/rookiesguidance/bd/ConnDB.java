@@ -1,10 +1,7 @@
 package pt.isec.gps.rookiesguidance.bd;
 
 import java.sql.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class ConnDB {
 
@@ -48,8 +45,8 @@ public class ConnDB {
             String novidade = """
                     CREATE TABLE IF NOT EXISTS novidade
                     (id INTEGER NOT NULL,
-                    descricao TEXT NOT NULL,
                     titulo TEXT NOT NULL,
+                    descricao TEXT NOT NULL,
                     id_gestor INTEGER NOT NULL)
                     """;
 
@@ -195,8 +192,8 @@ public class ConnDB {
             statement.close();
             return false;
     } // feito
-    public boolean addNovidade(String titulo, String descricao, long idGestor) throws SQLException {
-        if (titulo == null && descricao == null) {
+    public boolean adicionaNovidade(String titulo, String descricao, long idGestor) throws SQLException {
+        if (titulo == null || descricao == null) {
             System.out.println("Não foi possível adicionar novidade!");
             return false;
         }
@@ -239,8 +236,11 @@ public class ConnDB {
                     statement.close();
 
                     ResultSet rsOrdena = statement.executeQuery("SELECT * FROM novidade");
+                    int i = 0;
                     while(rsOrdena.next()){
-
+                        int idOrdena = rsOrdena.getInt("id");
+                        statement.executeUpdate("UPDATE novidade SET id='"+ i +"' WHERE id ='" + idOrdena+"'");
+                        i++;
                     }
                     return true;
                 }
@@ -278,8 +278,9 @@ public class ConnDB {
             String descricao = rs.getString("descricao");
             novidades.add(titulo);
             novidades.add(descricao);
-
         }
+        /*if(novidades.size() == 0)
+            return null;*/
         return novidades;
     }
     public boolean adicionaEvento(long idGestor, String tipo, String localizacao, String data_hora) throws SQLException {

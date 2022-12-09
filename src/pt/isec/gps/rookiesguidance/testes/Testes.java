@@ -418,7 +418,7 @@ public class Testes {
         Statement statement = connDB.dbConn.createStatement();
         String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
-        Assertions.assertTrue(connDB.addNovidade("Nova Merge do ISEC","Novas t-shirts, camisolas e casacos do ISEC" ,2019133920));
+        Assertions.assertTrue(connDB.adicionaNovidade("Nova Merge do ISEC","Novas t-shirts, camisolas e casacos do ISEC" ,2019133920));
         if(rs.next()) {
             statement.executeUpdate("DELETE FROM novidades WHERE id_gestor=" + 2019133920);
             statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
