@@ -257,7 +257,8 @@ public class ConnDB {
         while (rs.next()){
             String tipo = rs.getString("tipo");
             String data = rs.getString("data_hora");
-            eventos.add(tipo+"\n"+data+ "\n");
+            String [] datahora = data.split(" ");
+            eventos.add(tipo+"\n"+datahora[1]+ "\n");
         }
         return eventos;
     }

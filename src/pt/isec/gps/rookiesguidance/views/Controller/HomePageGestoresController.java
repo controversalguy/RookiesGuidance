@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import pt.isec.gps.rookiesguidance.bd.ConnDB;
@@ -24,8 +25,14 @@ import java.util.Date;
 import java.util.ResourceBundle;
 public class HomePageGestoresController implements Initializable {
     ConnDB connDB;
+    DatePickerSkin datePickerSkin;
+    LocalDate localDate;
+    Instant instant;
+    Date date;
+    DateFormat dateFormat;
+    String strDate;
     @FXML
-    private VBox detalhesCalendario;
+    private VBox detalhesCalendario; // TODO meter um pra um
     @FXML
     private HBox PICKER;
     @FXML
@@ -85,7 +92,28 @@ public class HomePageGestoresController implements Initializable {
     void onTerminarSessaoPressed() {
         ViewSwitcher.switchTo(View.LOGIN);
     }
-
+    @FXML
+    public void onDiaPressed() {
+        detalhesCalendario.getChildren().clear();
+        LocalDate localDate = datePickerSkin.getSkinnable().getValue();
+        instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        date = Date.from(instant);
+        dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String strDate = dateFormat.format(date);
+        try {
+            ArrayList<String> eventos;
+            ArrayList<Text> eventosText = new ArrayList<>();
+            eventos = connDB.getEventos(strDate);
+            for (int i = 0; i < eventos.size(); i++) {
+                Text t = new Text();
+                t.setText(eventos.get(i));
+                eventosText.add(t);
+            }
+            detalhesCalendario.getChildren().addAll(eventosText);
+        } catch (SQLException e) {
+        throw new RuntimeException(e);
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -94,19 +122,19 @@ public class HomePageGestoresController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        DatePickerSkin datePickerSkin = new DatePickerSkin(new DatePicker(LocalDate.now()));
+        datePickerSkin = new DatePickerSkin(new DatePicker(LocalDate.now()));
         Node popupContent = datePickerSkin.getPopupContent();
         PICKER.getChildren().add(popupContent);
-        LocalDate localDate = datePickerSkin.getSkinnable().getValue();
+        localDate = datePickerSkin.getSkinnable().getValue();
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String strDate = dateFormat.format(date);
+        strDate = dateFormat.format(date);
         try {
-            ArrayList<String> eventos ;
+            ArrayList<String> eventos;
             ArrayList<Text> eventosText = new ArrayList<>();
             eventos = connDB.getEventos(strDate);
-            for (int i = 0; i < eventos.size(); i++){
+            for (int i = 0; i < eventos.size(); i++) {
                 Text t = new Text();
                 t.setText(eventos.get(i));
                 eventosText.add(t);

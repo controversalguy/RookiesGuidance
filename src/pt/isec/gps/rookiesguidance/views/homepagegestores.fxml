@@ -65,7 +65,7 @@
                     </font>
                 </Button>
             </HBox>
-            <HBox fx:id="PICKER" layoutX="33.0" layoutY="99.0" maxHeight="200" maxWidth="230" />
+            <HBox fx:id="PICKER" layoutX="33.0" layoutY="99.0" maxHeight="200" maxWidth="230" onMouseClicked="#onDiaPressed" />
             <Text layoutX="362.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sobre a aplicação" wrappingWidth="139.99996337890627">
                 <font>
                     <Font name="System Bold" size="16.0" />
@@ -83,7 +83,7 @@
                 </font>
             </Button>
             <VBox layoutX="330.0" layoutY="271.0" prefHeight="212.0" prefWidth="396.0" style="-fx-border-color: #000000; -fx-border-radius: 8;" />
-         <VBox fx:id="detalhesCalendario" layoutX="33.0" layoutY="306.0" prefHeight="200.0" prefWidth="178.0" />
+         <VBox fx:id="detalhesCalendario" layoutX="33.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" maxWidth="150.0" style="-fx-border-color: #000000; -fx-border-radius: 8;"/>
         </AnchorPane>
     </content>
 </ScrollPane>
