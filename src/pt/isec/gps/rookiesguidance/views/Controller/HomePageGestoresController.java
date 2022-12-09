@@ -278,6 +278,7 @@ public class HomePageGestoresController implements Initializable {
         Date date = Date.from(instant);
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         strDate = dateFormat.format(date);
+
         try {
             ArrayList<String> eventos;
             ArrayList<Text> eventosText = new ArrayList<>();

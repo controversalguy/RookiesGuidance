@@ -10,8 +10,11 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws SQLException {
         Application.launch(MainJFX.class,args);
-        //ConnDB cdb = new ConnDB();
-        //cdb.criaTabelas();
+       // ConnDB cdb = new ConnDB();
+       // cdb.registaNovoUtilizador(2019202020, "Francisco Simões","LEI" ,"a2019202020@isec.pt", "123");
+        //cdb.adicionaEvento(2019202020,"Praxe","Lisboa","09-12-2022 21:00");
+      //  cdb.criaTabelas();
+
 //        cdb.adicionaEvento(2019202020,"Praxe","Lisboa","09-12-2022 21:00");
 //        cdb.adicionaEvento(2019202020,"Praxe","Lisboa","10-12-2022 13:00");
 ////       if (cdb.removeRegisto(2019133920))

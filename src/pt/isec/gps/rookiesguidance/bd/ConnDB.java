@@ -287,6 +287,24 @@ public class ConnDB {
         }
         return eventos;
     }
+
+    public ArrayList<String> getEventos2() throws SQLException {
+
+        Statement statement = dbConn.createStatement();
+        String verificaExistente = "SELECT * FROM evento";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        ArrayList<String> eventos = new ArrayList<>();
+        while (rs.next()){
+            String tipo = rs.getString("tipo");
+            String data_hora = rs.getString("data_hora");
+            String local = rs.getString("local");
+            eventos.add(tipo);
+            eventos.add(data_hora);
+            eventos.add(local);
+
+        }
+        return eventos;
+    }
     public ArrayList<String> getNovidades() throws SQLException {
 
         Statement statement = dbConn.createStatement();
