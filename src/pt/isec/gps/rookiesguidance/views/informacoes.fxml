@@ -135,9 +135,9 @@
          </Button>
 
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-         <VBox fx:id="locaisVbox" layoutX="319.0" layoutY="72.0" maxHeight="Infinity" prefWidth="417.0">
+         <VBox fx:id="locaisVbox" layoutX="319.0" layoutY="72.0" prefWidth="417.0" >
             <children>
-               <HBox fx:id="alimentacaoVbox" prefHeight="171.0" prefWidth="417.0">
+               <VBox fx:id="alimentacaoVbox" prefHeight="171.0" prefWidth="417.0" style="-fx-border-color: #000000; -fx-border-radius: 8;">
                   <children>
             
                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- Alimentação">
@@ -146,8 +146,8 @@
                         </font>
                      </Text>
                   </children>
-               </HBox>
-               <HBox fx:id="estudoVbox" prefHeight="172.0" prefWidth="417.0">
+               </VBox>
+               <VBox fx:id="estudoVbox" prefHeight="172.0" prefWidth="417.0" style="-fx-border-color: #000000; -fx-border-radius: 8;">
                   <children>
                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- Estudo">
                         <font>
@@ -155,7 +155,7 @@
                         </font>
                      </Text>
                   </children>
-               </HBox>
+               </VBox>
                <HBox fx:id="buttonsHbox" prefHeight="100.0" prefWidth="200.0">
                   <children>
                      <Button fx:id="adicionarInfo" mnemonicParsing="false" onAction="#onAdicionarInfoPressed" text="Adicionar Informações" />

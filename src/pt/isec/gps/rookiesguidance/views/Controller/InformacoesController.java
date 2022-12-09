@@ -1,5 +1,6 @@
 package pt.isec.gps.rookiesguidance.views.Controller;
 
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -7,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import pt.isec.gps.rookiesguidance.bd.ConnDB;
 import pt.isec.gps.rookiesguidance.utils.ToastMessage;
@@ -17,7 +17,7 @@ import pt.isec.gps.rookiesguidance.views.ViewSwitcher;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Optional;
+
 import java.util.ResourceBundle;
 
 import static pt.isec.gps.rookiesguidance.views.ViewSwitcher.getScene;
@@ -28,13 +28,13 @@ public class InformacoesController implements Initializable {
     private Button adicionarInfo;
 
     @FXML
-    private HBox alimentacaoVbox;
+    private VBox alimentacaoVbox;
 
     @FXML
     private HBox buttonsHbox;
 
     @FXML
-    private HBox estudoVbox;
+    private VBox estudoVbox;
 
     @FXML
     private ImageView homePageIcon;
@@ -101,7 +101,6 @@ public class InformacoesController implements Initializable {
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
-
                     try {
                         locais = connDB.getLocais();
                         if (locais.size() == 0) {
@@ -113,30 +112,34 @@ public class InformacoesController implements Initializable {
                             //int index = i / 2;
                             if(!locais.get(i+1).equalsIgnoreCase("Alimentação"))
                                 continue;
-                            t = new Text("\n"+ locais.get(i)+ "\n");
-                            //t.setText("\n" + locais.get(i) + "\n");
+                            t = new Text(locais.get(i));
                             t.setStyle("-fx-font-weight: bold;");
                             locaisText.add(t);
                         }
-                        System.out.println("locaisText: "+ locaisText);
+
+                        Text tAlimentacao = new Text("Alimentação");
+                        tAlimentacao.setStyle("-fx-font-weight: bold;");
+                        tAlimentacao.setStyle(" -fx-font-size: 15;");
                         alimentacaoVbox.getChildren().clear();
-                        alimentacaoVbox.getChildren().add(new Text("Alimentação"));
+                        alimentacaoVbox.getChildren().add(tAlimentacao);
                         alimentacaoVbox.getChildren().addAll(locaisText);
 
                         locaisText.clear();
-                        for (int i = 0; i < locais.size(); i += 2) {
-                            if(!locais.get(i+1).equalsIgnoreCase("Estudo"))
+                        Text tEstudo = new Text("Estudo");
+                        tEstudo.setStyle("-fx-font-weight: bold;");
+                        tEstudo.setStyle(" -fx-font-size: 15;");
+
+
+                        for (int i = 0; i < locais.size(); i+=2) {
+                            if(!locais.get(i+1).equalsIgnoreCase("Estudo")) {
                                 continue;
-
-
-                            t = new Text("\n"+ locais.get(i)+ "\n");
-                            //t.setText("\n" + locais.get(i) + "\n");
+                            }
+                            t = new Text(locais.get(i));
                             t.setStyle("-fx-font-weight: bold;");
                             locaisText.add(t);
                         }
-
                         estudoVbox.getChildren().clear();
-                        estudoVbox.getChildren().add(new Text("Estudo"));
+                        estudoVbox.getChildren().add(tEstudo);
                         estudoVbox.getChildren().addAll(locaisText);
 
                     } catch (SQLException e) {
@@ -217,7 +220,6 @@ public class InformacoesController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        locais = new ArrayList<>();
         locaisText = new ArrayList<>();
 
         try {
@@ -227,38 +229,41 @@ public class InformacoesController implements Initializable {
             }
             Text t;
 
-            /*for (int i = 0; i < locais.size(); i += 2) {
+            for (int i = 0; i < locais.size(); i += 2) {
                 //int index = i / 2;
                 if(!locais.get(i+1).equalsIgnoreCase("Alimentação"))
                     continue;
-                t = new Text("\n" + locais.get(i) + "\n");
+                t = new Text(locais.get(i));
                 System.out.println("locais.get(i):"+t.getText());
 
                 t.setStyle("-fx-font-weight: bold;");
                 locaisText.add(t);
             }
-            System.out.println("locaisText: "+ locaisText);
+
+            Text tAlimentacao = new Text("Alimentação");
+            tAlimentacao.setStyle("-fx-font-weight: bold;");
+            tAlimentacao.setStyle(" -fx-font-size: 15;");
             alimentacaoVbox.getChildren().clear();
-            alimentacaoVbox.getChildren().add(new Text("Alimentação"));
-            alimentacaoVbox.getChildren().addAll(locaisText);*/
+            alimentacaoVbox.getChildren().add(tAlimentacao);
+            alimentacaoVbox.getChildren().addAll(locaisText);
 
             locaisText.clear();
-            estudoVbox.getChildren().clear();
-            //estudoVbox.getChildren().add(new Text("Estudo"));
+            Text tEstudo = new Text("Estudo");
+            tEstudo.setStyle("-fx-font-weight: bold;");
+            tEstudo.setStyle(" -fx-font-size: 15;");
+
+
             for (int i = 0; i < locais.size(); i+=2) {
-                /*if(!locais.get(i+1).equalsIgnoreCase("Estudo"))
-                    continue;*/
-                t = new Text("\n"+locais.get(i));
-                //t.setText("\n" + locais.get(i) + "\n");
-                System.out.println("t.getText()"+t.getText());
-                //t.setStyle("-fx-font-weight: bold;");
-                //locaisText.add(t);/**/
-                estudoVbox.getChildren().add(t);
+                if(!locais.get(i+1).equalsIgnoreCase("Estudo")) {
+                    continue;
+                }
+                t = new Text(locais.get(i));
+                t.setStyle("-fx-font-weight: bold;");
+                locaisText.add(t);
             }
-
-
-
-            //estudoVbox.getChildren().addAll(locaisText);
+            estudoVbox.getChildren().clear();
+            estudoVbox.getChildren().add(tEstudo);
+            estudoVbox.getChildren().addAll(locaisText);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
