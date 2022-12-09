@@ -92,6 +92,7 @@ public class HomePageGestoresController implements Initializable {
                 }
                 novidadesText.add(t);
             }
+            novidadesvBox.getChildren().clear();
             novidadesvBox.getChildren().addAll(novidadesText);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -148,7 +149,6 @@ public class HomePageGestoresController implements Initializable {
 
         dialog.showAndWait();
 
-        novidadesvBox.getChildren().clear();
         connDB.removeNovidade(Integer.parseInt(id.getText()),LoginController.getNumero());
         try {
 
@@ -166,6 +166,7 @@ public class HomePageGestoresController implements Initializable {
                 }
                 novidadesText.add(t);
             }
+            novidadesvBox.getChildren().clear();
             novidadesvBox.getChildren().addAll(novidadesText);
         } catch (SQLException e) {
             throw new RuntimeException(e);

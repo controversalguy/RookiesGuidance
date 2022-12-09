@@ -234,7 +234,7 @@ public class ConnDB {
                 String verificaExistente = "SELECT * FROM novidade WHERE id=" + id;
                 ResultSet resultSet = statement.executeQuery(verificaExistente);
                 if (resultSet.next()) { // se existir a novidade com o id recebido
-                    statement.executeUpdate("DELETE FROM novidade "); //WHERE id=" + id
+                    statement.executeUpdate("DELETE FROM novidade WHERE id=" + id);
                     resultSet.close();
                     statement.close();
                     return true;
