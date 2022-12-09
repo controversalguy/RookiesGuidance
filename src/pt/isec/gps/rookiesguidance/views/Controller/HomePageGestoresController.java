@@ -43,6 +43,8 @@ public class HomePageGestoresController implements Initializable {
     private HBox PICKER;
     @FXML
     private ImageView homePageIcon;
+    ArrayList<String> novidades;
+    ArrayList<Text> novidadesText;
     @FXML
     void onAdicionarNovidade() throws SQLException {
         Dialog<String> dialog = new Dialog<>();
@@ -73,6 +75,27 @@ public class HomePageGestoresController implements Initializable {
         dialog.showAndWait();
 
         connDB.addNovidade(titulo.getText(), descricao.getText(), LoginController.getNumero());
+
+        try {
+
+            novidadesText = new ArrayList<>();
+            novidades = connDB.getNovidades();
+            Text t;
+            for (int i = 0; i < novidades.size(); i++) {
+                if(i % 2 ==0){
+                    t = new Text();
+                    t.setText("\n" + novidades.get(i));
+                    t.setStyle("-fx-font-weight: bold;");
+                }else{
+                    t = new Text();
+                    t.setText(novidades.get(i));
+                }
+                novidadesText.add(t);
+            }
+            novidadesvBox.getChildren().addAll(novidadesText);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     @FXML
     void onEventosPressed() {
@@ -100,8 +123,53 @@ public class HomePageGestoresController implements Initializable {
         ViewSwitcher.switchTo(View.LOGIN);
     }
     @FXML
-    public void onRemoverNovidade() {
+    public void onRemoverNovidade() throws SQLException {
 
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Novidades");
+        dialog.setHeaderText("Remover Novidades");
+
+        ButtonType insertButtonType = new ButtonType("Remover", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(insertButtonType, ButtonType.CANCEL);
+
+        // Create the username and password labels and fields.
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField id = new TextField();
+        id.setPromptText("Número da Novidade:");
+
+        grid.add(new Label("Novidade:"), 0, 0);
+        grid.add(id, 1, 0);
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.showAndWait();
+
+        novidadesvBox.getChildren().clear();
+        connDB.removeNovidade(Integer.parseInt(id.getText()),LoginController.getNumero());
+        try {
+
+            novidadesText = new ArrayList<>();
+            novidades = connDB.getNovidades();
+            Text t;
+            for (int i = 0; i < novidades.size(); i++) {
+                if(i % 2 ==0){
+                    t = new Text();
+                    t.setText("\n" + novidades.get(i));
+                    t.setStyle("-fx-font-weight: bold;");
+                }else{
+                    t = new Text();
+                    t.setText(novidades.get(i));
+                }
+                novidadesText.add(t);
+            }
+            novidadesvBox.getChildren().addAll(novidadesText);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     @FXML
     public void onDiaPressed() {
@@ -141,7 +209,7 @@ public class HomePageGestoresController implements Initializable {
         Date date = Date.from(instant);
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         strDate = dateFormat.format(date);
-        try {
+        try{
             ArrayList<String> eventos;
             ArrayList<Text> eventosText = new ArrayList<>();
             eventos = connDB.getEventos(strDate);
@@ -151,13 +219,13 @@ public class HomePageGestoresController implements Initializable {
                 eventosText.add(t);
             }
             detalhesCalendario.getChildren().addAll(eventosText);
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            ArrayList<String> novidades;
-            ArrayList<Text> novidadesText = new ArrayList<>();
+
+            novidadesText = new ArrayList<>();
             novidades = connDB.getNovidades();
             Text t;
             for (int i = 0; i < novidades.size(); i++) {
