@@ -1,5 +1,6 @@
 
 package pt.isec.gps.rookiesguidance.views.Controller;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -7,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import pt.isec.gps.rookiesguidance.bd.ConnDB;
@@ -24,6 +24,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 public class HomePageGestoresController implements Initializable {
+    @FXML
+    private Button removerNovidade;
+    @FXML
+    private Button adicionarNovidade;
     ConnDB connDB;
     DatePickerSkin datePickerSkin;
     LocalDate localDate;
@@ -34,18 +38,19 @@ public class HomePageGestoresController implements Initializable {
     @FXML
     private VBox detalhesCalendario; // TODO meter um pra um
     @FXML
+    private VBox novidadesvBox;
+    @FXML
     private HBox PICKER;
     @FXML
     private ImageView homePageIcon;
     @FXML
-    void onAdicionarNovidade() {
+    void onAdicionarNovidade() throws SQLException {
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Novidades");
         dialog.setHeaderText("Inserir Novidades");
 
         ButtonType insertButtonType = new ButtonType("Inserir", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(insertButtonType, ButtonType.CANCEL);
-
 
         // Create the username and password labels and fields.
         GridPane grid = new GridPane();
@@ -66,6 +71,8 @@ public class HomePageGestoresController implements Initializable {
         dialog.getDialogPane().setContent(grid);
 
         dialog.showAndWait();
+
+        connDB.addNovidade(titulo.getText(), descricao.getText(), LoginController.getNumero());
     }
     @FXML
     void onEventosPressed() {
@@ -91,6 +98,10 @@ public class HomePageGestoresController implements Initializable {
     @FXML
     void onTerminarSessaoPressed() {
         ViewSwitcher.switchTo(View.LOGIN);
+    }
+    @FXML
+    public void onRemoverNovidade() {
+
     }
     @FXML
     public void onDiaPressed() {
@@ -140,6 +151,27 @@ public class HomePageGestoresController implements Initializable {
                 eventosText.add(t);
             }
             detalhesCalendario.getChildren().addAll(eventosText);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            ArrayList<String> novidades;
+            ArrayList<Text> novidadesText = new ArrayList<>();
+            novidades = connDB.getNovidades();
+            Text t;
+            for (int i = 0; i < novidades.size(); i++) {
+                if(i % 2 ==0){
+                    t = new Text();
+                    t.setText("\n" + novidades.get(i));
+                    t.setStyle("-fx-font-weight: bold;");
+                }else{
+                    t = new Text();
+                    t.setText(novidades.get(i));
+                }
+                novidadesText.add(t);
+            }
+            novidadesvBox.getChildren().addAll(novidadesText);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

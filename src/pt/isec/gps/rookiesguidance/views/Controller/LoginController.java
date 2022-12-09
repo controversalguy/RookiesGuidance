@@ -28,6 +28,7 @@ public class LoginController implements Initializable {
     private PasswordField password;
 
     ConnDB connDB;
+    static Long nrUtilizador;
     @FXML
     void buttonPressed() throws SQLException {
         String emailText = email.getText();
@@ -41,6 +42,9 @@ public class LoginController implements Initializable {
                 ToastMessage.show(getScene().getWindow(), "Gestor logado com sucesso");
                 ViewSwitcher.switchTo(View.HOMEPAGE_GESTORES);
             }
+            String numero = emailText.substring(1, 11);
+
+            nrUtilizador = Long.parseLong(numero);
         } else {
             ToastMessage.show(getScene().getWindow(), "Credenciais inválidas!");
         }
@@ -58,4 +62,9 @@ public class LoginController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+    public static long getNumero() {
+        return nrUtilizador;
+    }
+
 }

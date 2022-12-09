@@ -262,6 +262,21 @@ public class ConnDB {
         }
         return eventos;
     }
+    public ArrayList<String> getNovidades() throws SQLException {
+
+        Statement statement = dbConn.createStatement();
+        String verificaExistente = "SELECT * FROM novidade";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        ArrayList<String> novidades = new ArrayList<>();
+        while (rs.next()){
+            String titulo = rs.getString("titulo");
+            String descricao = rs.getString("descricao");
+            novidades.add(titulo);
+            novidades.add(descricao);
+
+        }
+        return novidades;
+    }
     public boolean adicionaEvento(long idGestor, String tipo, String localizacao, String data_hora) throws SQLException {
             if(tipo == null || localizacao == null || data_hora == null){
                 System.out.println("Impossível adicionar evento");
