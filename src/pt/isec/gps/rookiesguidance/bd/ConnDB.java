@@ -3,6 +3,7 @@ package pt.isec.gps.rookiesguidance.bd;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ConnDB {
@@ -245,6 +246,21 @@ public class ConnDB {
             statement.close();
             return false;
     } //feito
+    public ArrayList<String> getEventos(String dataHora) throws SQLException {
+        if(dataHora == null)
+            return null;
+
+        Statement statement = dbConn.createStatement();
+        String verificaExistente = "SELECT * FROM evento WHERE data_hora like '" + dataHora+ "%'";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        ArrayList<String> eventos = new ArrayList<>();
+        while (rs.next()){
+            String tipo = rs.getString("tipo");
+            String data = rs.getString("data_hora");
+            eventos.add(tipo+"\n"+data+ "\n");
+        }
+        return eventos;
+    }
     public boolean adicionaEvento(long idGestor, String tipo, String localizacao, String data_hora) throws SQLException {
             if(tipo == null || localizacao == null || data_hora == null){
                 System.out.println("Impossível adicionar evento");
