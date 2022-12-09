@@ -71,6 +71,8 @@ public class HomePageController implements Initializable {
 
     @FXML
     void onTerminarSessaoPressed() {
+
+
         ViewSwitcher.switchTo(View.LOGIN);
     }
 

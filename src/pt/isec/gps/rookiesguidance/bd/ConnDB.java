@@ -234,9 +234,14 @@ public class ConnDB {
                 String verificaExistente = "SELECT * FROM novidade WHERE id=" + id;
                 ResultSet resultSet = statement.executeQuery(verificaExistente);
                 if (resultSet.next()) { // se existir a novidade com o id recebido
-                    statement.executeUpdate("DELETE FROM novidade "); //WHERE id=" + id
+                    statement.executeUpdate("DELETE FROM novidade WHERE id=" + id);
                     resultSet.close();
                     statement.close();
+
+                    ResultSet rsOrdena = statement.executeQuery("SELECT * FROM novidade");
+                    while(rsOrdena.next()){
+
+                    }
                     return true;
                 }
                 System.out.println("Local inexistente");
@@ -460,8 +465,8 @@ public class ConnDB {
             String verificaExistente = "SELECT * FROM utilizador WHERE numero='" + idUtilizador + "'";
             ResultSet rs = statement.executeQuery(verificaExistente);
             if(rs.next()) {
-                String verificaPergunta = "SELECT * FROM evento WHERE id='" + idUtilizador + "'";
-                ResultSet resultSet = statement.executeQuery(verificaPergunta);
+                String verificaEvento = "SELECT * FROM evento WHERE id='" + idUtilizador + "'";
+                ResultSet resultSet = statement.executeQuery(verificaEvento);
 
                 if (resultSet.next()) {
                     String sqlQuery = "INSERT INTO evento_utilizador VALUES ('" + idEvento + "','" + idUtilizador + "')";
@@ -575,6 +580,18 @@ public class ConnDB {
         statement.executeUpdate(sqlQuery);
         System.out.println("Está agora autenticado!");
         statement.close();
+    }
+    public boolean logout(long nrAluno) throws SQLException {
+        Statement st = dbConn.createStatement();
+        String user = "SELECT * FROM utilizador WHERE numero=" + nrAluno;
+        ResultSet rs = st.executeQuery(user);
+        if(rs.next()) {
+            String logout = "UPDATE utilizador SET autenticado='" + 0 + "' WHERE numero=" + nrAluno;
+            st.executeUpdate(logout);
+            return true;
+        }
+
+        return false;
     }
 
 }

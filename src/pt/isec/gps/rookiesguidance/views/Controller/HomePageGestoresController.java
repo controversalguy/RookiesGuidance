@@ -1,6 +1,5 @@
 
 package pt.isec.gps.rookiesguidance.views.Controller;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -11,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import pt.isec.gps.rookiesguidance.bd.ConnDB;
+import pt.isec.gps.rookiesguidance.utils.ToastMessage;
 import pt.isec.gps.rookiesguidance.views.View;
 import pt.isec.gps.rookiesguidance.views.ViewSwitcher;
 import java.net.URL;
@@ -23,6 +23,9 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+
+import static pt.isec.gps.rookiesguidance.views.ViewSwitcher.getScene;
+
 public class HomePageGestoresController implements Initializable {
     @FXML
     private Button removerNovidade;
@@ -75,7 +78,7 @@ public class HomePageGestoresController implements Initializable {
         dialog.showAndWait();
 
         connDB.addNovidade(titulo.getText(), descricao.getText(), LoginController.getNumero());
-
+        novidadesvBox.getChildren().clear();
         try {
 
             novidadesText = new ArrayList<>();
@@ -119,8 +122,13 @@ public class HomePageGestoresController implements Initializable {
     }
 
     @FXML
-    void onTerminarSessaoPressed() {
-        ViewSwitcher.switchTo(View.LOGIN);
+    void onTerminarSessaoPressed() throws SQLException {
+
+        if(connDB.logout(LoginController.getNumero())){
+            ToastMessage.show(getScene().getWindow(), "Sessão terminada com sucesso");
+            ViewSwitcher.switchTo(View.LOGIN);
+        }else
+            ToastMessage.show(getScene().getWindow(), "Erro ao terminar sessão");
     }
     @FXML
     public void onRemoverNovidade() throws SQLException {
