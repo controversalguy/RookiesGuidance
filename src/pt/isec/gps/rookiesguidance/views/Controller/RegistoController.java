@@ -16,8 +16,6 @@ import static pt.isec.gps.rookiesguidance.views.ViewSwitcher.getScene;
 
 public class RegistoController implements Initializable {
     ConnDB connDB;
-
-
     @FXML
     private TextField nomeText;
 
@@ -36,13 +34,7 @@ public class RegistoController implements Initializable {
     @FXML
     private Button registarButton;
     @FXML
-    void buttonPressed() {
-        ViewSwitcher.switchTo(View.LOGIN);
-    }
-
-    @FXML
-    void onButtonLogin() throws SQLException {
-
+    void buttonPressed()  throws SQLException {
         String curso = (String) dropdownCurso.getSelectionModel().getSelectedItem();
         String nome = nomeText.getText();
         String email = emailText.getText();
@@ -57,6 +49,11 @@ public class RegistoController implements Initializable {
         } else {
             ToastMessage.show(getScene().getWindow(), "Insira a palavra-passe corretamente");
         }
+    }
+
+    @FXML
+    void onButtonLogin(){
+        ViewSwitcher.switchTo(View.LOGIN);
     }
 
     @Override

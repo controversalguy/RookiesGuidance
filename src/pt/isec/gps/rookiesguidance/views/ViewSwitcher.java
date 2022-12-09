@@ -16,7 +16,6 @@ public class ViewSwitcher {
     public static Scene getScene() {
         return scene.getRoot().getScene();
     }
-
     public static Parent getRoot() {
         return scene.getRoot();
     }

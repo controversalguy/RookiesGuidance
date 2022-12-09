@@ -518,22 +518,23 @@ public class ConnDB {
 
         return -1;
     }
-    public boolean loginUtilizador(String email, String password) throws SQLException {
+    public int loginUtilizador(String email, String password) throws SQLException {
         if (email == null || password == null) {
-            return false;
+            return -1;
         }
         Statement statement = dbConn.createStatement();
         String sqlQuery = "SELECT * FROM utilizador WHERE email = '" + email + "' AND password = '" + password + "'";
         ResultSet resultSet = statement.executeQuery(sqlQuery);
         if (resultSet.next()) {
+            int isGestor = resultSet.getInt("isGestor");
             int nrAluno = resultSet.getInt("numero");
             loginEfetuado(nrAluno);
             System.out.println("Login Efetuado Com Sucesso!");
             statement.close();
-            return true;
+            return isGestor;
         }
         System.out.println("Login Incorreto!");
-        return false;
+        return -1;
     }
     public void loginEfetuado (int nrAluno) throws SQLException {
         int autent = 1;
