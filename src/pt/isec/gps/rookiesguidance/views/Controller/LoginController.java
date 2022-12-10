@@ -29,6 +29,7 @@ public class LoginController implements Initializable {
 
     ConnDB connDB;
     static Long nrUtilizador;
+    static int isGestor;
     @FXML
     void buttonPressed() throws SQLException {
         String emailText = email.getText();
@@ -65,6 +66,10 @@ public class LoginController implements Initializable {
 
     public static long getNumero() {
         return nrUtilizador;
+    }
+
+    public static int isGestor() {
+        return isGestor;
     }
 
 }

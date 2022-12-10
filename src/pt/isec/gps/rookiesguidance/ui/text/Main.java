@@ -23,7 +23,7 @@ public class Main {
 //            System.out.println("Registado com Sucesso!");
 
         //ConnDB cDb = new ConnDB();
-//        if (cDb.registaNovoUtilizador(2019133920, "Francisco Simões", "a2019133920@isec.pt", "IS3C..0", "LEI"))
+//        if (cDb.registaNovoUtilizador(2019133920, "Francisco Simões", "a2019S133920@isec.pt", "IS3C..0", "LEI"))
 //            System.out.println("Registado com Sucesso!");
 
       // cdb.adicionaEvento(2019133920,"Praxe","Lisboa","09-12-2022 12:00");
