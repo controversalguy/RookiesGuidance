@@ -328,6 +328,26 @@ public class ConnDB {
         return eventos;
     }
 
+    public ArrayList<String> getEventos2(String dataHora) throws SQLException {
+        if(dataHora == null)
+            return null;
+
+        Statement statement = dbConn.createStatement();
+        String verificaExistente = "SELECT * FROM evento WHERE data_hora like '" + dataHora+ "%'";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        ArrayList<String> eventos = new ArrayList<>();
+        while (rs.next()){
+            String tipo = rs.getString("tipo");
+            String data = rs.getString("data_hora");
+            String local = rs.getString("local");
+            String [] datahora = data.split(" ");
+            eventos.add(tipo);
+            eventos.add(datahora[1]);
+            eventos.add(local);
+        }
+        return eventos;
+    }
+
     public ArrayList<String> getEventos2() throws SQLException {
 
         Statement statement = dbConn.createStatement();

@@ -27,7 +27,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static pt.isec.gps.rookiesguidance.views.ViewSwitcher.getScene;
 
@@ -155,7 +157,19 @@ public class EventosController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Eventos");
+
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
         //popup
+        VBox detalhesEventos = new VBox();
         ArrayList<Button> id = new ArrayList<>();
         for (int i = 0; i < eventos.size() ; i++) {
             Button detalhes = new Button("Detalhes");
@@ -164,9 +178,43 @@ public class EventosController implements Initializable {
             id.add(detalhes);
             id.add(atualizar);
             id.add(remover);
-            HBox hbevento = new HBox(detalhes,atualizar,remover);
+            int j = i;
+            id.get(i).setOnAction(actionEvent -> {
+
+            });
+            id.get(i+1).setOnAction(actionEvent -> {
+//                try {
+//                    if (!connDB.editaEvento(Integer.parseInt(String.valueOf(j)), LoginController.getNumero())) {
+//                        ToastMessage.show(getScene().getWindow(), "Não existe evento para remover");
+//                    }
+//                } catch (SQLException e) {
+//                    throw new RuntimeException(e);
+//                }
+            });
+            id.get(i+2).setOnAction(actionEvent -> {
+                try {
+                    if (!connDB.removeEvento(2, LoginController.getNumero())) {
+                        ToastMessage.show(getScene().getWindow(), "Não existe evento para remover");
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            VBox vBoxButoesevento = new VBox(detalhes,atualizar,remover);
+            VBox vBoxdadosEvento = new VBox(new Text("\nasdasdsdasad\nadddddd\naasdsad"));
+            HBox hBoxdadosEventoTotais = new HBox(vBoxdadosEvento,vBoxButoesevento);
+            detalhesEventos.getChildren().add(hBoxdadosEventoTotais);
+
+            dialog.getDialogPane().setContent(detalhesEventos);
+
+            Optional<String> result = dialog.showAndWait();
+
+//            if (!connDB.removeNovidade(Integer.parseInt(result.get()), LoginController.getNumero())) {
+//                ToastMessage.show(getScene().getWindow(), "Não existe novidades para remover");
+//                return;
+//            }
         }
-        VBox detalhesEventos = new VBox();
+
 
     }
 
