@@ -35,6 +35,24 @@ public class RegistoController implements Initializable {
     private Button registarButton;
     @FXML
     void buttonPressed()  throws SQLException {
+        if(dropdownCurso.getSelectionModel().isEmpty() || nomeText.getText().isEmpty() || emailText.getText().isEmpty() || passwordText.getText().isEmpty() || confirmpasswordText.getText().isEmpty()) {
+            ToastMessage.show(getScene().getWindow(), "Preencha os campos corretamente");
+            return;
+        }
+
+        int count = 0;
+        for (int i = 0, len = emailText.getText().length(); i < len; i++) {
+            if (Character.isDigit(emailText.getText().charAt(i))) {
+                count++;
+            }
+        }
+
+        if(!emailText.getText().startsWith("a") || emailText.getText().length() != 19 || !emailText.getText().endsWith("@isec.pt") || count != 10) {
+            ToastMessage.show(getScene().getWindow(), "Preencha os campos corretamente");
+            return;
+        }
+
+
         String curso = (String) dropdownCurso.getSelectionModel().getSelectedItem();
         String nome = nomeText.getText();
         String email = emailText.getText();

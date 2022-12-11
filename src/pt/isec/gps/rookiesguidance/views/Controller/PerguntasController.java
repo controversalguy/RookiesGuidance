@@ -1,5 +1,6 @@
 package pt.isec.gps.rookiesguidance.views.Controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -8,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import pt.isec.gps.rookiesguidance.bd.ConnDB;
 import pt.isec.gps.rookiesguidance.utils.ToastMessage;
@@ -18,7 +18,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static pt.isec.gps.rookiesguidance.views.ViewSwitcher.getScene;
@@ -104,102 +103,63 @@ public class PerguntasController implements Initializable {
                     System.out.println("mapaRespostasPerguntas" + mapaRespostasPerguntas);
                     int index = 0;
                     //vBox.getChildren().clear();
-                    for (var p : mapaRespostasPerguntas.keySet()) {// adiciona titulo
-                        HBox h = new HBox();
-                        VBox perguntaResposta = new VBox();
-                        t = new Text();
-                        t.setText("\n" + p);
-                        t.setStyle("-fx-font-weight: bold;");
-                        respostasPerguntasText.add(t);
-                        int finalIndex = index;
+                    id = new ArrayList<>();
+
+                    for (var p : mapaRespostasPerguntas.keySet()) {
                         Button badicionaResposta = new Button("Adiciona\nResposta");
                         Button bremoveResposta = new Button("Remove\nResposta");
                         badicionaResposta.setMaxSize(90, 40);
                         bremoveResposta.setMaxSize(90, 40);
+                        badicionaResposta.addEventHandler(ActionEvent.ACTION,e -> {
+                            System.out.println("badicionaResposta");
+                        });
+                        bremoveResposta.addEventHandler(ActionEvent.ACTION,e -> {
+                            System.out.println("bremoveResposta");
+                        });
                         id.add(badicionaResposta);
                         id.add(bremoveResposta);
-
-
-                        id.get(index).setOnAction(mouseEvent -> {
-
-                            //dialog.setResult(String.valueOf(finalIndex));
-
-                            Dialog<String> dialog1 = new Dialog<>();
-                            dialog1.setTitle("Perguntas");
-                            dialog1.setHeaderText("Inserir Pergunta");
-
-                            ButtonType ok1 = new ButtonType("Inserir", ButtonBar.ButtonData.OK_DONE);
-                            dialog1.getDialogPane().getButtonTypes().addAll(ok1, ButtonType.CANCEL);
-
-                            // Create the username and password labels and fields.
-                            GridPane grid1 = new GridPane();
-                            grid1.setHgap(10);
-                            grid1.setVgap(10);
-                            grid1.setPadding(new Insets(20, 150, 10, 10));
-
-                            TextArea pergunta1 = new TextArea();
-
-                            grid1.add(new Label("Pergunta:"), 0, 0);
-                            grid1.add(pergunta1, 1, 0);
-
-                            Node okButton1 = dialog1.getDialogPane().lookupButton(ok1);
-                            okButton1.setDisable(true);
-                            pergunta1.textProperty().addListener((observable, oldValue, newValue) -> {
-
-                                if (!pergunta1.textProperty().getValue().isEmpty())
-                                    okButton1.setDisable(false);
-                                else
-                                    okButton1.setDisable(true);
-                            });
-
-                            dialog1.getDialogPane().setContent(grid1);
-
-                            dialog1.setResultConverter(dialogButton1 -> {
-                                if (dialogButton1 == ok1) {
-                                    try {
-                                        if (!connDB.adicionaPergunta(pergunta1.getText(), LoginController.getNumero())) {
-                                            ToastMessage.show(getScene().getWindow(), "Não foi possível adicionar Pergunta!");
-                                            return null;
-                                        }
-                                    } catch (SQLException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                }
-                                return null;
-                            });
-
-                            dialog1.showAndWait();
-
-                            ViewSwitcher.switchTo(View.PERGUNTAS);
-                        });
-                        index++;
-                        int finalIndex1 = index;
-                        id.get(index).setOnAction(mouseEvent -> {
-                            // dialog.setResult(String.valueOf(finalIndex1));
-
-
-                        });
-                        index++;
-                        h.getChildren().addAll(respostasPerguntasText);
-                        h.getChildren().addAll(badicionaResposta);
-                        h.getChildren().addAll(bremoveResposta);
-                        perguntaResposta.getChildren().add(h);
-                        respostasPerguntasText = new ArrayList<>();
-                        for (var resposta : mapaRespostasPerguntas.get(p)) { // adiciona respostas
-                            t = new Text();
-                            t.setText("\n" + resposta);
-                            t.setStyle("-fx-font-weight: bold;");
-                            respostasPerguntasText.add(t);
-                        }
-                        perguntaResposta.getChildren().addAll(respostasPerguntasText);
-                        //  vBox.getChildren().add(perguntaResposta);
-                        respostasPerguntasText = new ArrayList<>();
+                        System.out.println("yes");
+                        gridPerguntaResposta.getChildren().add(badicionaResposta);
+                        gridPerguntaResposta.getChildren().add(bremoveResposta);
                     }
+                    System.out.println(id);
+//                    index = 0;
+//                    for (var p : mapaRespostasPerguntas.keySet()) {// adiciona titulo
+//                        HBox h = new HBox();
+//                        VBox perguntaResposta = new VBox();
+//                        t = new Text();
+//                        t.setText("\n" + p);
+//                        t.setStyle("-fx-font-weight: bold;");
+//                        respostasPerguntasText.add(t);
+//                        int finalIndex = index;
+////                        Button badicionaResposta = new Button("Adiciona\nResposta");
+////                        Button bremoveResposta = new Button("Remove\nResposta");
+////                        badicionaResposta.setMaxSize(90, 40);
+////                        bremoveResposta.setMaxSize(90, 40);
+////                        badicionaResposta.setOnAction(actionEvent -> {
+////                            System.out.println("a");
+////                        });
+//                        System.out.println("index" + index);
+//                        h.getChildren().addAll(respostasPerguntasText);
+//                        h.getChildren().add(id.get(index));
+//                        h.getChildren().add(id.get(index+1));
+//                        index++;
+//                        perguntaResposta.getChildren().add(h);
+//                        respostasPerguntasText = new ArrayList<>();
+//                        for (var resposta : mapaRespostasPerguntas.get(p)) { // adiciona respostas
+//                            t = new Text();
+//                            t.setText("\n" + resposta);
+//                            t.setStyle("-fx-font-weight: bold;");
+//                            respostasPerguntasText.add(t);
+//                        }
+//                        perguntaResposta.getChildren().addAll(respostasPerguntasText);
+//                        //  vBox.getChildren().add(perguntaResposta);
+//                        respostasPerguntasText = new ArrayList<>();
+//                    }
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
             }
-
             return null;
         });
 
@@ -309,8 +269,33 @@ public class PerguntasController implements Initializable {
             Text t;
             id = new ArrayList<>();
             int i = 0,j=0;
+            id = new ArrayList<>();
 
+            for (var p : mapaRespostasPerguntas.keySet()) {
+                j++;
+
+                Button badicionaResposta = new Button("Adiciona\nResposta");
+                Button bremoveResposta = new Button("Remove\nResposta");
+                badicionaResposta.setMaxSize(90, 40);
+                bremoveResposta.setMaxSize(90, 40);
+                int k = j;
+                badicionaResposta.addEventHandler(ActionEvent.ACTION,e -> {
+
+                });
+                bremoveResposta.addEventHandler(ActionEvent.ACTION,e -> {
+
+                });
+                id.add(badicionaResposta);
+                id.add(bremoveResposta);
+                //System.out.println("yes");
+                //gridPerguntaResposta.getChildren().add(badicionaResposta);
+                //gridPerguntaResposta.getChildren().add(bremoveResposta);
+            }
+            int index = 0;
+            i =0;
             for (var p : mapaRespostasPerguntas.keySet()){// adiciona titulo
+                if(index == id.size()-1)
+                    break;
                 VBox perguntaResposta = new VBox(); // uma pergunta varias respostas
                 t = new Text();
                 t.setText("\nPergunta: " + p + "\n");
@@ -319,17 +304,12 @@ public class PerguntasController implements Initializable {
                 //pergunta.setMinWidth();
                 pergunta.setStyle("-fx-background-radius: 10; -fx-background-color:#38819c; -fx-font-weight: bold;" );
                 perguntaResposta.getChildren().add(pergunta);
-                Button adicionaPergunta = new Button("Adiciona\nResposta\n\n");
-                Button removePergunta = new Button("Remove\nResposta\n\n");
-                id.add(adicionaPergunta);
-                id.add(removePergunta);
-                HBox hButtoes = new HBox(adicionaPergunta, removePergunta);
+                HBox hButtoes = new HBox(id.get(index),id.get(index+1));
+                index++;
+                index++;
                 hButtoes.setStyle("-fx-background-color: #ffffff; -fx-font-weight: bold;");
 
-//                int row = GridPane.getRowIndex(vBox);
-//                int column = GridPane.getColumnIndex(hButtoes);
                 gridPerguntaResposta.add(hButtoes, 1, i);
-
                 for (var r : mapaRespostasPerguntas.get(p)){ // adiciona respostas
                     t = new Text();
                     t.setText("\nResposta: " + r);
