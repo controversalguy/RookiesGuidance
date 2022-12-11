@@ -12,8 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ScrollPane?>
 
-<AnchorPane depthTest="DISABLE" minHeight="550.0" minWidth="750.0" prefHeight="400.0" prefWidth="680.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.InscreveEventoController">
+<ScrollPane maxHeight="-Infinity" maxWidth="750.0" minHeight="550.0" minWidth="750" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.InscreveEventoController">
+    <content>
+    <AnchorPane maxHeight="Infinity" maxWidth="750" minHeight="550" minWidth="750">
     <HBox prefHeight="63.0" prefWidth="750.0" style="-fx-background-color: #38819c;">
         <children>
             <ImageView fx:id="homePageIcon" accessibleRole="BUTTON" fitHeight="79.0" fitWidth="154.0" onMouseClicked="#onIconPressed" pickOnBounds="true" preserveRatio="true">
@@ -89,7 +92,7 @@
          </CheckBox>
       </children>
    </Pane>
-   <VBox layoutX="469.0" layoutY="108.0" prefHeight="330.0" prefWidth="218.0">
+   <VBox layoutX="469.0" layoutY="108.0" prefHeight="330.0" prefWidth="218.0" style="-fx-border-color: #53A7C6; -fx-border-radius: 8;">
       <children>
          <HBox alignment="CENTER" prefHeight="44.0" prefWidth="218.0">
             <children>
@@ -100,8 +103,9 @@
                </Text>
             </children>
          </HBox>
-         <VBox fx:id="presencasVBox" prefHeight="286.0" prefWidth="218.0" />
+         <VBox fx:id="presencasVBox" prefHeight="286.0" prefWidth="218.0" alignment="TOP_CENTER"/>
       </children>
    </VBox>
-
-</AnchorPane>
+    </AnchorPane>
+    </content>
+</ScrollPane>

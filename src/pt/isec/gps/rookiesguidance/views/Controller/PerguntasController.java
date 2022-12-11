@@ -39,24 +39,12 @@ public class PerguntasController implements Initializable {
     private ArrayList <Text> respostasPerguntasText;
     @FXML
     private GridPane gridPerguntaResposta;
+
     ArrayList<Button> id;
+
     @FXML
     void onAdicionarPerguntaPressed() {
-//        Text t = new Text("Pergunta:");
-//        Button bResponderPergunta= new Button("Responder\n Pergunta");
-//        Button bRemoverPergunta= new Button("Remover\n Pergunta");
-//        TextField tf = new TextField();
-//
-//        bRemoverPergunta.setMaxSize(90, 40);
-//        bResponderPergunta.setMaxSize(90, 40);
-//        tf.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
-//        HBox hBox = new HBox(t,tf);
-//        hBox.setMinSize(300,40);
-//        HBox hBox1 = new HBox(hBox,bResponderPergunta,bRemoverPergunta);
-//        Color c = Color.rgb(56, 129, 156);
-//        VBox group = new VBox(hBox1,adicionaPergunta);
-//        hBox.setBackground(new Background(new BackgroundFill(c, CornerRadii.EMPTY, Insets.EMPTY)));
-//        vBox.getChildren().add(group);
+
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Perguntas");
         dialog.setHeaderText("Inserir Pergunta");
@@ -79,7 +67,7 @@ public class PerguntasController implements Initializable {
         okButton.setDisable(true);
         pergunta.textProperty().addListener((observable, oldValue, newValue) -> {
 //            && !descricao.textProperty().getValue().isEmpty()
-            if(!pergunta.textProperty().getValue().isEmpty() )
+            if (!pergunta.textProperty().getValue().isEmpty())
                 okButton.setDisable(false);
             else
                 okButton.setDisable(true);
@@ -125,19 +113,71 @@ public class PerguntasController implements Initializable {
                         respostasPerguntasText.add(t);
                         int finalIndex = index;
                         Button badicionaResposta = new Button("Adiciona\nResposta");
-                        Button bremoveResposta  = new Button("Remove\nResposta");
+                        Button bremoveResposta = new Button("Remove\nResposta");
                         badicionaResposta.setMaxSize(90, 40);
                         bremoveResposta.setMaxSize(90, 40);
                         id.add(badicionaResposta);
                         id.add(bremoveResposta);
+
+
                         id.get(index).setOnAction(mouseEvent -> {
-                            dialog.setResult(String.valueOf(finalIndex));
+
+                            //dialog.setResult(String.valueOf(finalIndex));
+
+                            Dialog<String> dialog1 = new Dialog<>();
+                            dialog1.setTitle("Perguntas");
+                            dialog1.setHeaderText("Inserir Pergunta");
+
+                            ButtonType ok1 = new ButtonType("Inserir", ButtonBar.ButtonData.OK_DONE);
+                            dialog1.getDialogPane().getButtonTypes().addAll(ok1, ButtonType.CANCEL);
+
+                            // Create the username and password labels and fields.
+                            GridPane grid1 = new GridPane();
+                            grid1.setHgap(10);
+                            grid1.setVgap(10);
+                            grid1.setPadding(new Insets(20, 150, 10, 10));
+
+                            TextArea pergunta1 = new TextArea();
+
+                            grid1.add(new Label("Pergunta:"), 0, 0);
+                            grid1.add(pergunta1, 1, 0);
+
+                            Node okButton1 = dialog1.getDialogPane().lookupButton(ok1);
+                            okButton1.setDisable(true);
+                            pergunta1.textProperty().addListener((observable, oldValue, newValue) -> {
+
+                                if (!pergunta1.textProperty().getValue().isEmpty())
+                                    okButton1.setDisable(false);
+                                else
+                                    okButton1.setDisable(true);
+                            });
+
+                            dialog1.getDialogPane().setContent(grid1);
+
+                            dialog1.setResultConverter(dialogButton1 -> {
+                                if (dialogButton1 == ok1) {
+                                    try {
+                                        if (!connDB.adicionaPergunta(pergunta1.getText(), LoginController.getNumero())) {
+                                            ToastMessage.show(getScene().getWindow(), "Não foi possível adicionar Pergunta!");
+                                            return null;
+                                        }
+                                    } catch (SQLException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+                                return null;
+                            });
+
+                            dialog1.showAndWait();
+
+                            ViewSwitcher.switchTo(View.PERGUNTAS);
                         });
                         index++;
-
                         int finalIndex1 = index;
                         id.get(index).setOnAction(mouseEvent -> {
-                            dialog.setResult(String.valueOf(finalIndex1));
+                            // dialog.setResult(String.valueOf(finalIndex1));
+
+
                         });
                         index++;
                         h.getChildren().addAll(respostasPerguntasText);
@@ -159,84 +199,68 @@ public class PerguntasController implements Initializable {
                     throw new RuntimeException(e);
                 }
             }
+
             return null;
         });
 
         dialog.showAndWait();
+
+        ViewSwitcher.switchTo(View.PERGUNTAS);
     }
 
     @FXML
     public void onRemoverPerguntaPressed() throws SQLException {
-//        try {
-//            mapaRespostasPerguntas = connDB.getNovidades();
-//            if (novidades.isEmpty()) {
-//                ToastMessage.show(getScene().getWindow(), "Não existe novidades para remover");
-//                return;
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        novidadesText = new ArrayList<>();
-//
-//        Dialog<String> dialog = new Dialog<>();
-//        dialog.setTitle("Novidades");
-//        dialog.setHeaderText("Remover Novidades");
-//
-//        // Create the username and password labels and fields.
-//        GridPane grid = new GridPane();
-//        grid.setHgap(10);
-//        grid.setVgap(10);
-//        grid.setPadding(new Insets(20, 150, 10, 10));
-//        ArrayList<Button> id = new ArrayList<>();
-//
-//        for (int i = 0; i < novidades.size(); i+=2) {
-//            int index = i/2;
-//            id.add(new Button(novidades.get(i)));
-//            System.out.println("novidades.get(i): "+novidades.get(i));
-//            System.out.println(novidades);
-//            id.get(index).setOnAction(mouseEvent -> {
-//                dialog.setResult(String.valueOf(index));
-//            });
-//            grid.add(new Label("Novidade:"), index, index);
-//            grid.add(id.get(index), index + 1, index);
-//        }
-//
-//
-//        System.out.println("NOVIDADES: " + novidades);
-//
-//        dialog.getDialogPane().setContent(grid);
-//
-//        Optional<String> result = dialog.showAndWait();
-//
-//        if (!connDB.removeNovidade(Integer.parseInt(result.get()), LoginController.getNumero())) {
-//            ToastMessage.show(getScene().getWindow(), "Não existe novidades para remover");
-//            return;
-//        }
-//
-//        novidades = connDB.getNovidades();
-//
-//        if(novidades == null){
-//            ToastMessage.show(getScene().getWindow(), "Não existe novidades para remover");
-//        }
-//        System.out.println("novidades:" + novidades);
-//        Text t;
-//        for (int i = 0; i < novidades.size(); i++) {
-//            if (i % 2 == 0) {
-//                t = new Text();
-//                t.setText("\n" + novidades.get(i));
-//                t.setStyle("-fx-font-weight: bold;");
-//            } else {
-//                t = new Text();
-//                t.setText(novidades.get(i));
-//            }
-//            novidadesText.add(t);
-//        }
-//        novidadesvBox.getChildren().clear();
-//        novidadesvBox.getChildren().addAll(novidadesText);
+        Dialog<String> dialog1 = new Dialog<>();
+        dialog1.setTitle("Perguntas");
+        dialog1.setHeaderText("Remover pergunta");
 
+        ButtonType ok = new ButtonType("Remover", ButtonBar.ButtonData.OK_DONE);
+        dialog1.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
+
+        // Create the username and password labels and fields.
+        GridPane grid1 = new GridPane();
+        grid1.setHgap(10);
+        grid1.setVgap(10);
+        grid1.setPadding(new Insets(20, 150, 10, 10));
+
+        ArrayList<String> ids = connDB.getIdPerguntas();
+        ChoiceBox<String> tipo = new ChoiceBox<>();
+
+        tipo.getItems().addAll(ids);
+
+        grid1.add(new Label("Número da Pergunta:"), 0, 0);
+        grid1.add(tipo, 1, 0);
+
+        dialog1.setResultConverter(dialogButton -> {
+            if (dialogButton == ok) {
+                if(tipo.getSelectionModel().isEmpty()) {
+                    ToastMessage.show(getScene().getWindow(), "Insira um número!");
+                    return null;
+                } else {
+                    try {
+                        if (connDB.removePergunta(Integer.parseInt(tipo.getSelectionModel().getSelectedItem()), LoginController.getNumero()))
+                            ToastMessage.show(getScene().getWindow(), "Pergunta eliminado com sucesso!");
+                        else
+                            ToastMessage.show(getScene().getWindow(), "Impossivel eliminar pergunta!");
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    ViewSwitcher.switchTo(View.PERGUNTAS);
+
+                }
+            }
+            return null;
+        });
+
+        dialog1.getDialogPane().setContent(grid1);
+
+        dialog1.showAndWait();
     }
+
     @FXML
     void onIconPressed() {ViewSwitcher.switchTo(View.HOMEPAGE);  }
+
     @FXML
     void onEventosPressed() {
         ViewSwitcher.switchTo(View.EVENTOS);

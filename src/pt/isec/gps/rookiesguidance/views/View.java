@@ -65,7 +65,6 @@ public enum View {
 
 
 
-
     private String filename;
 
     View(String filename) {

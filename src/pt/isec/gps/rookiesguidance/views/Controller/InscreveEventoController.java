@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import pt.isec.gps.rookiesguidance.bd.ConnDB;
 import pt.isec.gps.rookiesguidance.utils.ToastMessage;
 import pt.isec.gps.rookiesguidance.views.View;
@@ -13,6 +14,7 @@ import pt.isec.gps.rookiesguidance.views.ViewSwitcher;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static pt.isec.gps.rookiesguidance.views.ViewSwitcher.getScene;
@@ -88,6 +90,21 @@ public class InscreveEventoController implements Initializable {
                 ToastMessage.show(getScene().getWindow(), "Impossivel desinscrever no evento");
 
         }
+
+        presencasVBox.getChildren().clear();
+        try {
+            ArrayList<String> eventosUtilizadores;
+            ArrayList<Text> eventosUtilizadoresText = new ArrayList<>();
+            eventosUtilizadores = connDB.getUtilizadoresEvento(idEvento);
+            for (int i = 0; i < eventosUtilizadores.size(); i++) {
+                Text t = new Text();
+                t.setText(eventosUtilizadores.get(i));
+                eventosUtilizadoresText.add(t);
+            }
+            presencasVBox.getChildren().addAll(eventosUtilizadoresText);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -111,7 +128,19 @@ public class InscreveEventoController implements Initializable {
         idEvento = EventosController.getIdEvento();
         submeterButton.setDisable(true);
 
-
+        try {
+            ArrayList<String> eventosUtilizadores;
+            ArrayList<Text> eventosUtilizadoresText = new ArrayList<>();
+            eventosUtilizadores = connDB.getUtilizadoresEvento(idEvento);
+            for (int i = 0; i < eventosUtilizadores.size(); i++) {
+                Text t = new Text();
+                t.setText(eventosUtilizadores.get(i));
+                eventosUtilizadoresText.add(t);
+            }
+            presencasVBox.getChildren().addAll(eventosUtilizadoresText);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
 
     }

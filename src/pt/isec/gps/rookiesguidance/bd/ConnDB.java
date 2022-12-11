@@ -2,6 +2,7 @@ package pt.isec.gps.rookiesguidance.bd;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -481,6 +482,7 @@ public class ConnDB {
             statement.close();
             return false;
     } //feito
+
     public boolean adicionaPergunta(String pergunta, long idUtilizador) throws SQLException {
             Statement statement = dbConn.createStatement();
             String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idUtilizador + "' AND isGestor = '" + 1 + "'";
@@ -502,6 +504,20 @@ public class ConnDB {
             return false;
     }
 
+    public ArrayList<String> getIdPerguntas() throws SQLException {
+        Statement statement = dbConn.createStatement();
+        String verificaExistente = "SELECT * FROM pergunta";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        ArrayList<String> ids = new ArrayList<>();
+        while (rs.next()){
+            int id = rs.getInt("id");
+            ids.add(String.valueOf(id));
+        }
+        /*if(novidades.size() == 0)
+            return null;*/
+        return ids;
+    }
+
     public Map<String, ArrayList<String>> getPerguntas() throws SQLException {
         Statement statement = dbConn.createStatement();
         String verificaExistente = "SELECT * FROM pergunta";
@@ -514,7 +530,7 @@ public class ConnDB {
             String texto = rs.getString("texto");
             System.out.println("idPergunta->" + idPergunta);
             //String idUtilizador = rs.getString("id_utilizador");
-            perguntas = texto;
+            perguntas = idPergunta + " - " + texto;
             // perguntas.add(idUtilizador);
             String respostaExistente = "SELECT * FROM resposta WHERE id_pergunta='" + Integer.parseInt(idPergunta) + "'";
             Statement st = dbConn.createStatement();
@@ -534,10 +550,8 @@ public class ConnDB {
             st.close();
         }
 
-        System.out.println("mapaRespostas" + mapaRespostas);
-        System.out.println("mapaRespostas1" + mapaRespostas);
         statement.close();
-
+        System.out.println("mapaRespostas" + mapaRespostas);
         return mapaRespostas;
     }
     public boolean removePergunta(int id, long idUtilizador) throws SQLException {
@@ -678,22 +692,24 @@ public class ConnDB {
             String verificaTudo = "SELECT * FROM evento_utilizador WHERE id_evento='" + idEvento + "'";
             ResultSet resultSet2 = statement.executeQuery(verificaTudo);
             while (resultSet2.next()) {
+                Statement st = dbConn.createStatement();
                 int idUtilizador = resultSet2.getInt("id_utilizador");
 
-                String verificaUtilizador = "SELECT * utilizador WHERE numero='" + idUtilizador + "'";
+                String verificaUtilizador = "SELECT * FROM utilizador WHERE numero='" + idUtilizador + "'";
 
-                ResultSet resultSet3 = statement.executeQuery(verificaUtilizador);
-                if(resultSet3.next()) {
+                ResultSet resultSet3 = st.executeQuery(verificaUtilizador);
+                if (resultSet3.next()) {
                     String nomeUtilizador = resultSet3.getString("nome");
                     utilizadoresEvento.add(nomeUtilizador);
                 }
                 resultSet3.close();
-
+                st.close();
             }
             resultSet2.close();
         }
 
         resultSet.close();
+
         statement.close();
         return utilizadoresEvento;
     }
