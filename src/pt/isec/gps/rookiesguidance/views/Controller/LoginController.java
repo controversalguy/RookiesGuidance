@@ -1,13 +1,10 @@
 package pt.isec.gps.rookiesguidance.views.Controller;
 
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.skin.DatePickerSkin;
 import pt.isec.gps.rookiesguidance.bd.ConnDB;
 import pt.isec.gps.rookiesguidance.utils.ToastMessage;
 import pt.isec.gps.rookiesguidance.views.View;
@@ -15,7 +12,7 @@ import pt.isec.gps.rookiesguidance.views.ViewSwitcher;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static pt.isec.gps.rookiesguidance.views.ViewSwitcher.getScene;
@@ -28,7 +25,11 @@ public class LoginController implements Initializable {
     private PasswordField password;
 
     ConnDB connDB;
-    static Long nrUtilizador;
+    static int nrUtilizador;
+    static String emailUtilizador;
+    static String nomeUtilizador;
+    static String cursoUtilizador;
+    static String passeUtilizador;
     static int isGestor;
     @FXML
     void buttonPressed() throws SQLException {
@@ -45,7 +46,13 @@ public class LoginController implements Initializable {
             }
             String numero = emailText.substring(1, 11);
 
-            nrUtilizador = Long.parseLong(numero);
+            nrUtilizador = Integer.parseInt(numero);
+            emailUtilizador = emailText;
+            ArrayList<String> user = connDB.getUser(emailUtilizador);
+            nomeUtilizador = user.get(0);
+            cursoUtilizador = user.get(1);
+            passeUtilizador = user.get(2);
+
         } else {
             ToastMessage.show(getScene().getWindow(), "Credenciais inválidas!");
         }
@@ -64,8 +71,20 @@ public class LoginController implements Initializable {
         }
     }
 
-    public static long getNumero() {
+    public static int getNumero() {
         return nrUtilizador;
+    }
+    public static String getEmail() {
+        return emailUtilizador;
+    }
+    public static String getNome() {
+        return nomeUtilizador;
+    }
+    public static String getCurso() {
+        return cursoUtilizador;
+    }
+    public static String getPasse() {
+        return passeUtilizador;
     }
 
     public static int isGestor() {

@@ -2,6 +2,8 @@ package pt.isec.gps.rookiesguidance.bd;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ConnDB {
 
@@ -10,6 +12,9 @@ public class ConnDB {
 
     public ConnDB() throws SQLException {
         dbConn = DriverManager.getConnection(DATABASE);
+        /*partitioncount=1
+        minconnection=1
+        maxconnection=1*/
     }
 
     public void close() throws SQLException {
@@ -103,6 +108,29 @@ public class ConnDB {
         rs.close();
         return false;
     } // feito
+
+    public ArrayList<String> getUser(String emailUtilizador) throws SQLException {
+
+        Statement statement = dbConn.createStatement();
+        String verificaExistente = "SELECT * FROM utilizador WHERE email = '" + emailUtilizador + "'";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        ArrayList<String> user = new ArrayList<>();
+        if (rs.next()){
+            String nome = rs.getString("nome");
+            String curso = rs.getString("curso");
+            String passe = rs.getString("password");
+            user.add(nome);
+            user.add(curso);
+            user.add(passe);
+        }
+
+        /*if(novidades.size() == 0)
+            return null;*/
+
+        rs.close();
+        statement.close();
+        return user;
+    }
     public boolean registaNovoUtilizador(int nrAluno, String nome, String curso, String email, String password) throws SQLException {
         if (nome == null || email == null || password == null || curso == null)
             return false;
@@ -177,9 +205,10 @@ public class ConnDB {
         ResultSet rs = statement.executeQuery(verificaExistente);
         ArrayList<String> locais = new ArrayList<>();
         while (rs.next()){
+            int id = rs.getInt("id");
             String localizacao = rs.getString("localizacao");
             String tipo = rs.getString("tipo");
-            locais.add(localizacao);
+            locais.add(id + " - " + localizacao);
             locais.add(tipo);
         }
         /*if(novidades.size() == 0)
@@ -187,18 +216,29 @@ public class ConnDB {
         return locais;
     }
 
+    public ArrayList<String> getIdLocais() throws SQLException {
+        Statement statement = dbConn.createStatement();
+        String verificaExistente = "SELECT * FROM local";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        ArrayList<String> ids = new ArrayList<>();
+        while (rs.next()){
+            int id = rs.getInt("id");
+            ids.add(String.valueOf(id));
+        }
+        /*if(novidades.size() == 0)
+            return null;*/
+        return ids;
+    }
 
-
-
-    public boolean removelocal(int id, long idGestor) throws SQLException {
+    public boolean removelocal(int id, int idGestor) throws SQLException {
             Statement statement = dbConn.createStatement();
-            String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idGestor + "' AND isGestor = '" + 1 + "'";
+            String verificaUtilizador = "SELECT * FROM utilizador WHERE numero='" + idGestor + "' AND isGestor = '" + 1 + "'";
             ResultSet rs = statement.executeQuery(verificaUtilizador);
             if (rs.next()) { // se existir e for gestor
-                String verificaExistente = "SELECT * FROM local WHERE id=" + id;
+                String verificaExistente = "SELECT * FROM local WHERE id='" + id + "' AND id_gestor = '" + idGestor + "'";
                 ResultSet resultSet = statement.executeQuery(verificaExistente);
                 if (resultSet.next()) { // se existir o local com o id recebido
-                    statement.executeUpdate("DELETE FROM local WHERE id=" + id);
+                    statement.executeUpdate("DELETE FROM local WHERE id='" + id + "' AND id_gestor = '" + idGestor + "'");
                     resultSet.close();
                     rs.close();
                     statement.close();
@@ -349,6 +389,7 @@ public class ConnDB {
             return false;
 
     } //feito
+
     public boolean removeEvento(int id, long idGestor) throws SQLException {
 
             Statement statement = dbConn.createStatement();
@@ -427,6 +468,45 @@ public class ConnDB {
             System.out.println("Utilizador inexistente");
             statement.close();
             return false;
+    }
+
+    public Map<String, ArrayList<String>> getPerguntas() throws SQLException {
+        Statement statement = dbConn.createStatement();
+        String verificaExistente = "SELECT * FROM pergunta";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        String perguntas;
+        ArrayList<String> respostas = new ArrayList<>();
+        Map<String, ArrayList<String>> mapaRespostas = new HashMap<>();
+        while (rs.next()) { // se tiver uma pergunta
+            String idPergunta = rs.getString("id");
+            String texto = rs.getString("texto");
+            System.out.println("idPergunta->" + idPergunta);
+            //String idUtilizador = rs.getString("id_utilizador");
+            perguntas = texto;
+            // perguntas.add(idUtilizador);
+            String respostaExistente = "SELECT * FROM resposta WHERE id_pergunta='" + Integer.parseInt(idPergunta) + "'";
+            Statement st = dbConn.createStatement();
+            ResultSet resultSet = st.executeQuery(respostaExistente);
+
+            while (true) {
+                if (!resultSet.next()) { // se não houver (mais/nenhuma) resposta para esta pergunta
+                    mapaRespostas.put(perguntas, respostas);
+                    resultSet.close();
+                    break;
+                }
+                String textoResposta = resultSet.getString("texto");
+                respostas.add(textoResposta);
+                mapaRespostas.put(perguntas, respostas);
+            }
+            respostas = new ArrayList<>();
+            st.close();
+        }
+
+        System.out.println("mapaRespostas" + mapaRespostas);
+        System.out.println("mapaRespostas1" + mapaRespostas);
+        statement.close();
+
+        return mapaRespostas;
     }
     public boolean removePergunta(int id, long idUtilizador) throws SQLException {
         Statement statement = dbConn.createStatement();
@@ -520,7 +600,7 @@ public class ConnDB {
             return false;
 
     }
-    public boolean editaUtilizador(long idUtilizador, String campo, int tipo) throws SQLException {
+    public boolean editaUtilizador(int idUtilizador, String campo, int tipo) throws SQLException {
         Statement statement = dbConn.createStatement();
         String sqlQuery = null;
 
@@ -537,9 +617,10 @@ public class ConnDB {
                 }
             }
 
+            System.out.println(sqlQuery);
             statement.executeUpdate(sqlQuery);
-            resultSet.close();
-            statement.close();
+            //resultSet.close();
+            //statement.close();
             return true;
         }
 
@@ -548,6 +629,7 @@ public class ConnDB {
         statement.close();
         return false;
     } //feito
+
     public boolean removeUtilizador(long idUtilizador) throws SQLException {
         Statement statement = dbConn.createStatement();
         String sqlQuery = null;
@@ -555,6 +637,8 @@ public class ConnDB {
         String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idUtilizador + "'";
         ResultSet resultSet = statement.executeQuery(verificaUtilizador);
         if (resultSet.next()) { // se esse utilizador existe
+
+            statement.executeUpdate("DELETE FROM evento_utilizador WHERE id_utilizador= '" + idUtilizador + "'");
             statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + idUtilizador);
 
             resultSet.close();

@@ -8,12 +8,19 @@ package pt.isec.gps.rookiesguidance.views.Controller;
         import javafx.scene.control.skin.DatePickerSkin;
         import javafx.scene.image.ImageView;
         import javafx.scene.layout.*;
+        import pt.isec.gps.rookiesguidance.bd.ConnDB;
+        import pt.isec.gps.rookiesguidance.utils.ToastMessage;
         import pt.isec.gps.rookiesguidance.views.View;
         import pt.isec.gps.rookiesguidance.views.ViewSwitcher;
         import java.net.URL;
+        import java.sql.SQLException;
         import java.time.LocalDate;
         import java.util.ResourceBundle;
+
+        import static pt.isec.gps.rookiesguidance.views.ViewSwitcher.getScene;
+
 public class HomePageController implements Initializable {
+    ConnDB connDB;
     @FXML
     private HBox PICKER;
     @FXML
@@ -70,14 +77,23 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    void onTerminarSessaoPressed() {
+    void onTerminarSessaoPressed() throws SQLException {
 
-
-        ViewSwitcher.switchTo(View.LOGIN);
+        if(connDB.logout(LoginController.getNumero())){
+            ToastMessage.show(getScene().getWindow(), "Sessão terminada com sucesso");
+            ViewSwitcher.switchTo(View.LOGIN);
+        }else
+            ToastMessage.show(getScene().getWindow(), "Erro ao terminar sessão");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            connDB = new ConnDB();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         DatePickerSkin datePickerSkin = new DatePickerSkin(new DatePicker(LocalDate.now()));
         Node popupContent = datePickerSkin.getPopupContent();
         PICKER.getChildren().add(popupContent);

@@ -7,11 +7,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane depthTest="DISABLE" prefHeight="400.0" prefWidth="680.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.EventosController">
-   <HBox fx:id="PICKER" layoutX="51.0" layoutY="125.0" onMouseClicked="#handleButtonClick" prefHeight="162.0" prefWidth="289.0" />
+   <HBox fx:id="PICKER" layoutX="50.0" layoutY="119.0" onMouseClicked="#onDiaPressed" prefHeight="210.0" prefWidth="450.0" />
    <HBox prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #38819c;">
       <children>
          <ImageView fx:id="homePageIcon" accessibleRole="BUTTON" fitHeight="79.0" fitWidth="154.0" onMouseClicked="#onIconPressed" pickOnBounds="true" preserveRatio="true">
@@ -67,7 +66,6 @@
          </Button>
       </children>
    </HBox>
-   <VBox fx:id="eventosVBox" layoutX="371.0" layoutY="77.0" prefHeight="309.0" prefWidth="150.0" />
-   <VBox fx:id="butoesVBox" layoutX="521.0" layoutY="77.0" prefHeight="309.0" prefWidth="150.0" />
+   <Button fx:id="adicionarEventos" layoutX="36.0" layoutY="352.0" mnemonicParsing="false" onAction="#onAdicionarPressed" style="-fx-background-color: #38819c; -fx-background-radius: 10;" text="Adicionar Eventos" textFill="WHITE" />
 
 </AnchorPane>

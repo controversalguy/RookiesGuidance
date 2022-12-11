@@ -19,25 +19,25 @@ public class GestaoData {
         return false;
     }
 
-    public boolean adicionalocalA(String local,String tipo,long idGestor)throws SQLException {
+    public boolean adicionalocalA(String local,String tipo,int idGestor)throws SQLException {
         if(dbconn.addlocal(local,tipo,idGestor))
             return true;
         return false;
     }
 
-    public boolean adicionalocalE(String local,String tipo,long idGestor)throws SQLException{
+    public boolean adicionalocalE(String local,String tipo,int idGestor)throws SQLException{
         if(dbconn.addlocal(local,tipo,idGestor))
             return true;
         return false;
     }
 
-    public boolean removeLocalA(int pos,long idGestor)throws SQLException {
+    public boolean removeLocalA(int pos,int idGestor)throws SQLException {
         if(dbconn.removelocal(pos,idGestor))
             return true;
         return false;
     }
 
-    public boolean removeLocalE(int pos,long idGestor) throws SQLException{
+    public boolean removeLocalE(int pos,int idGestor) throws SQLException{
         if(dbconn.removelocal(pos,idGestor))
             return true;
         return false;
@@ -49,43 +49,43 @@ public class GestaoData {
         return false;
     }
 
-    public boolean removeNovidade(Novidade nov,long idGestor)throws SQLException{
+    public boolean removeNovidade(Novidade nov,int idGestor)throws SQLException{
         if(dbconn.removeNovidade(nov.getId(),idGestor))
             return true;
         return false;
     }
 
-    public boolean adicionaEvento(Evento ev,long idGestor)throws SQLException{
+    public boolean adicionaEvento(Evento ev,int idGestor)throws SQLException{
         if(dbconn.adicionaEvento(idGestor, ev.getTipo(),ev.getLocalizacao(), ev.getData()))
             return true;
         return false;
     }
 
-    public boolean removeEvento(Evento ev,long idGestor)throws SQLException{
+    public boolean removeEvento(Evento ev,int idGestor)throws SQLException{
         if(dbconn.removeEvento(ev.getId(),idGestor))
             return true;
         return false;
     }
 
-    public boolean editaEvento(int id,String campo,int tipo,long idGestor)throws SQLException{
+    public boolean editaEvento(int id,String campo,int tipo,int idGestor)throws SQLException{
         if(dbconn.editaEvento(id,campo,tipo,idGestor))
             return true;
         return false;
     }
 
-    public boolean adicionaPergunta(Pergunta p,long idGestor)throws SQLException{
+    public boolean adicionaPergunta(Pergunta p,int idGestor)throws SQLException{
         if(dbconn.adicionaPergunta(p.getPergunta(),idGestor))
             return true;
         return false;
     }
 
-    public boolean removePergunta(int pos,long idGestor)throws SQLException{
+    public boolean removePergunta(int pos,int idGestor)throws SQLException{
         if(dbconn.removePergunta(pos,idGestor))
             return true;
         return false;
     }
 
-    public boolean adicionaResposta(int id, String resposta,long idGestor)throws SQLException{
+    public boolean adicionaResposta(int id, String resposta,int idGestor)throws SQLException{
         if(dbconn.adicionaResposta(resposta,id,idGestor))
             return true;
         return false;
@@ -97,13 +97,13 @@ public class GestaoData {
         return false;
     }
 
-    public boolean editaPassword(long idUser, String campo) throws SQLException {
+    public boolean editaPassword(int idUser, String campo) throws SQLException {
         if(dbconn.editaUtilizador(idUser,campo, 0))
             return true;
         return false;
     }
 
-    public boolean editaCurso(long idUser, String campo) throws SQLException {
+    public boolean editaCurso(int idUser, String campo) throws SQLException {
         if(dbconn.editaUtilizador(idUser,campo, 1))
             return true;
         return false;

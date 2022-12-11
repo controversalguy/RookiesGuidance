@@ -1,9 +1,5 @@
 package pt.isec.gps.rookiesguidance.views.Controller;
 
-
-import javafx.beans.value.ChangeListener;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -18,38 +14,20 @@ import pt.isec.gps.rookiesguidance.bd.ConnDB;
 import pt.isec.gps.rookiesguidance.utils.ToastMessage;
 import pt.isec.gps.rookiesguidance.views.View;
 import pt.isec.gps.rookiesguidance.views.ViewSwitcher;
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.Optional;
 import java.util.ResourceBundle;
-
 import static pt.isec.gps.rookiesguidance.views.ViewSwitcher.getScene;
 
 public class InformacoesController implements Initializable {
     ConnDB connDB;
-    @FXML
-    private Button adicionarInfo;
 
     @FXML
     private VBox alimentacaoVbox;
-
-    @FXML
-    private HBox buttonsHbox;
-
     @FXML
     private VBox estudoVbox;
-
-    @FXML
-    private ImageView homePageIcon;
-
-    @FXML
-    private VBox locaisVbox;
-
-    @FXML
-    private Button removerInfo;
-
     ArrayList<String> locais;
     ArrayList<Text> locaisText;
 
@@ -162,38 +140,101 @@ public class InformacoesController implements Initializable {
 
     }
     @FXML
-   void onRemoverInfoPressed(){}
-//    {
-//        Dialog<String> dialog = new Dialog<>();
-//        dialog.setTitle("Novidades");
-//        dialog.setHeaderText("Remover Novidades");
-//
-//        // Create the username and password labels and fields.
-//        GridPane grid = new GridPane();
-//        grid.setHgap(10);
-//        grid.setVgap(10);
-//        grid.setPadding(new Insets(20, 150, 10, 10));
-//        ArrayList<Button> id = new ArrayList<>();
-//
-//        for (int i = 0; i < novidades.size(); i+=2) {
-//            int index = i/2;
-//            id.add(new Button(novidades.get(i)));
-//            System.out.println("novidades.get(i): "+novidades.get(i));
-//            System.out.println(novidades);
-//            id.get(index).setOnAction(mouseEvent -> {
-//                dialog.setResult(String.valueOf(index));
-//            });
-//            grid.add(new Label("Novidade:"), index, index);
-//            grid.add(id.get(index), index + 1, index);
-//        }
-//
-//
-//        System.out.println("NOVIDADES: " + novidades);
-//
-//        dialog.getDialogPane().setContent(grid);
-//
-//        Optional<String> result = dialog.showAndWait();
-//    }
+   void onRemoverInfoPressed() throws SQLException {
+        Dialog<String> dialog1 = new Dialog<>();
+        dialog1.setTitle("Locais");
+        dialog1.setHeaderText("Remover local");
+
+        ButtonType ok = new ButtonType("Remover", ButtonBar.ButtonData.OK_DONE);
+        dialog1.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
+
+        // Create the username and password labels and fields.
+        GridPane grid1 = new GridPane();
+        grid1.setHgap(10);
+        grid1.setVgap(10);
+        grid1.setPadding(new Insets(20, 150, 10, 10));
+
+        ArrayList<String> ids = connDB.getIdLocais();
+        ChoiceBox<String> tipo = new ChoiceBox<>();
+
+        tipo.getItems().addAll(ids);
+
+        grid1.add(new Label("Número da Informação:"), 0, 0);
+        grid1.add(tipo, 1, 0);
+
+        dialog1.setResultConverter(dialogButton -> {
+            if (dialogButton == ok) {
+                if(tipo.getSelectionModel().isEmpty()) {
+                    ToastMessage.show(getScene().getWindow(), "Insira um número!");
+                    return null;
+                } else {
+                    try {
+                        if(connDB.removelocal(Integer.parseInt(tipo.getSelectionModel().getSelectedItem()), LoginController.getNumero()))
+                            ToastMessage.show(getScene().getWindow(), "Local eliminado com sucesso!");
+                        else
+                            ToastMessage.show(getScene().getWindow(), "Impossivel eliminar local!");
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    locaisText = new ArrayList<>();
+
+                    try {
+                        locais = connDB.getLocais();
+                        if (locais.size() == 0) {
+                            ToastMessage.show(getScene().getWindow(), "LOCAIS NULL");
+                        }
+                        Text t;
+
+                        for (int i = 0; i < locais.size(); i += 2) {
+                            //int index = i / 2;
+                            if(!locais.get(i+1).equalsIgnoreCase("Alimentação"))
+                                continue;
+                            t = new Text(locais.get(i));
+                            System.out.println("locais.get(i):"+t.getText());
+
+                            t.setStyle("-fx-font-weight: bold;");
+                            locaisText.add(t);
+                        }
+
+                        Text tAlimentacao = new Text("Alimentação");
+                        tAlimentacao.setStyle("-fx-font-weight: bold;");
+                        tAlimentacao.setStyle(" -fx-font-size: 15;");
+                        alimentacaoVbox.getChildren().clear();
+                        alimentacaoVbox.getChildren().add(tAlimentacao);
+                        alimentacaoVbox.getChildren().addAll(locaisText);
+
+                        locaisText.clear();
+                        Text tEstudo = new Text("Estudo");
+                        tEstudo.setStyle("-fx-font-weight: bold;");
+                        tEstudo.setStyle(" -fx-font-size: 15;");
+
+
+                        for (int i = 0; i < locais.size(); i+=2) {
+                            if(!locais.get(i+1).equalsIgnoreCase("Estudo")) {
+                                continue;
+                            }
+                            t = new Text(locais.get(i));
+                            t.setStyle("-fx-font-weight: bold;");
+                            locaisText.add(t);
+                        }
+                        estudoVbox.getChildren().clear();
+                        estudoVbox.getChildren().add(tEstudo);
+                        estudoVbox.getChildren().addAll(locaisText);
+
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }
+            }
+            return null;
+        });
+
+        dialog1.getDialogPane().setContent(grid1);
+
+        dialog1.showAndWait();
+    }
     @FXML
     void onIconPressed() {ViewSwitcher.switchTo(View.HOMEPAGE);  }
     @FXML
@@ -217,8 +258,13 @@ public class InformacoesController implements Initializable {
     }
 
     @FXML
-    void onTerminarSessaoPressed() {
-        ViewSwitcher.switchTo(View.LOGIN);
+    void onTerminarSessaoPressed() throws SQLException {
+
+        if(connDB.logout(LoginController.getNumero())){
+            ToastMessage.show(getScene().getWindow(), "Sessão terminada com sucesso");
+            ViewSwitcher.switchTo(View.LOGIN);
+        }else
+            ToastMessage.show(getScene().getWindow(), "Erro ao terminar sessão");
     }
 
     @Override
@@ -234,7 +280,7 @@ public class InformacoesController implements Initializable {
         try {
             locais = connDB.getLocais();
             if (locais.size() == 0) {
-                ToastMessage.show(getScene().getWindow(), "LOCAIS NULL");
+                //ToastMessage.show(getScene().getWindow(), "LOCAIS NULL");
             }
             Text t;
 
@@ -356,13 +402,15 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        switch (result.get()) {
-            case "TWEB" -> ViewSwitcher.switchTo(View.TWEB);
-            case "SD" -> ViewSwitcher.switchTo(View.SD);
-            case "IP" -> ViewSwitcher.switchTo(View.IP);
-            case "ELETRO" -> ViewSwitcher.switchTo(View.ELETRO);
-            case "ALGEBRA" -> ViewSwitcher.switchTo(View.ALGEBRA);
-            case "AM1" -> ViewSwitcher.switchTo(View.AM1);
+        if(result.isPresent()) {
+            switch (result.get()) {
+                case "TWEB" -> ViewSwitcher.switchTo(View.TWEB);
+                case "SD" -> ViewSwitcher.switchTo(View.SD);
+                case "IP" -> ViewSwitcher.switchTo(View.IP);
+                case "ELETRO" -> ViewSwitcher.switchTo(View.ELETRO);
+                case "ALGEBRA" -> ViewSwitcher.switchTo(View.ALGEBRA);
+                case "AM1" -> ViewSwitcher.switchTo(View.AM1);
+            }
         }
     }
 
@@ -443,13 +491,15 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        switch (result.get()) {
-            case "SO" -> ViewSwitcher.switchTo(View.SO);
-            case "BD" -> ViewSwitcher.switchTo(View.BD);
-            case "POO" -> ViewSwitcher.switchTo(View.POO);
-            case "SO2" -> ViewSwitcher.switchTo(View.SO2);
-            case "PA" -> ViewSwitcher.switchTo(View.PA);
-            case "CR" -> ViewSwitcher.switchTo(View.CR);
+        if(result.isPresent()) {
+            switch (result.get()) {
+                case "SO" -> ViewSwitcher.switchTo(View.SO);
+                case "BD" -> ViewSwitcher.switchTo(View.BD);
+                case "POO" -> ViewSwitcher.switchTo(View.POO);
+                case "SO2" -> ViewSwitcher.switchTo(View.SO2);
+                case "PA" -> ViewSwitcher.switchTo(View.PA);
+                case "CR" -> ViewSwitcher.switchTo(View.CR);
+            }
         }
     }
 
@@ -513,11 +563,13 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        switch (result.get()) {
-            case "PD" -> ViewSwitcher.switchTo(View.PD);
-            case "PWEB" -> ViewSwitcher.switchTo(View.PWEB);
-            case "AMOV" -> ViewSwitcher.switchTo(View.AMOV);
-            case "ETICA" -> ViewSwitcher.switchTo(View.ETICA);
+        if(result.isPresent()) {
+            switch (result.get()) {
+                case "PD" -> ViewSwitcher.switchTo(View.PD);
+                case "PWEB" -> ViewSwitcher.switchTo(View.PWEB);
+                case "AMOV" -> ViewSwitcher.switchTo(View.AMOV);
+                case "ETICA" -> ViewSwitcher.switchTo(View.ETICA);
+            }
         }
     }
 
@@ -598,13 +650,15 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        switch (result.get()) {
-            case "DT" -> ViewSwitcher.switchTo(View.DT);
-            case "QUIMICA" -> ViewSwitcher.switchTo(View.QUIMICA);
-            case "FA" -> ViewSwitcher.switchTo(View.FA);
-            case "IP" -> ViewSwitcher.switchTo(View.IP);
-            case "ALGEBRA" -> ViewSwitcher.switchTo(View.ALGEBRA);
-            case "AM1" -> ViewSwitcher.switchTo(View.AM1);
+        if(result.isPresent()) {
+            switch (result.get()) {
+                case "DT" -> ViewSwitcher.switchTo(View.DT);
+                case "QUIMICA" -> ViewSwitcher.switchTo(View.QUIMICA);
+                case "FA" -> ViewSwitcher.switchTo(View.FA);
+                case "IP" -> ViewSwitcher.switchTo(View.IP);
+                case "ALGEBRA" -> ViewSwitcher.switchTo(View.ALGEBRA);
+                case "AM1" -> ViewSwitcher.switchTo(View.AM1);
+            }
         }
     }
 
@@ -685,13 +739,15 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        switch (result.get()) {
-            case "RM1" -> ViewSwitcher.switchTo(View.RM1);
-            case "MH" -> ViewSwitcher.switchTo(View.MH);
-            case "TM1" -> ViewSwitcher.switchTo(View.TM1);
-            case "ME" -> ViewSwitcher.switchTo(View.ME);
-            case "MF" -> ViewSwitcher.switchTo(View.MF);
-            case "TM2" -> ViewSwitcher.switchTo(View.TM2);
+        if(result.isPresent()) {
+            switch (result.get()) {
+                case "RM1" -> ViewSwitcher.switchTo(View.RM1);
+                case "MH" -> ViewSwitcher.switchTo(View.MH);
+                case "TM1" -> ViewSwitcher.switchTo(View.TM1);
+                case "ME" -> ViewSwitcher.switchTo(View.ME);
+                case "MF" -> ViewSwitcher.switchTo(View.MF);
+                case "TM2" -> ViewSwitcher.switchTo(View.TM2);
+            }
         }
     }
 
@@ -754,11 +810,13 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        switch (result.get()) {
-            case "GQ" -> ViewSwitcher.switchTo(View.GQ);
-            case "FM" -> ViewSwitcher.switchTo(View.FM);
-            case "OG" -> ViewSwitcher.switchTo(View.OG);
-            case "IC" -> ViewSwitcher.switchTo(View.IC);
+        if(result.isPresent()) {
+            switch (result.get()) {
+                case "GQ" -> ViewSwitcher.switchTo(View.GQ);
+                case "FM" -> ViewSwitcher.switchTo(View.FM);
+                case "OG" -> ViewSwitcher.switchTo(View.OG);
+                case "IC" -> ViewSwitcher.switchTo(View.IC);
+            }
         }
     }
 
@@ -839,13 +897,15 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        switch (result.get()) {
-            case "SD" -> ViewSwitcher.switchTo(View.SD);
-            case "AL" -> ViewSwitcher.switchTo(View.ALGEBRA);
-            case "AP" -> ViewSwitcher.switchTo(View.AP);
-            case "PC" -> ViewSwitcher.switchTo(View.PC);
-            case "MI" -> ViewSwitcher.switchTo(View.MI);
-            case "FG" -> ViewSwitcher.switchTo(View.FG);
+        if(result.isPresent()) {
+            switch (result.get()) {
+                case "SD" -> ViewSwitcher.switchTo(View.SD);
+                case "AL" -> ViewSwitcher.switchTo(View.ALGEBRA);
+                case "AP" -> ViewSwitcher.switchTo(View.AP);
+                case "PC" -> ViewSwitcher.switchTo(View.PC);
+                case "MI" -> ViewSwitcher.switchTo(View.MI);
+                case "FG" -> ViewSwitcher.switchTo(View.FG);
+            }
         }
     }
 
@@ -926,13 +986,15 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        switch (result.get()) {
-            case "ELETRONICA" -> ViewSwitcher.switchTo(View.ELETRO);
-            case "AI" -> ViewSwitcher.switchTo(View.AI);
-            case "SC" -> ViewSwitcher.switchTo(View.SC);
-            case "TSC" -> ViewSwitcher.switchTo(View.TSC);
-            case "PS" -> ViewSwitcher.switchTo(View.PS);
-            case "SM" -> ViewSwitcher.switchTo(View.SM);
+        if(result.isPresent()) {
+            switch (result.get()) {
+                case "ELETRONICA" -> ViewSwitcher.switchTo(View.ELETRO);
+                case "AI" -> ViewSwitcher.switchTo(View.AI);
+                case "SC" -> ViewSwitcher.switchTo(View.SC);
+                case "TSC" -> ViewSwitcher.switchTo(View.TSC);
+                case "PS" -> ViewSwitcher.switchTo(View.PS);
+                case "SM" -> ViewSwitcher.switchTo(View.SM);
+            }
         }
     }
 
@@ -995,11 +1057,13 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        switch (result.get()) {
-            case "EP" -> ViewSwitcher.switchTo(View.EP);
-            case "IE" -> ViewSwitcher.switchTo(View.IE);
-            case "CE" -> ViewSwitcher.switchTo(View.CE);
-            case "GE" -> ViewSwitcher.switchTo(View.GE);
+        if(result.isPresent()) {
+            switch (result.get()) {
+                case "EP" -> ViewSwitcher.switchTo(View.EP);
+                case "IE" -> ViewSwitcher.switchTo(View.IE);
+                case "CE" -> ViewSwitcher.switchTo(View.CE);
+                case "GE" -> ViewSwitcher.switchTo(View.GE);
+            }
         }
     }
 
