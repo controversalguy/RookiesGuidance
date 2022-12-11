@@ -125,8 +125,8 @@ public class HomePageGestoresController implements Initializable {
                         novidadesText.add(t);
                     }
                     novidadesvBox.getChildren().clear();
-                if(novidades.size()!=0)
-                    novidadesvBox.getChildren().addAll(novidadesText);
+                    if(novidades.size()!=0)
+                        novidadesvBox.getChildren().addAll(novidadesText);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -266,7 +266,7 @@ public class HomePageGestoresController implements Initializable {
             }
             detalhesCalendario.getChildren().addAll(eventosText);
         } catch (SQLException e) {
-        throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 
