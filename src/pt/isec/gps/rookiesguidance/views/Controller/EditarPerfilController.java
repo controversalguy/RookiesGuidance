@@ -66,24 +66,25 @@ public class EditarPerfilController implements Initializable {
 
     @FXML
     void onConfirmarPressed() throws SQLException {
-
+        boolean update = false;
         //nao inseriu a passe
         if (passAntiga.getText().isEmpty()) {
             ToastMessage.show(getScene().getWindow(), "Insira a palavra-passe!");
             ViewSwitcher.switchTo(View.PERFIL);
-            return;
         }
 
         //inseriu a passe e não é igual à q tinha
-        if (!passAntiga.getText().equals(LoginController.getPasse())) {
+        if (!passAntiga.getText().trim().equals(LoginController.getPasse().trim())) {
             ToastMessage.show(getScene().getWindow(), "Insira a palavra-passe correta!");
             ViewSwitcher.switchTo(View.PERFIL);
-            return;
-        }
+        }else
+            update = true;
 
         if(!passNova.getText().isEmpty()) {
-            connDB.editaUtilizador(LoginController.getNumero(), passNova.getText(), 0);
-            ToastMessage.show(getScene().getWindow(), "Password mudada com sucesso!");
+            if(update){
+                connDB.editaUtilizador(LoginController.getNumero(), passNova.getText(), 0);
+                ToastMessage.show(getScene().getWindow(), "Password mudada com sucesso!");
+            }
         }
 
         if(!dropdownCurso.getSelectionModel().isEmpty()) {

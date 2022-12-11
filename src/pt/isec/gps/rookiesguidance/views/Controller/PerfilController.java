@@ -12,6 +12,7 @@ import pt.isec.gps.rookiesguidance.views.ViewSwitcher;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static pt.isec.gps.rookiesguidance.views.ViewSwitcher.getScene;
@@ -77,9 +78,15 @@ public class PerfilController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+        ArrayList<String> credenciais;
         nomeUser.setText(LoginController.getNome());
-        cursoUser.setText(LoginController.getCurso());
+        try {
+            credenciais = connDB.getUser(LoginController.getEmail());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        nomeUser.setText(credenciais.get(0));
+        cursoUser.setText(credenciais.get(1));
         numeroUser.setText(String.valueOf(LoginController.getNumero()));
     }
 }

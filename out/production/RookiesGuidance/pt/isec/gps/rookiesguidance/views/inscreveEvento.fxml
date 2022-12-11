@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -68,7 +69,7 @@
             </Button>
         </children>
     </HBox>
-   <Pane layoutX="62.0" layoutY="190.0" prefHeight="200.0" prefWidth="218.0" style="-fx-border-radius: 16; -fx-border-color: #53A7C6;">
+   <Pane layoutX="62.0" layoutY="190.0" prefHeight="200.0" prefWidth="211.0" style="-fx-border-radius: 16; -fx-border-color: #53A7C6;">
       <children>
          <CheckBox fx:id="yesButton" alignment="CENTER" layoutX="28.0" layoutY="74.0" mnemonicParsing="false" onAction="#onYesSelected" text="Vou estar presente">
             <font>
@@ -88,5 +89,19 @@
          </CheckBox>
       </children>
    </Pane>
+   <VBox layoutX="469.0" layoutY="108.0" prefHeight="330.0" prefWidth="218.0">
+      <children>
+         <HBox alignment="CENTER" prefHeight="44.0" prefWidth="218.0">
+            <children>
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lista de Presenças:" textAlignment="RIGHT">
+                  <font>
+                     <Font name="System Bold" size="17.0" />
+                  </font>
+               </Text>
+            </children>
+         </HBox>
+         <VBox fx:id="presencasVBox" prefHeight="286.0" prefWidth="218.0" />
+      </children>
+   </VBox>
 
 </AnchorPane>
