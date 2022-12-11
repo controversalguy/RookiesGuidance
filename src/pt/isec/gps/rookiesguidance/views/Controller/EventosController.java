@@ -37,6 +37,8 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static pt.isec.gps.rookiesguidance.views.ViewSwitcher.getScene;
 
@@ -125,6 +127,18 @@ public class EventosController implements Initializable {
             if (dialogButton == ok) {
                 try {
 
+                    String regex = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
+                    Pattern pattern;
+                    Matcher matcher;
+
+                    pattern = Pattern.compile(regex);
+                    matcher = pattern.matcher(horaInicio.getText());
+
+                    if(!matcher.matches()) {
+                        ToastMessage.show(getScene().getWindow(), "Preencha os campos corretamente");
+                        return null;
+                    }
+
                     LocalDate localDate = data.getValue();
                     Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
                     Date date = Date.from(instant);
@@ -159,6 +173,11 @@ public class EventosController implements Initializable {
         try {
             eventos = connDB.getEventos2(strDate);
             Text t;
+
+            if(eventos.size() == 0) {
+                ToastMessage.show(getScene().getWindow(), "Não existem eventos neste dia!");
+                return;
+            }
 
             for (int i = 0; i < eventos.size(); i+=4) { //i++
                 for(int j = 0; j < 4; j ++) {
@@ -278,6 +297,19 @@ public class EventosController implements Initializable {
                 dialog2.setResultConverter(dialogButton -> {
                     if (dialogButton == ok) {
                         try {
+
+                            String regex = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
+                            Pattern pattern;
+                            Matcher matcher;
+
+                            pattern = Pattern.compile(regex);
+                            matcher = pattern.matcher(horaInicio.getText());
+
+                            if(!matcher.matches()) {
+                                ToastMessage.show(getScene().getWindow(), "Preencha os campos corretamente");
+                                return null;
+                            }
+
                             LocalDate localDate2 = data.getValue();
                             Instant instant = Instant.from(localDate2.atStartOfDay(ZoneId.systemDefault()));
                             Date date = Date.from(instant);
@@ -325,11 +357,11 @@ public class EventosController implements Initializable {
                     throw new RuntimeException(e);
                 }
                 dialog.close();
-                try {
+                /*try {
                     onDiaPressed();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
-                }
+                }*/
             });
             VBox vBoxButoesevento = new VBox(detalhes,atualizar,remover);
             vBoxButoesevento.setSpacing(5);

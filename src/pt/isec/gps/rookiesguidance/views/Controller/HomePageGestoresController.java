@@ -112,7 +112,6 @@ public class HomePageGestoresController implements Initializable {
                     if (novidades.size() == 0) {
                         ToastMessage.show(getScene().getWindow(), "NOVIDADES NULL");
                     }
-                    System.out.println("NOVIDADES ADD: "+novidades);
                     Text t;
                     for (int i = 0; i < novidades.size(); i++) {
                         if (i % 2 == 0) {
@@ -252,8 +251,18 @@ public class HomePageGestoresController implements Initializable {
             eventos = connDB.getEventos(strDate);
             for (int i = 0; i < eventos.size(); i++) {
                 Text t = new Text();
-                t.setText(eventos.get(i));
+                //t.setStyle("-fx-font-weight: bold");
+
+                String[] texto = eventos.get(i).split("\n");
+                t.setText(texto[0]);
+                t.setStyle("-fx-font-weight: bold");
+
+                Text q = new Text();
+                q.setText(texto[1]);
+
+                //t.setText(eventos.get(i));
                 eventosText.add(t);
+                eventosText.add(q);
             }
             detalhesCalendario.getChildren().addAll(eventosText);
         } catch (SQLException e) {
@@ -284,8 +293,18 @@ public class HomePageGestoresController implements Initializable {
             eventos = connDB.getEventos(strDate);
             for (int i = 0; i < eventos.size(); i++) {
                 Text t = new Text();
-                t.setText(eventos.get(i));
+                //t.setStyle("-fx-font-weight: bold");
+
+                String[] texto = eventos.get(i).split("\n");
+                t.setText(texto[0]);
+                t.setStyle("-fx-font-weight: bold");
+
+                Text q = new Text();
+                q.setText(texto[1]);
+
+                //t.setText(eventos.get(i));
                 eventosText.add(t);
+                eventosText.add(q);
             }
             detalhesCalendario.getChildren().addAll(eventosText);
         } catch (SQLException e) {
