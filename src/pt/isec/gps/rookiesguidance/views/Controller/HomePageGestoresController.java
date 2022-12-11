@@ -139,13 +139,21 @@ public class HomePageGestoresController implements Initializable {
 
     @FXML
     void onEventosPressed() {
-        ViewSwitcher.switchTo(View.EVENTOS);
+        if(LoginController.isGestor)
+            ViewSwitcher.switchTo(View.EVENTOS);
+        else
+            ViewSwitcher.switchTo(View.EVENTOS_ESTUDANTE);
     }
     @FXML
-    void onIconPressed() {ViewSwitcher.switchTo(View.HOMEPAGE);  }
+    void onIconPressed() {
+        ViewSwitcher.switchTo(View.HOMEPAGE);
+    }
     @FXML
     void onInformacoesPressed() {
-        ViewSwitcher.switchTo(View.INFORMACOES);
+        if(LoginController.isGestor)
+            ViewSwitcher.switchTo(View.INFORMACOES);
+        else
+            ViewSwitcher.switchTo(View.INFORMACOES_ESTUDANTE);
     }
 
     @FXML
@@ -258,7 +266,7 @@ public class HomePageGestoresController implements Initializable {
                 t.setStyle("-fx-font-weight: bold");
 
                 Text q = new Text();
-                q.setText(texto[1]);
+                q.setText(texto[1] + "\n");
 
                 //t.setText(eventos.get(i));
                 eventosText.add(t);
@@ -300,7 +308,7 @@ public class HomePageGestoresController implements Initializable {
                 t.setStyle("-fx-font-weight: bold");
 
                 Text q = new Text();
-                q.setText(texto[1]);
+                q.setText(texto[1] + "\n");
 
                 //t.setText(eventos.get(i));
                 eventosText.add(t);

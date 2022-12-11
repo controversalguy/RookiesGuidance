@@ -528,9 +528,8 @@ public class ConnDB {
         while (rs.next()) { // se tiver uma pergunta
             String idPergunta = rs.getString("id");
             String texto = rs.getString("texto");
-            System.out.println("idPergunta->" + idPergunta);
             //String idUtilizador = rs.getString("id_utilizador");
-            perguntas = idPergunta + " - " + texto;
+            perguntas = idPergunta + ": " + texto;
             // perguntas.add(idUtilizador);
             String respostaExistente = "SELECT * FROM resposta WHERE id_pergunta='" + Integer.parseInt(idPergunta) + "'";
             Statement st = dbConn.createStatement();
@@ -542,8 +541,10 @@ public class ConnDB {
                     resultSet.close();
                     break;
                 }
+                int idResposta = resultSet.getInt("id");
                 String textoResposta = resultSet.getString("texto");
-                respostas.add(textoResposta);
+                String textoId = idResposta + ": " + textoResposta;
+                respostas.add(textoId);
                 mapaRespostas.put(perguntas, respostas);
             }
             respostas = new ArrayList<>();
@@ -601,6 +602,20 @@ public class ConnDB {
         return false;
 
     }
+
+    public ArrayList<String> getIdRespostas(int iD) throws SQLException {
+        Statement statement = dbConn.createStatement();
+        String verificaExistente = "SELECT * FROM resposta WHERE id_pergunta='"+iD+"'";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        ArrayList<String> ids = new ArrayList<>();
+        while (rs.next()){
+            int id = rs.getInt("id");
+            ids.add(String.valueOf(id));
+        }
+        System.out.println("ids"+ids);
+        rs.close();
+        return ids;
+    }
     public boolean removeResposta(int id, long idGestor) throws SQLException {
         Statement statement = dbConn.createStatement();
         String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idGestor + "' AND isGestor = '" + 1 + "'";
@@ -623,6 +638,7 @@ public class ConnDB {
         return false;
 
     } //feito
+
     public boolean inscreveEmEvento(int idUtilizador, int idEvento) throws SQLException {
 
             Statement statement = dbConn.createStatement();

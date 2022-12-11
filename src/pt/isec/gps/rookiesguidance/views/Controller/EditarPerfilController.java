@@ -67,32 +67,50 @@ public class EditarPerfilController implements Initializable {
     @FXML
     void onConfirmarPressed() throws SQLException {
         boolean update = false;
+        boolean atualizou = false;
+
         //nao inseriu a passe
-        if (passAntiga.getText().isEmpty()) {
+        /*if (passAntiga.getText().isEmpty() || passAntiga.getText().isEmpty()) {
             ToastMessage.show(getScene().getWindow(), "Insira a palavra-passe!");
             ViewSwitcher.switchTo(View.PERFIL);
-        }
+        }*/
+        String edita = "";
 
         //inseriu a passe e não é igual à q tinha
-        if (!passAntiga.getText().trim().equals(LoginController.getPasse().trim())) {
-            ToastMessage.show(getScene().getWindow(), "Insira a palavra-passe correta!");
-            ViewSwitcher.switchTo(View.PERFIL);
-        }else
-            update = true;
+        if(!passAntiga.getText().isEmpty()) {
+            if (!passAntiga.getText().trim().equals(LoginController.getPasse().trim())) {
+                edita +=  "Insira a palavra-passe correta!";
+                //ToastMessage.show(getScene().getWindow(), "Insira a palavra-passe correta!");
+                //ViewSwitcher.switchTo(View.PERFIL);
+            } else
+                update = true;
 
-        if(!passNova.getText().isEmpty()) {
-            if(update){
-                connDB.editaUtilizador(LoginController.getNumero(), passNova.getText(), 0);
-                ToastMessage.show(getScene().getWindow(), "Password mudada com sucesso!");
+            if (!passNova.getText().isEmpty()) {
+                if (update) {
+                    connDB.editaUtilizador(LoginController.getNumero(), passNova.getText(), 0);
+                    edita +=  "Password mudada com sucesso!";
+                    atualizou = true;
+                    //ToastMessage.show(getScene().getWindow(), "Password mudada com sucesso!");
+                }
             }
         }
 
         if(!dropdownCurso.getSelectionModel().isEmpty()) {
             connDB.editaUtilizador(LoginController.getNumero(), (String) dropdownCurso.getSelectionModel().getSelectedItem(), 1);
-            ToastMessage.show(getScene().getWindow(), "Curso mudado com sucesso!");
+            //ToastMessage.show(getScene().getWindow(), "Curso mudado com sucesso!");
+            edita +=  "\nCurso mudado com sucesso!";
+            atualizou = true;
         }
 
-        ViewSwitcher.switchTo(View.PERFIL);
+        //if( (passAntiga.getText().isEmpty() || passNova.getText().isEmpty()) && dropdownCurso.getSelectionModel().isEmpty()) {
+          if(!atualizou) {
+            edita +=  "\nPreencha os campos!";
+            ToastMessage.show(getScene().getWindow(), edita);
+        }
+        else {
+            ToastMessage.show(getScene().getWindow(), edita);
+            ViewSwitcher.switchTo(View.PERFIL);
+        }
 
     }
 

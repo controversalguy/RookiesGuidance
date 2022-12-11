@@ -10,6 +10,7 @@ import pt.isec.gps.rookiesguidance.utils.ToastMessage;
 import pt.isec.gps.rookiesguidance.views.View;
 import pt.isec.gps.rookiesguidance.views.ViewSwitcher;
 
+import javax.swing.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -66,8 +67,12 @@ public class PerfilController implements Initializable {
 
     @FXML
     void onEliminarPerfilPressed() throws SQLException {
-        connDB.removeUtilizador(LoginController.getNumero());
-        ViewSwitcher.switchTo(View.LOGIN);
+        if(!connDB.removeUtilizador(LoginController.getNumero()))
+            ToastMessage.show(getScene().getWindow(), "Impossivel eliminar perfil!");
+        else {
+            ToastMessage.show(getScene().getWindow(), "Perfil eliminado com sucesso!");
+            ViewSwitcher.switchTo(View.LOGIN);
+        }
     }
 
 

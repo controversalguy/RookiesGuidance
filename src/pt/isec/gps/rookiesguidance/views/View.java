@@ -8,9 +8,13 @@ public enum View {
     PERFIL("perfil.fxml"),
     EDITAR_PERFIL("editarPerfil.fxml"),
     EVENTOS("eventos.fxml"),
+    EVENTOS_ESTUDANTE("eventosEstudante.fxml"),
     INSCREVE_EVENTO("inscreveEvento.fxml"),
     INFORMACOES("informacoes.fxml"),
+    INFORMACOES_ESTUDANTE("informacoesEstudante.fxml"),
+
     PERGUNTAS("perguntas.fxml"),
+    PERGUNTAS_ESTUDANTE("perguntasEstudante.fxml"),
 
     TWEB("cursosInfo/tweb.fxml"),
     SD("cursosInfo/sd.fxml"),

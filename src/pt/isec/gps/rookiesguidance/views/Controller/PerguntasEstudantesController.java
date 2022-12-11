@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 import static pt.isec.gps.rookiesguidance.views.ViewSwitcher.getScene;
 
-public class PerguntasController implements Initializable {
+public class PerguntasEstudantesController implements Initializable {
     @FXML
     private ImageView homePageIcon;
     @FXML
@@ -166,7 +166,7 @@ public class PerguntasController implements Initializable {
 
     @FXML
     void onPerguntasPressed() {
-        ViewSwitcher.switchTo(View.PERGUNTAS_ESTUDANTE);
+        ViewSwitcher.switchTo(View.PERGUNTAS);
     }
 
     @FXML
@@ -197,128 +197,7 @@ public class PerguntasController implements Initializable {
             Text t;
             id = new ArrayList<>();
             int i = 0,j=0;
-            id = new ArrayList<>();
 
-            for (var p : mapaRespostasPerguntas.keySet()) {
-                j++;
-                Button badicionaResposta = new Button("Adiciona\nResposta");
-                Button bremoveResposta = new Button("Remove\nResposta");
-                badicionaResposta.setMaxSize(90, 40);
-                badicionaResposta.setStyle("-fx-background-color: #ffffff; -fx-font-weight: bold; -fx-border-color: #000000; -fx-border-radius: 5");
-                bremoveResposta.setMaxSize(90, 40);
-                bremoveResposta.setStyle("-fx-background-color: #ffffff; -fx-font-weight: bold; -fx-border-color: #000000; -fx-border-radius: 5");
-                int k = j;
-
-
-                badicionaResposta.addEventHandler(ActionEvent.ACTION,e -> {
-                    Dialog<String> dialog = new Dialog<>();
-                    dialog.setTitle("Respostas");
-                    dialog.setHeaderText("Adicionar Respostas");
-
-                    ButtonType ok = new ButtonType("Adicionar", ButtonBar.ButtonData.OK_DONE);
-                    dialog.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
-
-                    GridPane grid = new GridPane();
-                    grid.setHgap(10);
-                    grid.setVgap(10);
-                    grid.setPadding(new Insets(20, 150, 10, 10));
-
-                    TextArea resposta = new TextArea();
-
-                    grid.add(new Label("Resposta:"), 0, 0);
-                    grid.add(resposta, 1, 0);
-
-                    Node okButton = dialog.getDialogPane().lookupButton(ok);
-                    okButton.setDisable(true);
-                    resposta.textProperty().addListener((observable, oldValue, newValue) -> {
-                        if (!resposta.textProperty().getValue().isEmpty())
-                            okButton.setDisable(false);
-                        else
-                            okButton.setDisable(true);
-                    });
-
-                    dialog.getDialogPane().setContent(grid);
-
-                    dialog.setResultConverter(dialogButton -> {
-                        if (dialogButton == ok) {
-                            try {
-                                if (!connDB.adicionaResposta(resposta.getText(),Integer.parseInt(String.valueOf(p.charAt(0))), LoginController.getNumero())) {
-                                    ToastMessage.show(getScene().getWindow(), "Não foi possível adicionar Pergunta!");
-                                    return null;
-                                }
-                            } catch (SQLException f) {
-                                throw new RuntimeException(f);
-                            }
-                        }
-                        return null;
-                    });
-
-                    dialog.showAndWait();
-                    ViewSwitcher.switchTo(View.PERGUNTAS);
-                });
-                bremoveResposta.addEventHandler(ActionEvent.ACTION,e->{
-                    Dialog<String> dialog1 = new Dialog<>();
-                    dialog1.setTitle("Respostas");
-                    dialog1.setHeaderText("Remover respostas");
-
-                    ButtonType ok = new ButtonType("Remover", ButtonBar.ButtonData.OK_DONE);
-                    dialog1.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
-
-                    // Create the username and password labels and fields.
-                    GridPane grid1 = new GridPane();
-                    grid1.setHgap(10);
-                    grid1.setVgap(10);
-                    grid1.setPadding(new Insets(20, 150, 10, 10));
-
-                    ArrayList<String> ids = null;
-                    try {
-                        ids = connDB.getIdRespostas(Integer.parseInt(String.valueOf(p.charAt(0))));
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    }
-
-                    if(ids.size() == 0) {
-                        ToastMessage.show(getScene().getWindow(), "Não existe respostas para remover");
-                        return;
-                    }
-
-                    ChoiceBox<String> tipo = new ChoiceBox<>();
-
-                    tipo.getItems().addAll(ids);
-
-                    grid1.add(new Label("Número da Resposta:"), 0, 0);
-                    grid1.add(tipo, 1, 0);
-
-                    dialog1.setResultConverter(dialogButton -> {
-                        if (dialogButton == ok) {
-                            if(tipo.getSelectionModel().isEmpty()) {
-                                ToastMessage.show(getScene().getWindow(), "Insira um número!");
-                                return null;
-                            } else {
-                                System.out.println("Integer.parseInt(tipo.getSelectionModel().getSelectedItem())" + Integer.parseInt(tipo.getSelectionModel().getSelectedItem()));
-                                try {
-                                    if (connDB.removeResposta(Integer.parseInt(tipo.getSelectionModel().getSelectedItem()), LoginController.getNumero()))
-                                        ToastMessage.show(getScene().getWindow(), "Resposta eliminada com sucesso!");
-                                    else
-                                        ToastMessage.show(getScene().getWindow(), "Impossivel eliminar resposta!");
-                                } catch (SQLException z) {
-                                    throw new RuntimeException(z);
-                                }
-
-                                ViewSwitcher.switchTo(View.PERGUNTAS);
-
-                            }
-                        }
-                        return null;
-                    });
-
-                    dialog1.getDialogPane().setContent(grid1);
-
-                    dialog1.showAndWait();
-                });
-                id.add(badicionaResposta);
-                id.add(bremoveResposta);
-            }
             int index = 0;
             i =0;
             for (var p : mapaRespostasPerguntas.keySet()){// adiciona titulo
@@ -332,12 +211,10 @@ public class PerguntasController implements Initializable {
                 //pergunta.setMinWidth();
                 pergunta.setStyle("-fx-background-radius: 10; -fx-background-color:#38819c; -fx-font-weight: bold;" );
                 perguntaResposta.getChildren().add(pergunta);
-                HBox hButtoes = new HBox(id.get(index),id.get(index+1));
                 index++;
                 index++;
                 //hButtoes.setStyle("-fx-background-color: #ffffff; -fx-font-weight: bold;");
 
-                gridPerguntaResposta.add(hButtoes, 1, i);
                 for (var r : mapaRespostasPerguntas.get(p)){ // adiciona respostas
                     t = new Text();
                     t.setText("\nResposta " + r);

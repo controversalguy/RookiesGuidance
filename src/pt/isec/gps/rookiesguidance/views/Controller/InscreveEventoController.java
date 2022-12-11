@@ -35,7 +35,7 @@ public class InscreveEventoController implements Initializable {
     int idEvento;
     @FXML
     void onIconPressed() {
-        if(LoginController.isGestor() == 0)
+        if(LoginController.isGestor())
             ViewSwitcher.switchTo(View.HOMEPAGE);
         else
             ViewSwitcher.switchTo(View.HOMEPAGE_GESTORES);

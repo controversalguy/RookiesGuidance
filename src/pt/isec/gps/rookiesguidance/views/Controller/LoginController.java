@@ -30,7 +30,7 @@ public class LoginController implements Initializable {
     static String nomeUtilizador;
     static String cursoUtilizador;
     static String passeUtilizador;
-    static int isGestor;
+    static boolean isGestor = false;
     @FXML
     void buttonPressed() throws SQLException {
         String emailText = email.getText();
@@ -43,6 +43,7 @@ public class LoginController implements Initializable {
             }else if((valor == 1)){
                 ToastMessage.show(getScene().getWindow(), "Gestor logado com sucesso");
                 ViewSwitcher.switchTo(View.HOMEPAGE_GESTORES);
+                isGestor = true;
             }
             String numero = emailText.substring(1, 11);
 
@@ -87,7 +88,7 @@ public class LoginController implements Initializable {
         return passeUtilizador;
     }
 
-    public static int isGestor() {
+    public static boolean isGestor() {
         return isGestor;
     }
 

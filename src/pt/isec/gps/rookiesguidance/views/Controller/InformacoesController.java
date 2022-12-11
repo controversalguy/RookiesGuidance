@@ -32,113 +32,116 @@ public class InformacoesController implements Initializable {
     ArrayList<Text> locaisText;
 
     @FXML
-    void onAdicionarInfoPressed() throws SQLException {
-            Dialog<String> dialog1 = new Dialog<>();
-            dialog1.setTitle("Locais");
-            dialog1.setHeaderText("Inserir local");
+    void onAdicionarInfoPressed() {
+        Dialog<String> dialog1 = new Dialog<>();
+        dialog1.setTitle("Locais");
+        dialog1.setHeaderText("Inserir local");
 
-            ButtonType ok = new ButtonType("Inserir", ButtonBar.ButtonData.OK_DONE);
-            dialog1.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
+        ButtonType ok = new ButtonType("Inserir", ButtonBar.ButtonData.OK_DONE);
+        dialog1.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
 
-            // Create the username and password labels and fields.
-            GridPane grid1 = new GridPane();
-            grid1.setHgap(10);
-            grid1.setVgap(10);
-            grid1.setPadding(new Insets(20, 150, 10, 10));
+        // Create the username and password labels and fields.
+        GridPane grid1 = new GridPane();
+        grid1.setHgap(10);
+        grid1.setVgap(10);
+        grid1.setPadding(new Insets(20, 150, 10, 10));
 
-            ChoiceBox<String> tipo = new ChoiceBox<>();
-            tipo.getItems().addAll("Alimentação","Estudo");
-            TextArea local = new TextArea();
-            local.setPromptText("Escreva texto aqui...");
+        ChoiceBox<String> tipo = new ChoiceBox<>();
+        tipo.getItems().addAll("Alimentação", "Estudo");
+        TextArea local = new TextArea();
+        local.setPromptText("Escreva texto aqui...");
 
-            grid1.add(new Label("Típo de Informação:"), 0, 0);
-            grid1.add(tipo, 1, 0);
-            grid1.add(new Label("Local:"), 0, 1); //coluna 0 | linha 1
-            grid1.add(local, 1, 1);
+        grid1.add(new Label("Típo de Informação:"), 0, 0);
+        grid1.add(tipo, 1, 0);
+        grid1.add(new Label("Local:"), 0, 1); //coluna 0 | linha 1
+        grid1.add(local, 1, 1);
 
-            Node okButton = dialog1.getDialogPane().lookupButton(ok);
-            okButton.setDisable(true);
-            tipo.accessibleTextProperty().addListener((observable, oldValue, newValue) -> {
-                if(!tipo.getSelectionModel().getSelectedItem().isEmpty() && !local.textProperty().getValue().isEmpty())
+        Node okButton = dialog1.getDialogPane().lookupButton(ok);
+        okButton.setDisable(true);
+        tipo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (!tipo.getSelectionModel().getSelectedItem().isEmpty() && !local.textProperty().getValue().isEmpty())
+                okButton.setDisable(false);
+            else
+                okButton.setDisable(true);
+
+        });
+
+        local.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("localll");
+            if (tipo.getSelectionModel().getSelectedItem() != null) {
+                if (!tipo.getSelectionModel().getSelectedItem().isEmpty() && !local.textProperty().getValue().isEmpty())
                     okButton.setDisable(false);
                 else
                     okButton.setDisable(true);
-            });
+            } else
+                okButton.setDisable(true);
 
-            local.textProperty().addListener((observable, oldValue, newValue) -> {
-                if(tipo.getSelectionModel().getSelectedItem() != null) {
-                    if (!tipo.getSelectionModel().getSelectedItem().isEmpty() && !local.textProperty().getValue().isEmpty())
-                        okButton.setDisable(false);
-                    else
-                        okButton.setDisable(true);
-                }
-                else
-                    okButton.setDisable(true);
+        });
+        dialog1.getDialogPane().setContent(grid1);
 
-            });
-            dialog1.getDialogPane().setContent(grid1);
-
-            dialog1.setResultConverter(dialogButton -> {
-                if (dialogButton == ok) {
-                    try {
-                        if (!connDB.addlocal(local.getText(), tipo.getSelectionModel().getSelectedItem(), LoginController.getNumero())) {
-                            ToastMessage.show(getScene().getWindow(), "Não foi possível adicionar local");
-                            return null;
-                        }
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
+        dialog1.setResultConverter(dialogButton -> {
+            if (dialogButton == ok) {
+                try {
+                    if (!connDB.addlocal(local.getText(), tipo.getSelectionModel().getSelectedItem(), LoginController.getNumero())) {
+                        ToastMessage.show(getScene().getWindow(), "Não foi possível adicionar local");
+                        return null;
                     }
-                    try {
-                        locais = connDB.getLocais();
-                        if (locais.size() == 0) {
-                            ToastMessage.show(getScene().getWindow(), "LOCAIS NULL");
-                        }
-                        Text t;
-
-                        for (int i = 0; i < locais.size(); i += 2) {
-                            //int index = i / 2;
-                            if(!locais.get(i+1).equalsIgnoreCase("Alimentação"))
-                                continue;
-                            t = new Text(locais.get(i));
-                            t.setStyle("-fx-font-weight: bold;");
-                            locaisText.add(t);
-                        }
-
-                        Text tAlimentacao = new Text("Alimentação");
-                        tAlimentacao.setStyle("-fx-font-weight: bold;");
-                        tAlimentacao.setStyle(" -fx-font-size: 15;");
-                        alimentacaoVbox.getChildren().clear();
-                        alimentacaoVbox.getChildren().add(tAlimentacao);
-                        alimentacaoVbox.getChildren().addAll(locaisText);
-
-                        locaisText.clear();
-                        Text tEstudo = new Text("Estudo");
-                        tEstudo.setStyle("-fx-font-weight: bold;");
-                        tEstudo.setStyle(" -fx-font-size: 15;");
-
-
-                        for (int i = 0; i < locais.size(); i+=2) {
-                            if(!locais.get(i+1).equalsIgnoreCase("Estudo")) {
-                                continue;
-                            }
-                            t = new Text(locais.get(i));
-                            t.setStyle("-fx-font-weight: bold;");
-                            locaisText.add(t);
-                        }
-                        estudoVbox.getChildren().clear();
-                        estudoVbox.getChildren().add(tEstudo);
-                        estudoVbox.getChildren().addAll(locaisText);
-
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
                 }
-                return null;
-            });
+                try {
+                    locais = connDB.getLocais();
+                    if (locais.size() == 0) {
+                        ToastMessage.show(getScene().getWindow(), "LOCAIS NULL");
+                    }
+                    Text t;
 
-            dialog1.showAndWait();
+                    for (int i = 0; i < locais.size(); i += 2) {
+                        //int index = i / 2;
+                        if (!locais.get(i + 1).equalsIgnoreCase("Alimentação"))
+                            continue;
+                        t = new Text(locais.get(i));
+                        t.setStyle("-fx-font-weight: bold;");
+                        locaisText.add(t);
+                    }
+
+                    Text tAlimentacao = new Text("Alimentação");
+                    tAlimentacao.setStyle("-fx-font-weight: bold;");
+                    tAlimentacao.setStyle(" -fx-font-size: 15;");
+                    alimentacaoVbox.getChildren().clear();
+                    alimentacaoVbox.getChildren().add(tAlimentacao);
+                    alimentacaoVbox.getChildren().addAll(locaisText);
+
+                    locaisText.clear();
+                    Text tEstudo = new Text("Estudo");
+                    tEstudo.setStyle("-fx-font-weight: bold;");
+                    tEstudo.setStyle(" -fx-font-size: 15;");
+
+
+                    for (int i = 0; i < locais.size(); i += 2) {
+                        if (!locais.get(i + 1).equalsIgnoreCase("Estudo")) {
+                            continue;
+                        }
+                        t = new Text(locais.get(i));
+                        t.setStyle("-fx-font-weight: bold;");
+                        locaisText.add(t);
+                    }
+                    estudoVbox.getChildren().clear();
+                    estudoVbox.getChildren().add(tEstudo);
+                    estudoVbox.getChildren().addAll(locaisText);
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return null;
+        });
+
+        dialog1.showAndWait();
 
     }
+
     @FXML
    void onRemoverInfoPressed() throws SQLException {
         Dialog<String> dialog1 = new Dialog<>();

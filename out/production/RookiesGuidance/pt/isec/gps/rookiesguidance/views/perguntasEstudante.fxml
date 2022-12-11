@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="750.0" minHeight="550.0" minWidth="750" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.PerguntasController">
+<ScrollPane maxHeight="-Infinity" maxWidth="750.0" minHeight="550.0" minWidth="750" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.views.Controller.PerguntasEstudantesController">
     <AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="550" minWidth="750">
         <HBox prefHeight="63.0" prefWidth="750.0" style="-fx-background-color: #38819c;">
             <ImageView fx:id="homePageIcon" accessibleRole="BUTTON" fitHeight="79.0" fitWidth="154.0" onMouseClicked="#onIconPressed" pickOnBounds="true" preserveRatio="true">
@@ -77,17 +77,17 @@
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
                 </Button>
                 <Button fx:id="removerPergunta" alignment="CENTER" contentDisplay="CENTER" layoutX="504.0" layoutY="10.0" mnemonicParsing="false" onAction="#onRemoverPerguntaPressed" prefHeight="40.0" prefWidth="129.0" scaleShape="false" style="-fx-background-color: #38819c; -fx-background-radius: 7;" text="Remover Pergunta" textAlignment="CENTER" textFill="WHITE">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
                 </Button>
             </HBox>
         </VBox>
