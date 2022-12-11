@@ -666,6 +666,38 @@ public class ConnDB {
         return false;
 
     }
+
+    public ArrayList<String> getUtilizadoresEvento(int idEvento) throws SQLException {
+        ArrayList<String> utilizadoresEvento = new ArrayList<>();
+        Statement statement = dbConn.createStatement();
+
+        String verificaEvento = "SELECT * FROM evento WHERE id='" + idEvento + "'";
+        ResultSet resultSet = statement.executeQuery(verificaEvento);
+
+        if (resultSet.next()) {
+            String verificaTudo = "SELECT * FROM evento_utilizador WHERE id_evento='" + idEvento + "'";
+            ResultSet resultSet2 = statement.executeQuery(verificaTudo);
+            while (resultSet2.next()) {
+                int idUtilizador = resultSet2.getInt("id_utilizador");
+
+                String verificaUtilizador = "SELECT * utilizador WHERE numero='" + idUtilizador + "'";
+
+                ResultSet resultSet3 = statement.executeQuery(verificaUtilizador);
+                if(resultSet3.next()) {
+                    String nomeUtilizador = resultSet3.getString("nome");
+                    utilizadoresEvento.add(nomeUtilizador);
+                }
+                resultSet3.close();
+
+            }
+            resultSet2.close();
+        }
+
+        resultSet.close();
+        statement.close();
+        return utilizadoresEvento;
+    }
+
     public boolean editaUtilizador(int idUtilizador, String campo, int tipo) throws SQLException {
         Statement statement = dbConn.createStatement();
         String sqlQuery = null;
