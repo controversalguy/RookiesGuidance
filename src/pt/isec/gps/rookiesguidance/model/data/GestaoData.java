@@ -67,8 +67,8 @@ public class GestaoData {
         return false;
     }
 
-    public boolean editaEvento(int id,String campo,int tipo,int idGestor)throws SQLException{
-        if(dbconn.editaEvento(id,campo,tipo,idGestor))
+    public boolean editaEvento(int id,String tipo, String local, String data,int idGestor)throws SQLException{
+        if(dbconn.editaEvento(id,tipo,local, data, idGestor))
             return true;
         return false;
     }
@@ -91,7 +91,7 @@ public class GestaoData {
         return false;
     }
 
-    public boolean inscreveEmEvento(long idUser, int idEvento) throws SQLException{
+    public boolean inscreveEmEvento(int idUser, int idEvento) throws SQLException{
         if(dbconn.inscreveEmEvento(idUser,idEvento))
             return true;
         return false;

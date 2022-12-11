@@ -315,9 +315,9 @@ public class Testes {
         String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         //mesmo local
-        Assertions.assertFalse(connDB.editaEvento(0, "Praxe", 0, 2019133920));
+        Assertions.assertFalse(connDB.editaEvento(0, "Praxe", "praca", "21/12/2022 13:00", 2019133920));
         //local diferente
-        Assertions.assertTrue(connDB.editaEvento(0, "Parque verde", 0, 2019133920));
+        Assertions.assertTrue(connDB.editaEvento(0, "Praxe", "praca","21/12/2022 13:00", 2019133920));
         if (rs.next()) {
             statement.executeUpdate("DELETE FROM eventos WHERE id_gestor=" + 2019133920);
             statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);

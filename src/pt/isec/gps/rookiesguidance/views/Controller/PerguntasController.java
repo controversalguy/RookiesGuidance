@@ -279,7 +279,7 @@ public class PerguntasController implements Initializable {
             mapaRespostasPerguntas = connDB.getPerguntas();
 
             if (mapaRespostasPerguntas.size() == 0) {
-                ToastMessage.show(getScene().getWindow(), "mapaRespostasPerguntas NULL");
+               // ToastMessage.show(getScene().getWindow(), "mapaRespostasPerguntas NULL");
             }
 
             Text t;
