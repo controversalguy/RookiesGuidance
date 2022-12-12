@@ -14,6 +14,7 @@ import pt.isec.gps.rookiesguidance.gui.views.View;
 import pt.isec.gps.rookiesguidance.gui.views.ViewSwitcher;
 import pt.isec.gps.rookiesguidance.utils.ToastMessage;
 
+import javax.swing.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -68,7 +69,7 @@ public class HomePageGestoresController implements Initializable {
         titulo.setPromptText("Titulo:");
         TextArea descricao = new TextArea();
         descricao.setPromptText("Descrição:");
-
+        descricao.setWrapText(true);
         grid.add(new Label("Título:"), 0, 0);
         grid.add(titulo, 1, 0);
         grid.add(new Label("Descrição:"), 0, 1); //coluna 0 | linha 1

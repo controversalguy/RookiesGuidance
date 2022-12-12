@@ -34,8 +34,6 @@ public class EventosEstudantesController implements Initializable {
     @FXML
     private HBox PICKER;
     @FXML
-    private Button adicionarEventos;
-    @FXML
     private ImageView homePageIcon;
     ConnDB connDB;
     DatePickerSkin datePickerSkin;

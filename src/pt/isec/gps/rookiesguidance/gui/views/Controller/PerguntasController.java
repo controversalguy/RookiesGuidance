@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class PerguntasController implements Initializable {
     @FXML
@@ -56,12 +57,13 @@ public class PerguntasController implements Initializable {
         grid.setPadding(new Insets(20, 150, 10, 10));
 
         TextArea pergunta = new TextArea();
-
+        pergunta.setWrapText(true);
         grid.add(new Label("Pergunta:"), 0, 0);
         grid.add(pergunta, 1, 0);
 
         Node okButton = dialog.getDialogPane().lookupButton(ok);
         okButton.setDisable(true);
+        int max = 70;
         pergunta.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!pergunta.textProperty().getValue().isEmpty())
                 okButton.setDisable(false);
@@ -227,13 +229,14 @@ public class PerguntasController implements Initializable {
                     grid.setPadding(new Insets(20, 150, 10, 10));
 
                     TextArea resposta = new TextArea();
-
+                    resposta.setWrapText(true);
                     grid.add(new Label("Resposta:"), 0, 0);
                     grid.add(resposta, 1, 0);
 
                     Node okButton = dialog.getDialogPane().lookupButton(ok);
                     okButton.setDisable(true);
                     resposta.textProperty().addListener((observable, oldValue, newValue) -> {
+
                         if (!resposta.textProperty().getValue().isEmpty())
                             okButton.setDisable(false);
                         else
