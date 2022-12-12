@@ -210,8 +210,7 @@ public class PerguntasEstudantesController implements Initializable {
                     if(k % 70 == 0 && k != 0)
                         temp += "\n";
                 }
-
-                t.setText("Pergunta "+temp);
+                t.setText("\n" +"Pergunta "+temp+"\n");
                 t.setFill(Color.WHITE);
                 HBox pergunta = new HBox(t);
                 //pergunta.setMinWidth();

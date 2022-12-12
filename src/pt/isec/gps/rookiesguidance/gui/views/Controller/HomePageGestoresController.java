@@ -15,6 +15,7 @@ import pt.isec.gps.rookiesguidance.gui.views.ViewSwitcher;
 import pt.isec.gps.rookiesguidance.utils.ToastMessage;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -189,6 +190,8 @@ public class HomePageGestoresController implements Initializable {
         dialog.setTitle("Novidades");
         dialog.setHeaderText("Remover Novidades");
 
+        //dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL);
+
         // Create the username and password labels and fields.
         GridPane grid = new GridPane();
         grid.setHgap(10);
@@ -208,6 +211,7 @@ public class HomePageGestoresController implements Initializable {
             grid.add(id.get(index), index + 1, index);
         }
 
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL);
 
         System.out.println("NOVIDADES: " + novidades);
 
@@ -215,31 +219,35 @@ public class HomePageGestoresController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        if (!connDB.removeNovidade(Integer.parseInt(result.get()), LoginController.getNumero())) {
-            ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Não existe novidades para remover");
-            return;
-        }
-
-        novidades = connDB.getNovidades();
-
-        if(novidades == null){
-            ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Não existe novidades para remover");
-        }
-        System.out.println("novidades:" + novidades);
-        Text t;
-        for (int i = 0; i < novidades.size(); i++) {
-            if (i % 2 == 0) {
-                t = new Text();
-                t.setText("\n" + novidades.get(i));
-                t.setStyle("-fx-font-weight: bold;");
-            } else {
-                t = new Text();
-                t.setText(novidades.get(i));
+        try {
+            if (!connDB.removeNovidade(Integer.parseInt(result.get()), LoginController.getNumero())) {
+                ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Não existe novidades para remover");
+                return;
             }
-            novidadesText.add(t);
-        }
-        novidadesvBox.getChildren().clear();
-        novidadesvBox.getChildren().addAll(novidadesText);
+
+            novidades = connDB.getNovidades();
+
+            if (novidades == null) {
+                ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Não existe novidades para remover");
+            }
+            System.out.println("novidades:" + novidades);
+            Text t;
+            for (int i = 0; i < novidades.size(); i++) {
+                if (i % 2 == 0) {
+                    t = new Text();
+                    t.setText("\n" + novidades.get(i));
+                    t.setStyle("-fx-font-weight: bold;");
+                } else {
+                    t = new Text();
+                    t.setText(novidades.get(i));
+                }
+                novidadesText.add(t);
+            }
+            novidadesvBox.getChildren().clear();
+            novidadesvBox.getChildren().addAll(novidadesText);
+        }catch (ClassCastException e) {
+            dialog.close();
+       }
 
     }
     @FXML
@@ -298,7 +306,6 @@ public class HomePageGestoresController implements Initializable {
             eventos = connDB.getEventos(strDate);
             for (int i = 0; i < eventos.size(); i++) {
                 Text t = new Text();
-                //t.setStyle("-fx-font-weight: bold");
 
                 String[] texto = eventos.get(i).split("\n");
                 t.setText(texto[0]);
@@ -307,7 +314,6 @@ public class HomePageGestoresController implements Initializable {
                 Text q = new Text();
                 q.setText(texto[1] + "\n");
 
-                //t.setText(eventos.get(i));
                 eventosText.add(t);
                 eventosText.add(q);
             }

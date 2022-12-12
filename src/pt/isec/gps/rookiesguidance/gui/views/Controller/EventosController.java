@@ -246,9 +246,6 @@ public class EventosController implements Initializable {
                 TextField local = new TextField();
                 local.setText(eventosText.get(j+3).getText());
 
-                local.setTextFormatter(new TextFormatter<String>(change ->
-                        change.getControlNewText().length() <= 30 ? change : null));
-
                 grid.add(new Label("Tipo do evento:"), 0, 0);
                 grid.add(tipo, 1, 0);
                 grid.add(new Label("Data:"), 0, 1); //coluna 0 | linha 1
@@ -329,21 +326,6 @@ public class EventosController implements Initializable {
                 dialog2.showAndWait();
 
                 dialog.close();
-
-               /*try {
-                    onDiaPressed();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }*/
-
-
-//                try {
-//                    if (!connDB.editaEvento(Integer.parseInt(String.valueOf(j)), LoginController.getNumero())) {
-//                        ToastMessage.show(getScene().getWindow(), "Não existe evento para remover");
-//                    }
-//                } catch (SQLException e) {
-//                    throw new RuntimeException(e);
-//                }
             });
             id.get(2).setOnAction(actionEvent -> {
                 try {
