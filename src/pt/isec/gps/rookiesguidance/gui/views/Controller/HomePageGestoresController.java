@@ -75,7 +75,10 @@ public class HomePageGestoresController implements Initializable {
         grid.add(new Label("Descrição:"), 0, 1); //coluna 0 | linha 1
         grid.add(descricao, 1, 1);
 
-
+        titulo.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 50 ? change : null));
+        descricao.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 10000 ? change : null));
 
         Node okButton = dialog.getDialogPane().lookupButton(ok);
         okButton.setDisable(true);

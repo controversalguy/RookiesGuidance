@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import pt.isec.gps.rookiesguidance.bd.ConnDB;
@@ -128,5 +129,7 @@ public class EditarPerfilController implements Initializable {
 
         nomeUser.setText(LoginController.getNome());
         dropdownCurso.getItems().addAll("Engenharia Informática","Engenharia Mecânica","Engenharia Eletrotécnica");
+        passNova.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 15 ? change : null));
     }
 }

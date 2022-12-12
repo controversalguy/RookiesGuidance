@@ -81,6 +81,9 @@ public class EventosController implements Initializable {
         grid.add(new Label("Local do evento:"), 0, 3); //coluna 0 | linha 1
         grid.add(local, 1, 3);
 
+        local.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 30 ? change : null));
+
         Node okButton = dialog.getDialogPane().lookupButton(ok);
         okButton.setDisable(true);
         okButton.setStyle("-fx-background-color: #38819c; -fx-text-fill: #ffffff;");
@@ -242,6 +245,9 @@ public class EventosController implements Initializable {
                 horaInicio.setText(eventosText.get(j+2).getText());
                 TextField local = new TextField();
                 local.setText(eventosText.get(j+3).getText());
+
+                local.setTextFormatter(new TextFormatter<String>(change ->
+                        change.getControlNewText().length() <= 30 ? change : null));
 
                 grid.add(new Label("Tipo do evento:"), 0, 0);
                 grid.add(tipo, 1, 0);

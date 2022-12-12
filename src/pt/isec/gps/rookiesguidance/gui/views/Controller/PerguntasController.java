@@ -61,6 +61,9 @@ public class PerguntasController implements Initializable {
         grid.add(new Label("Pergunta:"), 0, 0);
         grid.add(pergunta, 1, 0);
 
+        pergunta.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 400 ? change : null));
+
         Node okButton = dialog.getDialogPane().lookupButton(ok);
         okButton.setDisable(true);
         int max = 70;
@@ -338,7 +341,7 @@ public class PerguntasController implements Initializable {
                     if(k % 70 == 0 && k != 0)
                         temp += "\n";
                 }
-                t.setText("\n" +"Pergunta "+temp+"\n");
+                t.setText(temp);
                 t.setFill(Color.WHITE);
                 HBox pergunta = new HBox(t);
                 //pergunta.setMinWidth();

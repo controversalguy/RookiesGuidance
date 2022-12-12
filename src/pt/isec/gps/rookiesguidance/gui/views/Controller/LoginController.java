@@ -1,10 +1,13 @@
 package pt.isec.gps.rookiesguidance.gui.views.Controller;
 
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import pt.isec.gps.rookiesguidance.bd.ConnDB;
 import pt.isec.gps.rookiesguidance.gui.views.View;
 import pt.isec.gps.rookiesguidance.gui.views.ViewSwitcher;
@@ -33,6 +36,7 @@ public class LoginController implements Initializable {
     void buttonPressed() throws SQLException {
         String emailText = email.getText();
         String passwordText  = password.getText();
+
         int valor = connDB.loginUtilizador(emailText, passwordText);
         if (valor>-1) {
             if(valor == 0){
@@ -67,6 +71,10 @@ public class LoginController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        email.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 20 ? change : null));
+        password.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 15 ? change : null));
     }
     public static int getNumero() {
         return nrUtilizador;

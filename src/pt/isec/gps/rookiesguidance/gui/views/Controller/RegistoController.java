@@ -58,15 +58,15 @@ public class RegistoController implements Initializable {
         String password = passwordText.getText();
         String confirmaPassword = confirmpasswordText.getText();
         String numero = email.substring(1, 11);
+
+
         if(password.equals(confirmaPassword)){
             if(connDB.registaNovoUtilizador(Integer.parseInt(numero),nome,curso,email,password)){
-                ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Utilizador registado com sucesso!");
+                ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Utilizador registado com sucesso");
                 ViewSwitcher.switchTo(View.LOGIN);
-            } else {
-                ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Insira uma palavra-passe vãlida!");
             }
         } else {
-            ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Insira a palavra-passe corretamente!");
+            ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Insira a palavra-passe corretamente");
         }
     }
 
@@ -84,6 +84,13 @@ public class RegistoController implements Initializable {
         }
 
         dropdownCurso.getItems().addAll("Engenharia Informática","Engenharia Mecânica","Engenharia Eletrotécnica");
-
+        nomeText.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 30 ? change : null));
+        emailText.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 20 ? change : null));
+        passwordText.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 15 ? change : null));
+        confirmpasswordText.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 15 ? change : null));
     }
 }

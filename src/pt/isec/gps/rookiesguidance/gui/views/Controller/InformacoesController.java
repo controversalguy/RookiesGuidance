@@ -66,8 +66,10 @@ public class InformacoesController implements Initializable {
 
         });
 
+        local.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 50 ? change : null));
+
         local.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("localll");
             if (tipo.getSelectionModel().getSelectedItem() != null) {
                 if (!tipo.getSelectionModel().getSelectedItem().isEmpty() && !local.textProperty().getValue().isEmpty())
                     okButton.setDisable(false);
