@@ -485,12 +485,11 @@ public class ConnDB {
 
     public boolean adicionaPergunta(String pergunta, long idUtilizador) throws SQLException {
             Statement statement = dbConn.createStatement();
-            String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idUtilizador + "' AND isGestor = '" + 1 + "'";
+            String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idUtilizador + "'"; // + "' AND isGestor = '" + 1 + TODO
             ResultSet resultSet = statement.executeQuery(verificaUtilizador);
             if (resultSet.next()) { // se esse utilizador for gestor
                 String verificaExistente = "SELECT * FROM pergunta WHERE texto = '" + pergunta + "'";
                 ResultSet rs = statement.executeQuery(verificaExistente);
-
                 if (!rs.next()) {
                     String sqlQuery = "INSERT INTO pergunta VALUES ((SELECT COUNT(*) FROM pergunta),'" + pergunta + "','" +idUtilizador + "')";
                     statement.executeUpdate(sqlQuery);
@@ -582,7 +581,7 @@ public class ConnDB {
     } // feito
     public boolean adicionaResposta(String resposta, int idPergunta, long idGestor) throws SQLException {
         Statement statement = dbConn.createStatement();
-        String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idGestor + "' AND isGestor = '" + 1 + "'";
+        String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idGestor + "' AND isGestor = '" + 1 + "'"; //TODO E se for o que fez pergunta?
         ResultSet resultSet = statement.executeQuery(verificaUtilizador);
         if (resultSet.next()) { // se esse utilizador for gestor
             String verificaExistente = "SELECT * FROM pergunta WHERE texto = '" + idPergunta + "'";

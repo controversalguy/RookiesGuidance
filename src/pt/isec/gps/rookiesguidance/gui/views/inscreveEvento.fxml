@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ScrollPane?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="750.0" minHeight="550.0" minWidth="750" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.gui.views.Controller.InscreveEventoController">
+    <content>
+    <AnchorPane maxHeight="Infinity" maxWidth="750" minHeight="550" minWidth="750">
+    <HBox prefHeight="63.0" prefWidth="750.0" style="-fx-background-color: #38819c;">
+        <children>
+            <ImageView fx:id="homePageIcon" accessibleRole="BUTTON" fitHeight="79.0" fitWidth="154.0" onMouseClicked="#onIconPressed" pickOnBounds="true" preserveRatio="true">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <image>
+                    <Image url="@../../images/RookiesBanner.png" />
+                </image>
+            </ImageView>
+            <Button layoutX="350.0" layoutY="10.0" mnemonicParsing="false" onAction="#onEventosPressed" prefHeight="62.0" prefWidth="81.0" style="-fx-background-color: #38819c;" text="Eventos">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <font>
+                    <Font name="System Bold" size="12.0" />
+                </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#onInformacoesPressed" prefHeight="62.0" prefWidth="118.0" style="-fx-background-color: #38819c;" text="Informações" textFill="WHITE">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <font>
+                    <Font name="System Bold" size="12.0" />
+                </font>
+            </Button>
+            <Button layoutX="235.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPerguntasPressed" prefHeight="62.0" prefWidth="97.0" style="-fx-background-color: #38819c;" text="Perguntas" textFill="WHITE">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <font>
+                    <Font name="System Bold" size="12.0" />
+                </font>
+            </Button>
+            <Button layoutX="306.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPerfilPressed" prefHeight="62.0" prefWidth="76.0" style="-fx-background-color: #38819c;" text="Perfil" textFill="WHITE">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <font>
+                    <Font name="System Bold" size="12.0" />
+                </font>
+            </Button>
+            <Button layoutX="390.0" layoutY="10.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="28.0" prefWidth="129.0" text="Terminar sessão">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <font>
+                    <Font name="System Bold" size="12.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="120.0" right="10.0" top="20.0" />
+                </HBox.margin>
+            </Button>
+        </children>
+    </HBox>
+   <Pane layoutX="62.0" layoutY="190.0" prefHeight="200.0" prefWidth="211.0" style="-fx-border-radius: 16; -fx-border-color: #53A7C6;">
+      <children>
+         <CheckBox fx:id="yesButton" alignment="CENTER" layoutX="28.0" layoutY="74.0" mnemonicParsing="false" onAction="#onYesSelected" text="Vou estar presente">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </CheckBox>
+         <Text layoutX="13.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirma a tua presença">
+            <font>
+               <Font name="System Bold" size="16.0" />
+            </font>
+         </Text>
+         <Button fx:id="submeterButton" layoutX="70.0" layoutY="150.0" mnemonicParsing="false" onAction="#onSubmeterPressed" style="-fx-background-color: #53A7C6;" text="Submeter" textFill="WHITE" />
+         <CheckBox fx:id="noButton" alignment="CENTER" layoutX="28.0" layoutY="108.0" mnemonicParsing="false" onAction="#onNoSelected" text="Não vou estar presente">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </CheckBox>
+      </children>
+   </Pane>
+   <VBox layoutX="469.0" layoutY="108.0" prefHeight="330.0" prefWidth="218.0" style="-fx-border-color: #53A7C6; -fx-border-radius: 8;">
+      <children>
+         <HBox alignment="CENTER" prefHeight="44.0" prefWidth="218.0">
+            <children>
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lista de Presenças:" textAlignment="RIGHT">
+                  <font>
+                     <Font name="System Bold" size="17.0" />
+                  </font>
+               </Text>
+            </children>
+         </HBox>
+         <VBox fx:id="presencasVBox" prefHeight="286.0" prefWidth="218.0" alignment="TOP_CENTER"/>
+      </children>
+   </VBox>
+    </AnchorPane>
+    </content>
+</ScrollPane>
