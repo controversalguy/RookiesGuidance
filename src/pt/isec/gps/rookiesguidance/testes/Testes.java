@@ -10,6 +10,7 @@ import java.sql.Statement;
 
 public class Testes {
 
+
     //Fazer registo
     @Test
     void testeRegisto() throws SQLException {
@@ -26,6 +27,8 @@ public class Testes {
         System.out.println("Teste Registo sem nome");
         ConnDB connDB = new ConnDB();
         Assertions.assertFalse(connDB.registaNovoUtilizador(2019133920, "", "LEI", "a2019133920@isec.pt", "IS3C..0"));
+        Statement statement = connDB.dbConn.createStatement();
+        statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
     }
 
     //Fazer registo sem curso
@@ -34,6 +37,8 @@ public class Testes {
         System.out.println("Teste Registo sem curso");
         ConnDB connDB = new ConnDB();
         Assertions.assertFalse(connDB.registaNovoUtilizador(2019133920, "Francisco Simões", "", "a2019133920@isec.pt", "IS3C..0"));
+        Statement statement = connDB.dbConn.createStatement();
+        statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
     }
 
     //Fazer registo sem email
@@ -42,6 +47,8 @@ public class Testes {
         System.out.println("Teste Registo sem email");
         ConnDB connDB = new ConnDB();
         Assertions.assertFalse(connDB.registaNovoUtilizador(2019133920, "Francisco Simões", "LEI", "", "IS3C..0"));
+        Statement statement = connDB.dbConn.createStatement();
+        statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
     }
 
     //Fazer registo sem password
@@ -50,6 +57,8 @@ public class Testes {
         System.out.println("Teste Registo sem password");
         ConnDB connDB = new ConnDB();
         Assertions.assertFalse(connDB.registaNovoUtilizador(2019133920, "Francisco Simões", "LEI", "a2020144095@isec.pt", ""));
+        Statement statement = connDB.dbConn.createStatement();
+        statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
     }
 
     //Fazer registo de utilizador já registado
@@ -58,13 +67,13 @@ public class Testes {
         System.out.println("Teste Registo utilizador já registado");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 0 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertFalse(connDB.registaNovoUtilizador(2019133920, "Francisco Simões", "LEI", "a2019133920@isec.pt", "IS3C..0"));
-        if (rs.next()) {
+        //if (rs.next()) {
             statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
             rs.close();
-        }
+        //}
     }
 
     //Fazer registo de password menos 5 carateres
@@ -73,6 +82,8 @@ public class Testes {
         System.out.println("Teste Registo password menos de 5 carateres");
         ConnDB connDB = new ConnDB();
         Assertions.assertFalse(connDB.registaNovoUtilizador(2019133920, "Francisco Simões", "LEI", "a2019133920@isec.pt", "IS3C"));
+        Statement statement = connDB.dbConn.createStatement();
+        statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
     }
 
     //Fazer registo de password mais 15 carateres
@@ -80,7 +91,9 @@ public class Testes {
     void testeRegistoPasswordMais15() throws SQLException {
         System.out.println("Teste Registo password mais de 15 carateres");
         ConnDB connDB = new ConnDB();
-        Assertions.assertFalse(connDB.registaNovoUtilizador(2019133920, "Francisco Simões", "LEI", "a2019133920@isec.pt", "IS3CisecISECisec"));
+        Assertions.assertFalse(connDB.registaNovoUtilizador(2019133920, "Francisco Simões", "LEI", "a2019133920@isec.pt", "IS3CisecISECisecISEC"));
+        Statement statement = connDB.dbConn.createStatement();
+        statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
     }
 
     //Fazer login
@@ -89,7 +102,7 @@ public class Testes {
         System.out.println("Teste login");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 0 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertEquals(1,connDB.loginUtilizador("a2019133920@isec.pt", "IS3C..0"));
         if (rs.next()) {
@@ -104,7 +117,7 @@ public class Testes {
         System.out.println("Teste login utilizador já logado");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertEquals(-1,connDB.loginUtilizador("a2019133920@isec.pt", "IS3C..0"));
         if (rs.next()) {
@@ -119,7 +132,7 @@ public class Testes {
         System.out.println("Teste login password errada");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 0 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertEquals(-1,connDB.loginUtilizador("a2019133920@isec.pt", "IS3C..1"));
         if (rs.next()) {
@@ -134,7 +147,7 @@ public class Testes {
         System.out.println("Teste login email errado");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 0 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertEquals(-1,connDB.loginUtilizador("a2019133921@isec.pt", "IS3C..0"));
         if (rs.next()) {
@@ -149,7 +162,7 @@ public class Testes {
         System.out.println("Teste login sem inserir email");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 0 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertEquals(-1,connDB.loginUtilizador("", "IS3C..0"));
         if (rs.next()) {
@@ -164,7 +177,7 @@ public class Testes {
         System.out.println("Teste login sem inserir password");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertEquals(-1,connDB.loginUtilizador("a2019133921@isec.pt", ""));
         if (rs.next()) {
@@ -179,7 +192,7 @@ public class Testes {
         System.out.println("Teste edita password");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertTrue(connDB.editaUtilizador(2019133920, "IS3C..1", 0));
         if (rs.next()) {
@@ -194,7 +207,7 @@ public class Testes {
         System.out.println("Teste edita password mesma");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertEquals(-1,connDB.loginUtilizador("a2019133920@isec.pt", "IS3C..0"));
         if (rs.next()) {
@@ -209,7 +222,7 @@ public class Testes {
         System.out.println("Teste edita curso");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertTrue(connDB.editaUtilizador(2019133920, "LEM", 1));
         if (rs.next()) {
@@ -224,7 +237,7 @@ public class Testes {
         System.out.println("Teste edita curso mesmo");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertFalse(connDB.editaUtilizador(2019133920, "LEI", 1));
         if (rs.next()) {
@@ -239,13 +252,13 @@ public class Testes {
         System.out.println("Teste remove perfil");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertTrue(connDB.removeUtilizador(2019133920));
-//        if(rs.next()) {
-//            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
-//            rs.close();
-//        }
+        if(rs.next()) {
+            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
+            rs.close();
+        }
     }
 
     //Adicionar eventos
@@ -254,7 +267,7 @@ public class Testes {
         System.out.println("Teste adiciona eventos");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertTrue(connDB.adicionaEvento(2019133920, "Praxe", "ISEC", "Quinta-feira 15h"));
         if (rs.next()) {
@@ -271,7 +284,7 @@ public class Testes {
         System.out.println("Teste inscreve eventos");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         String verificaEvento = "INSERT INTO eventos VALUES ('" + 2019133920 + "','" + "Praxe" + "','" + "ISEC" + "','" + "Quinta-feira 15h" + "')";
         ResultSet rs2 = statement.executeQuery(verificaEvento);
@@ -290,7 +303,7 @@ public class Testes {
         System.out.println("Teste inscreve 2x mesmo evento");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         String verificaEvento = "INSERT INTO eventos VALUES ('" + 2019133920 + "','" + "Praxe" + "','" + "ISEC" + "','" + "Quinta-feira 15h" + "')";
         ResultSet rs2 = statement.executeQuery(verificaEvento);
@@ -312,7 +325,7 @@ public class Testes {
         System.out.println("Teste Editar eventos");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         //mesmo local
         Assertions.assertFalse(connDB.editaEvento(0, "Praxe", "praca", "21/12/2022 13:00", 2019133920));
@@ -331,7 +344,7 @@ public class Testes {
         System.out.println("Teste remove eventos");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs1 = statement.executeQuery(verificaExistente);
         String verificaEvento = "INSERT INTO eventos VALUES ('" + 2019133920 + "','" + "Praxe" + "','" + "ISEC" + "','" + "Quinta-feira 15h" + "')";
         ResultSet rs2 = statement.executeQuery(verificaEvento);
@@ -349,7 +362,7 @@ public class Testes {
         System.out.println("Teste remove evento que não existe!");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs1 = statement.executeQuery(verificaExistente);
         String verificaEvento = "INSERT INTO eventos VALUES ('" +  2019133920 + "','" + "Praxe" + "','" + "ISEC" + "','" + "Quinta-feira 15h" + "')";
         ResultSet rs2 = statement.executeQuery(verificaEvento);
@@ -368,7 +381,7 @@ public class Testes {
         System.out.println("Adicionar Informacao");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertTrue(connDB.addlocal("Cantina Amarela", "Alimentação", 2019133920));
         if(rs.next()) {
@@ -384,7 +397,7 @@ public class Testes {
         System.out.println("Remover Informacao");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertTrue(connDB.removelocal(0, 2019133920));
         if(rs.next()) {
@@ -400,7 +413,7 @@ public class Testes {
         System.out.println("Remover Informacao inexistente");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertTrue(connDB.removelocal(1, 2019133920));
         if(rs.next()) {
@@ -416,7 +429,7 @@ public class Testes {
         System.out.println("Adicionar Novidades");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertTrue(connDB.adicionaNovidade("Nova Merge do ISEC","Novas t-shirts, camisolas e casacos do ISEC" ,2019133920));
         if(rs.next()) {
@@ -432,7 +445,7 @@ public class Testes {
         System.out.println("Remover Novidades");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         String verificaNov = "INSERT INTO novidade VALUES ('" + "Nova Merge do ISEC" + "','" + "Novas t-shirts, camisolas e casacos do ISEC" + "','" +  2019133920 + "')";
         ResultSet rs2 = statement.executeQuery(verificaNov);
@@ -449,7 +462,7 @@ public class Testes {
         System.out.println("Remover Novidades inexistente");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         String verificaNov = "INSERT INTO novidade VALUES ('" + "Nova Merge do ISEC" + "','" + "Novas t-shirts, camisolas e casacos do ISEC" + "','" +  2019133920 + "')";
         ResultSet rs2 = statement.executeQuery(verificaNov);
@@ -467,7 +480,7 @@ public class Testes {
         System.out.println("Adicionar uma Pergunta");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertTrue(connDB.adicionaPergunta("Como funcionam as praxes?",2019133920));
         if(rs.next()) {
@@ -483,7 +496,7 @@ public class Testes {
         System.out.println("Responde a uma Pergunta");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         String verificaPergunta = "INSERT INTO pergunta VALUES ('" + "Como funcionam as praxes?" + "','" + 2019133920 + "')";
         ResultSet rs2 = statement.executeQuery(verificaPergunta);
@@ -502,7 +515,7 @@ public class Testes {
         System.out.println("Responde a uma Pergunta que já tem resposta");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         String verificaPergunta = "INSERT INTO pergunta VALUES ('" + "Como funcionam as praxes?" + "','" + 2019133920 + "')";
         ResultSet rs2 = statement.executeQuery(verificaPergunta);
@@ -524,7 +537,7 @@ public class Testes {
         System.out.println("Remove Pergunta");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         String verificaPergunta = "INSERT INTO pergunta VALUES ('" + "Como funcionam as praxes?" + "','" + 2019133920 + "')";
         ResultSet rs2 = statement.executeQuery(verificaPergunta);
@@ -541,7 +554,7 @@ public class Testes {
         System.out.println("Teste faz logout");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" +  "Francisco Simões" + "','" + "LEI" + "','" +  "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "','" + 1 + "')";
         ResultSet rs = statement.executeQuery(verificaExistente);
         Assertions.assertTrue(connDB.logout(2019133920));
         if(rs.next()) {
