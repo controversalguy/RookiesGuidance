@@ -846,5 +846,14 @@ public class ConnDB {
         return false;
     }
 
+    public void disconnectAll() throws SQLException {
+        Statement st = dbConn.createStatement();
+        String user = "SELECT * FROM utilizador";
+        ResultSet rs = st.executeQuery(user);
+        while (rs.next()) {
+            String logout = "UPDATE utilizador SET autenticado='" + 0 + "'";
+            st.executeUpdate(logout);
+        }
+    }
 }
 

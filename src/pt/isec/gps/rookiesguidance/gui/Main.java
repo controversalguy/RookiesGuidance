@@ -35,6 +35,8 @@ public class Main {
 ////            System.out.println("Registado com Sucesso!");
 ////        //cDb.addNovidade("luva pedreiro","RECEBAAAAAAAAAAAAAAAAAA",2019133920);
 ////    }
+        ConnDB c = new ConnDB();
+        c.disconnectAll();
     }
 
 
