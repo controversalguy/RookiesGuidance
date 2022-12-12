@@ -133,7 +133,7 @@ public class ConnDB {
         return user;
     }
     public boolean registaNovoUtilizador(int nrAluno, String nome, String curso, String email, String password) throws SQLException {
-        if (nome == null || email == null || password == null || curso == null)
+        if (nome.isEmpty() || email.isEmpty() || password.isEmpty() || curso.isEmpty())
             return false;
 
             int isGestor = 0;
@@ -808,11 +808,12 @@ public class ConnDB {
         return -1;
     }
     public int loginUtilizador(String email, String password) throws SQLException {
-        if (email == null || password == null) {
+        if (email.isEmpty() || password.isEmpty()) {
             return -1;
         }
         Statement statement = dbConn.createStatement();
-        String sqlQuery = "SELECT * FROM utilizador WHERE email = '" + email + "' AND password = '" + password + "'";
+        String sqlQuery = "SELECT * FROM utilizador WHERE email = '" + email + "' AND password = '" + password + "' AND autenticado='"
+                +0+"'";
         ResultSet resultSet = statement.executeQuery(sqlQuery);
         if (resultSet.next()) {
             int isGestor = resultSet.getInt("isGestor");

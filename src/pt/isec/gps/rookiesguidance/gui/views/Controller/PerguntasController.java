@@ -332,7 +332,13 @@ public class PerguntasController implements Initializable {
                     break;
                 VBox perguntaResposta = new VBox(); // uma pergunta varias respostas
                 t = new Text();
-                t.setText("\nPergunta " + p + "\n");
+                String temp = "";
+                for (int k = 0; k < p.length() ; k++) {
+                    temp += p.charAt(k);
+                    if(k % 70 == 0 && k != 0)
+                        temp += "\n";
+                }
+                t.setText(temp);
                 t.setFill(Color.WHITE);
                 HBox pergunta = new HBox(t);
                 //pergunta.setMinWidth();

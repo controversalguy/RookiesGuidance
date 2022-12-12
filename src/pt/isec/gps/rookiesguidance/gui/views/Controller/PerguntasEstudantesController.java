@@ -56,7 +56,7 @@ public class PerguntasEstudantesController implements Initializable {
         grid.setPadding(new Insets(20, 150, 10, 10));
 
         TextArea pergunta = new TextArea();
-
+        pergunta.setWrapText(true);
         grid.add(new Label("Pergunta:"), 0, 0);
         grid.add(pergunta, 1, 0);
 
@@ -204,7 +204,14 @@ public class PerguntasEstudantesController implements Initializable {
                     break;
                 VBox perguntaResposta = new VBox(); // uma pergunta varias respostas
                 t = new Text();
-                t.setText("\nPergunta " + p + "\n");
+                String temp = "";
+                for (int k = 0; k < p.length() ; k++) {
+                    temp += p.charAt(k);
+                    if(k % 70 == 0 && k != 0)
+                        temp += "\n";
+                }
+
+                t.setText("Pergunta"+temp);
                 t.setFill(Color.WHITE);
                 HBox pergunta = new HBox(t);
                 //pergunta.setMinWidth();

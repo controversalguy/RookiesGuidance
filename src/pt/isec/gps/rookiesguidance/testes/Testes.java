@@ -58,13 +58,11 @@ public class Testes {
         System.out.println("Teste Registo utilizador já registado");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
-        ResultSet rs = statement.executeQuery(verificaExistente);
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 +"','" + 0 + "')";
+        statement.executeUpdate(verificaExistente);
         Assertions.assertFalse(connDB.registaNovoUtilizador(2019133920, "Francisco Simões", "LEI", "a2019133920@isec.pt", "IS3C..0"));
-        if (rs.next()) {
-            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
-            rs.close();
-        }
+        statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
+
     }
 
     //Fazer registo de password menos 5 carateres
@@ -89,13 +87,10 @@ public class Testes {
         System.out.println("Teste login");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
-        ResultSet rs = statement.executeQuery(verificaExistente);
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 +"','" + 1 + "')";
+        statement.executeUpdate(verificaExistente);
         Assertions.assertEquals(1,connDB.loginUtilizador("a2019133920@isec.pt", "IS3C..0"));
-        if (rs.next()) {
-            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
-            rs.close();
-        }
+        statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
     }
 
     //Fazer login com login já iniciado
@@ -104,13 +99,10 @@ public class Testes {
         System.out.println("Teste login utilizador já logado");
         ConnDB connDB = new ConnDB();
         Statement statement = connDB.dbConn.createStatement();
-        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 + "')";
-        ResultSet rs = statement.executeQuery(verificaExistente);
+        String verificaExistente = "INSERT INTO utilizador VALUES ('" + 2019133920 + "','" + "Francisco Simões" + "','" + "LEI" + "','" + "a2019133920@isec.pt" + "','" + "IS3C..0" + "','" + 1 +"','" + 1 + "')";
+        statement.executeUpdate(verificaExistente);
         Assertions.assertEquals(-1,connDB.loginUtilizador("a2019133920@isec.pt", "IS3C..0"));
-        if (rs.next()) {
-            statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
-            rs.close();
-        }
+        statement.executeUpdate("DELETE FROM utilizador WHERE numero=" + 2019133920);
     }
 
     //Fazer login com a password errada

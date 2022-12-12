@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import pt.isec.gps.rookiesguidance.gui.views.View;
 import pt.isec.gps.rookiesguidance.gui.views.ViewSwitcher;
 
@@ -26,6 +27,7 @@ public class MainJFX extends Application {
         stage.setScene(scene);
         stage.show();
 
+        System.out.println();
     }
 
 }
