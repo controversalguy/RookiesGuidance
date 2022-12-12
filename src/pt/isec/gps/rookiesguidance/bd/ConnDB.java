@@ -292,10 +292,10 @@ public class ConnDB {
             String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idGestor + "' AND isGestor = '" + 1 + "'";
             ResultSet rs = statement.executeQuery(verificaUtilizador);
             if (rs.next()) { // se existir e for gestor
-                String verificaExistente = "SELECT * FROM novidade WHERE id=" + id;
+                String verificaExistente = "SELECT * FROM novidade WHERE id='" + id + "' AND id_gestor = '" + idGestor + "'";
                 ResultSet resultSet = statement.executeQuery(verificaExistente);
                 if (resultSet.next()) { // se existir a novidade com o id recebido
-                    statement.executeUpdate("DELETE FROM novidade WHERE id=" + id);
+                    statement.executeUpdate("DELETE FROM novidade WHERE id='" + id + "' AND id_gestor = '" + idGestor + "'");
                     resultSet.close();
                     statement.close();
 
@@ -423,10 +423,10 @@ public class ConnDB {
             String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idGestor + "' AND isGestor = '" + 1 + "'";
             ResultSet rs = statement.executeQuery(verificaUtilizador);
             if (rs.next()) { // se existir e for gestor
-                String verificaExistente = "SELECT * FROM evento WHERE id=" + id;
+                String verificaExistente = "SELECT * FROM evento WHERE id='" + id + "' AND id_gestor = '" + idGestor + "'";
                 ResultSet resultSet = statement.executeQuery(verificaExistente);
                 if (resultSet.next()) { // se existir a novidade com o id recebido
-                    statement.executeUpdate("DELETE FROM evento WHERE id=" + id);
+                    statement.executeUpdate("DELETE FROM evento WHERE id='" + id + "' AND id_gestor = '" + idGestor + "'");
                     resultSet.close();
                     statement.close();
                     return true;
@@ -458,7 +458,7 @@ public class ConnDB {
                 ResultSet rs = statement.executeQuery(verificaExistente);
                 if (rs.next()) {
 
-                    sqlQuery = "UPDATE evento SET tipo='" + tipo + "',data_hora='" + data + "',local='" + localidade + "' WHERE id='" + id + "'";
+                    sqlQuery = "UPDATE evento SET tipo='" + tipo + "',data_hora='" + data + "',local='" + localidade + "' WHERE id='" + id + "' AND id_gestor = '" + idGestor + "'";
 
                     /*switch (tipo) {
                         case 0 -> {
@@ -488,7 +488,7 @@ public class ConnDB {
 
     public boolean adicionaPergunta(String pergunta, long idUtilizador) throws SQLException {
             Statement statement = dbConn.createStatement();
-            String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idUtilizador + "'"; // + "' AND isGestor = '" + 1 + TODO
+            String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idUtilizador + "'";
             ResultSet resultSet = statement.executeQuery(verificaUtilizador);
             if (resultSet.next()) { // se esse utilizador for gestor
                 String verificaExistente = "SELECT * FROM pergunta WHERE texto = '" + pergunta + "'";
@@ -557,12 +557,12 @@ public class ConnDB {
         System.out.println("mapaRespostas" + mapaRespostas);
         return mapaRespostas;
     }
-    public boolean removePergunta(int id, long idUtilizador) throws SQLException {
+    public boolean removePergunta(int id, int idUtilizador) throws SQLException {
         Statement statement = dbConn.createStatement();
         String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idUtilizador + "'";
         ResultSet resultSet = statement.executeQuery(verificaUtilizador);
         if (resultSet.next()) { // se existe
-            String verificaExistente = "SELECT * FROM pergunta WHERE id=" + id;
+            String verificaExistente = "SELECT * FROM pergunta WHERE id='" + id + "' AND id_utilizador = '" + idUtilizador + "'";
             ResultSet rs = statement.executeQuery(verificaExistente);
             if (rs.next()) { // se existir a pergunta com o id recebido
                 ResultSet rs1 = statement.executeQuery("SELECT * FROM resposta WHERE id_pergunta=" + id);
@@ -570,7 +570,7 @@ public class ConnDB {
                     statement.executeUpdate("DELETE FROM resposta WHERE id_pergunta=" + id);
                 }
                 rs1.close();
-                statement.executeUpdate("DELETE FROM pergunta WHERE id=" + id);
+                statement.executeUpdate("DELETE FROM pergunta  WHERE id='" + id + "' AND id_utilizador = '" + idUtilizador + "'");
                 rs.close();
                 statement.close();
                 return true;
@@ -582,9 +582,9 @@ public class ConnDB {
         statement.close();
         return false;
     } // feito
-    public boolean adicionaResposta(String resposta, int idPergunta, long idGestor) throws SQLException {
+    public boolean adicionaResposta(String resposta, int idPergunta, int idGestor) throws SQLException {
         Statement statement = dbConn.createStatement();
-        String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idGestor + "' AND isGestor = '" + 1 + "'"; //TODO E se for o que fez pergunta?
+        String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idGestor + "' AND isGestor = '" + 1 + "'";
         ResultSet resultSet = statement.executeQuery(verificaUtilizador);
         if (resultSet.next()) { // se esse utilizador for gestor
             String verificaExistente = "SELECT * FROM pergunta WHERE texto = '" + idPergunta + "'";
@@ -618,15 +618,15 @@ public class ConnDB {
         rs.close();
         return ids;
     }
-    public boolean removeResposta(int id, long idGestor) throws SQLException {
+    public boolean removeResposta(int id, int idGestor) throws SQLException {
         Statement statement = dbConn.createStatement();
         String verificaUtilizador = "SELECT * FROM utilizador WHERE numero = '" + idGestor + "' AND isGestor = '" + 1 + "'";
         ResultSet resultSet = statement.executeQuery(verificaUtilizador);
         if (resultSet.next()) { // se esse utilizador for gestor
-            String verificaExistente = "SELECT * FROM resposta WHERE id=" + id;
+            String verificaExistente = "SELECT * FROM resposta WHERE id='" + id + "' AND id_gestor = '" + idGestor + "'";
             ResultSet rs = statement.executeQuery(verificaExistente);
             if (rs.next()) { // se existir a pergunta com o id recebido
-                statement.executeUpdate("DELETE FROM resposta WHERE id=" + id);
+                statement.executeUpdate("DELETE FROM resposta WHERE id='" + id + "' AND id_gestor = '" + idGestor + "'");
                 rs.close();
                 resultSet.close();
                 statement.close();

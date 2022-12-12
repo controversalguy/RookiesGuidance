@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        ConnDB cdb = new ConnDB();
-       cdb.criaTabelas();
+        //ConnDB cdb = new ConnDB();
+        //cdb.criaTabelas();
 
         Application.launch(MainJFX.class,args);
         // cdb.registaNovoUtilizador(2019202020, "Francisco Simões","LEI" ,"a2019202020@isec.pt", "123");

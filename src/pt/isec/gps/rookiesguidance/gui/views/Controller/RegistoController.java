@@ -60,11 +60,13 @@ public class RegistoController implements Initializable {
         String numero = email.substring(1, 11);
         if(password.equals(confirmaPassword)){
             if(connDB.registaNovoUtilizador(Integer.parseInt(numero),nome,curso,email,password)){
-                ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Utilizador registado com sucesso");
+                ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Utilizador registado com sucesso!");
                 ViewSwitcher.switchTo(View.LOGIN);
+            } else {
+                ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Insira uma palavra-passe vãlida!");
             }
         } else {
-            ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Insira a palavra-passe corretamente");
+            ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Insira a palavra-passe corretamente!");
         }
     }
 
