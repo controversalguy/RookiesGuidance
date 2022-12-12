@@ -31,7 +31,7 @@ public class ConnDB {
 
             String evento = """
                     CREATE TABLE IF NOT EXISTS evento
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
                     tipo TEXT NOT NULL,
                     data_hora TEXT NOT NULL,
                     local TEXT NOT NULL,
@@ -50,7 +50,7 @@ public class ConnDB {
                     """;
             String novidade = """
                     CREATE TABLE IF NOT EXISTS novidade
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
                     titulo TEXT NOT NULL,
                     descricao TEXT NOT NULL,
                     id_gestor INTEGER NOT NULL)
@@ -58,13 +58,13 @@ public class ConnDB {
 
             String pergunta = """
                     CREATE TABLE IF NOT EXISTS pergunta
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
                     texto TEXT NOT NULL,
                     id_utilizador INTEGER NOT NULL)
                     """;
             String resposta = """
                     CREATE TABLE IF NOT EXISTS resposta
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
                     texto TEXT NOT NULL,
                     id_pergunta TEXT NOT NULL,
                     id_gestor INTEGER NOT NULL)
@@ -77,7 +77,7 @@ public class ConnDB {
 
             String local = """
                     CREATE TABLE IF NOT EXISTS local
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
                      localizacao TEXT NOT NULL,
                      tipo TEXT NOT NULL,
                      id_gestor INTEGER NOT NULL)
