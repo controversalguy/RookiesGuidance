@@ -136,6 +136,9 @@ public class ConnDB {
         if (nome.isEmpty() || email.isEmpty() || password.isEmpty() || curso.isEmpty())
             return false;
 
+        if(password.length() < 5 || password.length() > 15)
+            return false;
+
             int isGestor = 0;
             Statement statement = dbConn.createStatement();
             String verificaExistente = "SELECT * FROM utilizador";
@@ -647,9 +650,7 @@ public class ConnDB {
             if(rs.next()) {
                 String verificaEvento = "SELECT * FROM evento WHERE id='" + idEvento + "'";
                 ResultSet resultSet = statement.executeQuery(verificaEvento);
-
                 if (resultSet.next()) {
-
                     String verificaTudo = "SELECT * FROM evento_utilizador WHERE id_evento='" + idEvento + "' AND id_utilizador='" + idUtilizador + "'";
                     ResultSet resultSet2 = statement.executeQuery(verificaTudo);
                     if(!resultSet2.next()) {
