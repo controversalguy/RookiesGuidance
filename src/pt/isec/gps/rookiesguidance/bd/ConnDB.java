@@ -31,7 +31,7 @@ public class ConnDB {
 
             String evento = """
                     CREATE TABLE IF NOT EXISTS evento
-                    (id INTEGER NOT NULL,
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                     tipo TEXT NOT NULL,
                     data_hora TEXT NOT NULL,
                     local TEXT NOT NULL,
@@ -50,7 +50,7 @@ public class ConnDB {
                     """;
             String novidade = """
                     CREATE TABLE IF NOT EXISTS novidade
-                    (id INTEGER NOT NULL,
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                     titulo TEXT NOT NULL,
                     descricao TEXT NOT NULL,
                     id_gestor INTEGER NOT NULL)
@@ -58,13 +58,13 @@ public class ConnDB {
 
             String pergunta = """
                     CREATE TABLE IF NOT EXISTS pergunta
-                    (id INTEGER NOT NULL,
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                     texto TEXT NOT NULL,
                     id_utilizador INTEGER NOT NULL)
                     """;
             String resposta = """
                     CREATE TABLE IF NOT EXISTS resposta
-                    (id INTEGER NOT NULL,
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                     texto TEXT NOT NULL,
                     id_pergunta TEXT NOT NULL,
                     id_gestor INTEGER NOT NULL)
@@ -77,7 +77,7 @@ public class ConnDB {
 
             String local = """
                     CREATE TABLE IF NOT EXISTS local
-                    (id INTEGER NOT NULL,
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                      localizacao TEXT NOT NULL,
                      tipo TEXT NOT NULL,
                      id_gestor INTEGER NOT NULL)
@@ -188,7 +188,7 @@ public class ConnDB {
             verificaExistente += " WHERE localizacao= '" + local + "' AND tipo = '" + tipo + "'";
             ResultSet resultSet = statement.executeQuery(verificaExistente);
             if (!resultSet.next()) {
-                String sqlQuery = "INSERT INTO local VALUES ((SELECT COUNT(*) FROM local),'" + local + "','" + tipo + "','" + idGestor + "')";
+                String sqlQuery = "INSERT INTO local VALUES (NULL,'" + local + "','" + tipo + "','" + idGestor + "')";
                 statement.executeUpdate(sqlQuery);
                 resultSet.close();
                 statement.close();
@@ -271,7 +271,7 @@ public class ConnDB {
 
             ResultSet resultSet = statement.executeQuery(verificaExistente);
             if (!resultSet.next()) {
-                String sqlQuery = "INSERT INTO novidade VALUES ((SELECT COUNT(*) FROM novidade),'" + titulo + "','" + descricao + "','" + idGestor + "')";
+                String sqlQuery = "INSERT INTO novidade VALUES (NULL,'" + titulo + "','" + descricao + "','" + idGestor + "')";
                 statement.executeUpdate(sqlQuery);
 
                 resultSet.close();
@@ -400,7 +400,7 @@ public class ConnDB {
                 String verificaEvento = "SELECT * FROM evento WHERE local = '" + localizacao + "' AND data_hora = '" + data_hora + "'";
                 ResultSet resultSet = statement.executeQuery(verificaEvento);
                 if (!resultSet.next()) { // se não houver já um evento a essa hora nesse local
-                    String sqlQuery = "INSERT INTO evento VALUES ((SELECT COUNT(*) FROM evento),'" + tipo + "','" + data_hora + "','" + localizacao + "','" + idGestor + "')";
+                    String sqlQuery = "INSERT INTO evento VALUES (NULL,'" + tipo + "','" + data_hora + "','" + localizacao + "','" + idGestor + "')";
                     statement.executeUpdate(sqlQuery);
 
                     resultSet.close();
@@ -494,7 +494,7 @@ public class ConnDB {
                 String verificaExistente = "SELECT * FROM pergunta WHERE texto = '" + pergunta + "'";
                 ResultSet rs = statement.executeQuery(verificaExistente);
                 if (!rs.next()) {
-                    String sqlQuery = "INSERT INTO pergunta VALUES ((SELECT COUNT(*) FROM pergunta),'" + pergunta + "','" +idUtilizador + "')";
+                    String sqlQuery = "INSERT INTO pergunta VALUES (NULL,'" + pergunta + "','" +idUtilizador + "')";
                     statement.executeUpdate(sqlQuery);
                     statement.close();
                     return true;
@@ -591,7 +591,7 @@ public class ConnDB {
             ResultSet rs = statement.executeQuery(verificaExistente);
 
             if (!rs.next()) {
-                String sqlQuery = "INSERT INTO resposta VALUES ((SELECT COUNT(*) FROM resposta),'" + resposta + "','" + idPergunta + "','" + idGestor + "')";
+                String sqlQuery = "INSERT INTO resposta VALUES (NULL,'" + resposta + "','" + idPergunta + "','" + idGestor + "')";
                 statement.executeUpdate(sqlQuery);
                 statement.close();
                 return true;
