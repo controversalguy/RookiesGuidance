@@ -1,8 +1,6 @@
 package pt.isec.gps.rookiesguidance.ui.text;
 
 import javafx.application.Application;
-import pt.isec.gps.rookiesguidance.bd.ConnDB;
-import pt.isec.gps.rookiesguidance.ui.gui.MainJFX;
 
 import java.sql.SQLException;
 
