@@ -211,7 +211,7 @@ public class PerguntasEstudantesController implements Initializable {
                         temp += "\n";
                 }
 
-                t.setText("Pergunta"+temp);
+                t.setText("Pergunta "+temp);
                 t.setFill(Color.WHITE);
                 HBox pergunta = new HBox(t);
                 //pergunta.setMinWidth();
