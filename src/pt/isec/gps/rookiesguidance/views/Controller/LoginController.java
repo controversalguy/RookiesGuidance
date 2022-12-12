@@ -62,7 +62,6 @@ public class LoginController implements Initializable {
     void onButtonRegisto() {
         ViewSwitcher.switchTo(View.REGISTO);
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -71,7 +70,6 @@ public class LoginController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
     public static int getNumero() {
         return nrUtilizador;
     }
@@ -87,7 +85,6 @@ public class LoginController implements Initializable {
     public static String getPasse() {
         return passeUtilizador;
     }
-
     public static boolean isGestor() {
         return isGestor;
     }

@@ -42,12 +42,18 @@ public class InscreveEventoController implements Initializable {
     }
     @FXML
     void onEventosPressed() {
-        ViewSwitcher.switchTo(View.EVENTOS);
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.EVENTOS_ESTUDANTE);
+        else
+            ViewSwitcher.switchTo(View.EVENTOS);
     }
 
     @FXML
     void onInformacoesPressed() {
-        ViewSwitcher.switchTo(View.INFORMACOES);
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.INFORMACOES_ESTUDANTE);
+        else
+            ViewSwitcher.switchTo(View.INFORMACOES);
     }
 
     @FXML
@@ -57,7 +63,10 @@ public class InscreveEventoController implements Initializable {
 
     @FXML
     void onPerguntasPressed() {
-        ViewSwitcher.switchTo(View.PERGUNTAS);
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.PERGUNTAS_ESTUDANTE);
+        else
+            ViewSwitcher.switchTo(View.PERGUNTAS);
     }
 
     @FXML

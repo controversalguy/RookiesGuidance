@@ -843,7 +843,6 @@ public class ConnDB {
             st.executeUpdate(logout);
             return true;
         }
-
         return false;
     }
 

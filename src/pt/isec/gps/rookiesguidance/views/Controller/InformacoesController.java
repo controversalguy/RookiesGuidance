@@ -239,15 +239,26 @@ public class InformacoesController implements Initializable {
         dialog1.showAndWait();
     }
     @FXML
-    void onIconPressed() {ViewSwitcher.switchTo(View.HOMEPAGE);  }
+    void onIconPressed() {
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.HOMEPAGE);
+        else
+            ViewSwitcher.switchTo(View.HOMEPAGE_GESTORES);
+    }
     @FXML
     void onEventosPressed() {
-        ViewSwitcher.switchTo(View.EVENTOS);
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.EVENTOS_ESTUDANTE);
+        else
+            ViewSwitcher.switchTo(View.EVENTOS);
     }
 
     @FXML
     void onInformacoesPressed() {
-        ViewSwitcher.switchTo(View.INFORMACOES);
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.INFORMACOES_ESTUDANTE);
+        else
+            ViewSwitcher.switchTo(View.INFORMACOES);
     }
 
     @FXML
@@ -257,7 +268,10 @@ public class InformacoesController implements Initializable {
 
     @FXML
     void onPerguntasPressed() {
-        ViewSwitcher.switchTo(View.PERGUNTAS);
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.PERGUNTAS_ESTUDANTE);
+        else
+            ViewSwitcher.switchTo(View.PERGUNTAS);
     }
 
     @FXML

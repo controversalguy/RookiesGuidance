@@ -33,30 +33,42 @@ public class EditarPerfilController implements Initializable {
     @FXML
     private ImageView homePageIcon;
     @FXML
-    void onIconPressed() {ViewSwitcher.switchTo(View.HOMEPAGE);  }
+    void onIconPressed() {
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.HOMEPAGE);
+        else
+            ViewSwitcher.switchTo(View.HOMEPAGE_GESTORES);
+    }
+
     @FXML
     void onEventosPressed() {
-        ViewSwitcher.switchTo(View.EVENTOS);
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.EVENTOS_ESTUDANTE);
+        else
+            ViewSwitcher.switchTo(View.EVENTOS);
     }
 
     @FXML
     void onInformacoesPressed() {
-        ViewSwitcher.switchTo(View.INFORMACOES);
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.INFORMACOES_ESTUDANTE);
+        else
+            ViewSwitcher.switchTo(View.INFORMACOES);
     }
 
     @FXML
-    void onPerfilPressed() {
-        ViewSwitcher.switchTo(View.PERFIL);
-    }
+    void onPerfilPressed() {ViewSwitcher.switchTo(View.PERFIL);}
 
     @FXML
     void onPerguntasPressed() {
-        ViewSwitcher.switchTo(View.PERGUNTAS);
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.PERGUNTAS_ESTUDANTE);
+        else
+            ViewSwitcher.switchTo(View.PERGUNTAS);
     }
 
     @FXML
     void onTerminarSessaoPressed() throws SQLException {
-
         if(connDB.logout(LoginController.getNumero())){
             ToastMessage.show(getScene().getWindow(), "Sessão terminada com sucesso");
             ViewSwitcher.switchTo(View.LOGIN);
@@ -70,18 +82,12 @@ public class EditarPerfilController implements Initializable {
         boolean atualizou = false;
 
         //nao inseriu a passe
-        /*if (passAntiga.getText().isEmpty() || passAntiga.getText().isEmpty()) {
-            ToastMessage.show(getScene().getWindow(), "Insira a palavra-passe!");
-            ViewSwitcher.switchTo(View.PERFIL);
-        }*/
         String edita = "";
 
         //inseriu a passe e não é igual à q tinha
         if(!passAntiga.getText().isEmpty()) {
             if (!passAntiga.getText().trim().equals(LoginController.getPasse().trim())) {
                 edita +=  "Insira a palavra-passe correta!";
-                //ToastMessage.show(getScene().getWindow(), "Insira a palavra-passe correta!");
-                //ViewSwitcher.switchTo(View.PERFIL);
             } else
                 update = true;
 
@@ -90,14 +96,14 @@ public class EditarPerfilController implements Initializable {
                     connDB.editaUtilizador(LoginController.getNumero(), passNova.getText(), 0);
                     edita +=  "Password mudada com sucesso!";
                     atualizou = true;
-                    //ToastMessage.show(getScene().getWindow(), "Password mudada com sucesso!");
+
                 }
             }
         }
 
         if(!dropdownCurso.getSelectionModel().isEmpty()) {
             connDB.editaUtilizador(LoginController.getNumero(), (String) dropdownCurso.getSelectionModel().getSelectedItem(), 1);
-            //ToastMessage.show(getScene().getWindow(), "Curso mudado com sucesso!");
+
             edita +=  "\nCurso mudado com sucesso!";
             atualizou = true;
         }

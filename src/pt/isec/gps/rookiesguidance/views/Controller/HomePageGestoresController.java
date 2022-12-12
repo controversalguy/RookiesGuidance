@@ -139,21 +139,15 @@ public class HomePageGestoresController implements Initializable {
 
     @FXML
     void onEventosPressed() {
-        if(LoginController.isGestor)
             ViewSwitcher.switchTo(View.EVENTOS);
-        else
-            ViewSwitcher.switchTo(View.EVENTOS_ESTUDANTE);
     }
     @FXML
     void onIconPressed() {
-        ViewSwitcher.switchTo(View.HOMEPAGE);
+        ViewSwitcher.switchTo(View.HOMEPAGE_GESTORES);
     }
     @FXML
     void onInformacoesPressed() {
-        if(LoginController.isGestor)
             ViewSwitcher.switchTo(View.INFORMACOES);
-        else
-            ViewSwitcher.switchTo(View.INFORMACOES_ESTUDANTE);
     }
 
     @FXML

@@ -19,39 +19,47 @@ import java.util.ResourceBundle;
 import static pt.isec.gps.rookiesguidance.views.ViewSwitcher.getScene;
 
 public class PerfilController implements Initializable {
-
     ConnDB connDB;
     @FXML
     private Text nomeUser;
     @FXML
     private Text cursoUser;
-
     @FXML
     private Text numeroUser;
     @FXML
     private ImageView homePageIcon;
     @FXML
-    void onIconPressed() {ViewSwitcher.switchTo(View.HOMEPAGE);  }
+    void onIconPressed() {
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.HOMEPAGE);
+        else
+            ViewSwitcher.switchTo(View.HOMEPAGE_GESTORES);
+    }
     @FXML
     void onEventosPressed() {
-        ViewSwitcher.switchTo(View.EVENTOS);
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.EVENTOS_ESTUDANTE);
+        else
+            ViewSwitcher.switchTo(View.EVENTOS);
     }
-
     @FXML
     void onInformacoesPressed() {
-        ViewSwitcher.switchTo(View.INFORMACOES);
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.INFORMACOES_ESTUDANTE);
+        else
+            ViewSwitcher.switchTo(View.INFORMACOES);
     }
-
     @FXML
     void onPerfilPressed() {
         ViewSwitcher.switchTo(View.PERFIL);
     }
-
     @FXML
     void onPerguntasPressed() {
-        ViewSwitcher.switchTo(View.PERGUNTAS);
+        if(!LoginController.isGestor)
+            ViewSwitcher.switchTo(View.PERGUNTAS_ESTUDANTE);
+        else
+            ViewSwitcher.switchTo(View.PERGUNTAS);
     }
-
     @FXML
     void onTerminarSessaoPressed() throws SQLException {
 
@@ -61,10 +69,8 @@ public class PerfilController implements Initializable {
         }else
             ToastMessage.show(getScene().getWindow(), "Erro ao terminar sessão");
     }
-
     @FXML
     void onEditarPerfilPressed() {ViewSwitcher.switchTo(View.EDITAR_PERFIL);}
-
     @FXML
     void onEliminarPerfilPressed() throws SQLException {
         if(!connDB.removeUtilizador(LoginController.getNumero()))
@@ -74,8 +80,6 @@ public class PerfilController implements Initializable {
             ViewSwitcher.switchTo(View.LOGIN);
         }
     }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

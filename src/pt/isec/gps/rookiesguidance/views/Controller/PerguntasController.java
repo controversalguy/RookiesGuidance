@@ -147,16 +147,18 @@ public class PerguntasController implements Initializable {
     }
 
     @FXML
-    void onIconPressed() {ViewSwitcher.switchTo(View.HOMEPAGE);  }
+    void onIconPressed() {
+            ViewSwitcher.switchTo(View.HOMEPAGE_GESTORES);
+    }
 
     @FXML
     void onEventosPressed() {
-        ViewSwitcher.switchTo(View.EVENTOS);
+            ViewSwitcher.switchTo(View.EVENTOS);
     }
 
     @FXML
     void onInformacoesPressed() {
-        ViewSwitcher.switchTo(View.INFORMACOES);
+            ViewSwitcher.switchTo(View.INFORMACOES);
     }
 
     @FXML
@@ -166,7 +168,7 @@ public class PerguntasController implements Initializable {
 
     @FXML
     void onPerguntasPressed() {
-        ViewSwitcher.switchTo(View.PERGUNTAS_ESTUDANTE);
+            ViewSwitcher.switchTo(View.PERGUNTAS);
     }
 
     @FXML

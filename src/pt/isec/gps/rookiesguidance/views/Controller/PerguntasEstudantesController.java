@@ -151,12 +151,12 @@ public class PerguntasEstudantesController implements Initializable {
 
     @FXML
     void onEventosPressed() {
-        ViewSwitcher.switchTo(View.EVENTOS);
+        ViewSwitcher.switchTo(View.EVENTOS_ESTUDANTE);
     }
 
     @FXML
     void onInformacoesPressed() {
-        ViewSwitcher.switchTo(View.INFORMACOES);
+        ViewSwitcher.switchTo(View.INFORMACOES_ESTUDANTE);
     }
 
     @FXML
@@ -166,7 +166,7 @@ public class PerguntasEstudantesController implements Initializable {
 
     @FXML
     void onPerguntasPressed() {
-        ViewSwitcher.switchTo(View.PERGUNTAS);
+        ViewSwitcher.switchTo(View.PERGUNTAS_ESTUDANTE);
     }
 
     @FXML
