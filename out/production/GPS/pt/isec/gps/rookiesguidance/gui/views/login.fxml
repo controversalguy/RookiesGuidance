@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.gui.views.Controller.LoginController">
+    <ImageView fitHeight="168.0" fitWidth="228.0" layoutX="269.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+        <cursor>
+            <Cursor fx:constant="HAND" />
+        </cursor>
+        <Image url="@../../images/Rookies.png" />
+    </ImageView>
+    <Button layoutX="157.0" layoutY="206.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="158.0" style="-fx-background-color: #53A7C6;" text="Login" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="15.0" />
+        </font>
+    </Button>
+    <Button layoutX="385.0" layoutY="206.0" mnemonicParsing="false" onAction="#onButtonRegisto" prefHeight="26.0" prefWidth="158.0" style="-fx-background-color: #38819c;" text="Registo" textFill="WHITE">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Button>
+    <TextField fx:id="email" accessibleHelp="email" layoutX="158.0" layoutY="266.0" prefHeight="26.0" prefWidth="390.0" promptText="Email" />
+    <Button layoutX="293.0" layoutY="367.0" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: #38819c;" text="Iniciar Sessão" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font>
+    </Button>
+    <PasswordField fx:id="password" layoutX="157.0" layoutY="321.0" prefHeight="26.0" prefWidth="390.0" promptText="Palavra-passe" />
+    <Text layoutX="158.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+    <Text layoutX="158.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Palavra-passe" />
+</AnchorPane>

@@ -332,15 +332,19 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        if(result.isPresent()) {
-            switch (result.get()) {
-                case "TWEB" -> ViewSwitcher.switchTo(View.TWEB);
-                case "SD" -> ViewSwitcher.switchTo(View.SD);
-                case "IP" -> ViewSwitcher.switchTo(View.IP);
-                case "ELETRO" -> ViewSwitcher.switchTo(View.ELETRO);
-                case "ALGEBRA" -> ViewSwitcher.switchTo(View.ALGEBRA);
-                case "AM1" -> ViewSwitcher.switchTo(View.AM1);
+        try {
+            if (result.isPresent()) {
+                switch (result.get()) {
+                    case "TWEB" -> ViewSwitcher.switchTo(View.TWEB);
+                    case "SD" -> ViewSwitcher.switchTo(View.SD);
+                    case "IP" -> ViewSwitcher.switchTo(View.IP);
+                    case "ELETRO" -> ViewSwitcher.switchTo(View.ELETRO);
+                    case "ALGEBRA" -> ViewSwitcher.switchTo(View.ALGEBRA);
+                    case "AM1" -> ViewSwitcher.switchTo(View.AM1);
+                }
             }
+        }catch (ClassCastException e) {
+
         }
     }
 
@@ -421,15 +425,19 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        if(result.isPresent()) {
-            switch (result.get()) {
-                case "SO" -> ViewSwitcher.switchTo(View.SO);
-                case "BD" -> ViewSwitcher.switchTo(View.BD);
-                case "POO" -> ViewSwitcher.switchTo(View.POO);
-                case "SO2" -> ViewSwitcher.switchTo(View.SO2);
-                case "PA" -> ViewSwitcher.switchTo(View.PA);
-                case "CR" -> ViewSwitcher.switchTo(View.CR);
+        try {
+            if (result.isPresent()) {
+                switch (result.get()) {
+                    case "SO" -> ViewSwitcher.switchTo(View.SO);
+                    case "BD" -> ViewSwitcher.switchTo(View.BD);
+                    case "POO" -> ViewSwitcher.switchTo(View.POO);
+                    case "SO2" -> ViewSwitcher.switchTo(View.SO2);
+                    case "PA" -> ViewSwitcher.switchTo(View.PA);
+                    case "CR" -> ViewSwitcher.switchTo(View.CR);
+                }
             }
+        } catch (ClassCastException e) {
+
         }
     }
 
@@ -493,13 +501,17 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        if(result.isPresent()) {
-            switch (result.get()) {
-                case "PD" -> ViewSwitcher.switchTo(View.PD);
-                case "PWEB" -> ViewSwitcher.switchTo(View.PWEB);
-                case "AMOV" -> ViewSwitcher.switchTo(View.AMOV);
-                case "ETICA" -> ViewSwitcher.switchTo(View.ETICA);
+        try {
+            if (result.isPresent()) {
+                switch (result.get()) {
+                    case "PD" -> ViewSwitcher.switchTo(View.PD);
+                    case "PWEB" -> ViewSwitcher.switchTo(View.PWEB);
+                    case "AMOV" -> ViewSwitcher.switchTo(View.AMOV);
+                    case "ETICA" -> ViewSwitcher.switchTo(View.ETICA);
+                }
             }
+        } catch (ClassCastException e) {
+
         }
     }
 
@@ -580,16 +592,21 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        if(result.isPresent()) {
-            switch (result.get()) {
-                case "DT" -> ViewSwitcher.switchTo(View.DT);
-                case "QUIMICA" -> ViewSwitcher.switchTo(View.QUIMICA);
-                case "FA" -> ViewSwitcher.switchTo(View.FA);
-                case "IP" -> ViewSwitcher.switchTo(View.IP);
-                case "ALGEBRA" -> ViewSwitcher.switchTo(View.ALGEBRA);
-                case "AM1" -> ViewSwitcher.switchTo(View.AM1);
+        try {
+            if (result.isPresent()) {
+                switch (result.get()) {
+                    case "DT" -> ViewSwitcher.switchTo(View.DT);
+                    case "QUIMICA" -> ViewSwitcher.switchTo(View.QUIMICA);
+                    case "FA" -> ViewSwitcher.switchTo(View.FA);
+                    case "IP" -> ViewSwitcher.switchTo(View.IP);
+                    case "ALGEBRA" -> ViewSwitcher.switchTo(View.ALGEBRA);
+                    case "AM1" -> ViewSwitcher.switchTo(View.AM1);
+                }
             }
+        } catch (ClassCastException e) {
+
         }
+
     }
 
     @FXML
@@ -669,15 +686,19 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        if(result.isPresent()) {
-            switch (result.get()) {
-                case "RM1" -> ViewSwitcher.switchTo(View.RM1);
-                case "MH" -> ViewSwitcher.switchTo(View.MH);
-                case "TM1" -> ViewSwitcher.switchTo(View.TM1);
-                case "ME" -> ViewSwitcher.switchTo(View.ME);
-                case "MF" -> ViewSwitcher.switchTo(View.MF);
-                case "TM2" -> ViewSwitcher.switchTo(View.TM2);
+        try {
+            if (result.isPresent()) {
+                switch (result.get()) {
+                    case "RM1" -> ViewSwitcher.switchTo(View.RM1);
+                    case "MH" -> ViewSwitcher.switchTo(View.MH);
+                    case "TM1" -> ViewSwitcher.switchTo(View.TM1);
+                    case "ME" -> ViewSwitcher.switchTo(View.ME);
+                    case "MF" -> ViewSwitcher.switchTo(View.MF);
+                    case "TM2" -> ViewSwitcher.switchTo(View.TM2);
+                }
             }
+        } catch (ClassCastException e) {
+
         }
     }
 
@@ -740,13 +761,17 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        if(result.isPresent()) {
-            switch (result.get()) {
-                case "GQ" -> ViewSwitcher.switchTo(View.GQ);
-                case "FM" -> ViewSwitcher.switchTo(View.FM);
-                case "OG" -> ViewSwitcher.switchTo(View.OG);
-                case "IC" -> ViewSwitcher.switchTo(View.IC);
+        try {
+            if (result.isPresent()) {
+                switch (result.get()) {
+                    case "GQ" -> ViewSwitcher.switchTo(View.GQ);
+                    case "FM" -> ViewSwitcher.switchTo(View.FM);
+                    case "OG" -> ViewSwitcher.switchTo(View.OG);
+                    case "IC" -> ViewSwitcher.switchTo(View.IC);
+                }
             }
+        } catch (ClassCastException e) {
+
         }
     }
 
@@ -827,15 +852,19 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        if(result.isPresent()) {
-            switch (result.get()) {
-                case "SD" -> ViewSwitcher.switchTo(View.SD);
-                case "AL" -> ViewSwitcher.switchTo(View.ALGEBRA);
-                case "AP" -> ViewSwitcher.switchTo(View.AP);
-                case "PC" -> ViewSwitcher.switchTo(View.PC);
-                case "MI" -> ViewSwitcher.switchTo(View.MI);
-                case "FG" -> ViewSwitcher.switchTo(View.FG);
+        try {
+            if (result.isPresent()) {
+                switch (result.get()) {
+                    case "SD" -> ViewSwitcher.switchTo(View.SD);
+                    case "AL" -> ViewSwitcher.switchTo(View.ALGEBRA);
+                    case "AP" -> ViewSwitcher.switchTo(View.AP);
+                    case "PC" -> ViewSwitcher.switchTo(View.PC);
+                    case "MI" -> ViewSwitcher.switchTo(View.MI);
+                    case "FG" -> ViewSwitcher.switchTo(View.FG);
+                }
             }
+        } catch (ClassCastException e) {
+
         }
     }
 
@@ -916,15 +945,19 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        if(result.isPresent()) {
-            switch (result.get()) {
-                case "ELETRONICA" -> ViewSwitcher.switchTo(View.ELETRO);
-                case "AI" -> ViewSwitcher.switchTo(View.AI);
-                case "SC" -> ViewSwitcher.switchTo(View.SC);
-                case "TSC" -> ViewSwitcher.switchTo(View.TSC);
-                case "PS" -> ViewSwitcher.switchTo(View.PS);
-                case "SM" -> ViewSwitcher.switchTo(View.SM);
+        try {
+            if (result.isPresent()) {
+                switch (result.get()) {
+                    case "ELETRONICA" -> ViewSwitcher.switchTo(View.ELETRO);
+                    case "AI" -> ViewSwitcher.switchTo(View.AI);
+                    case "SC" -> ViewSwitcher.switchTo(View.SC);
+                    case "TSC" -> ViewSwitcher.switchTo(View.TSC);
+                    case "PS" -> ViewSwitcher.switchTo(View.PS);
+                    case "SM" -> ViewSwitcher.switchTo(View.SM);
+                }
             }
+        } catch (ClassCastException e) {
+
         }
     }
 
@@ -987,13 +1020,17 @@ public class InformacoesController implements Initializable {
 
         Optional<String> result = dialog.showAndWait();
 
-        if(result.isPresent()) {
-            switch (result.get()) {
-                case "EP" -> ViewSwitcher.switchTo(View.EP);
-                case "IE" -> ViewSwitcher.switchTo(View.IE);
-                case "CE" -> ViewSwitcher.switchTo(View.CE);
-                case "GE" -> ViewSwitcher.switchTo(View.GE);
+        try {
+            if (result.isPresent()) {
+                switch (result.get()) {
+                    case "EP" -> ViewSwitcher.switchTo(View.EP);
+                    case "IE" -> ViewSwitcher.switchTo(View.IE);
+                    case "CE" -> ViewSwitcher.switchTo(View.CE);
+                    case "GE" -> ViewSwitcher.switchTo(View.GE);
+                }
             }
+        } catch (ClassCastException e) {
+
         }
     }
 

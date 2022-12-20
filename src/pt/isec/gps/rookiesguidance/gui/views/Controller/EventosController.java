@@ -69,7 +69,7 @@ public class EventosController implements Initializable {
         TextField tipo = new TextField();
         DatePicker data = new DatePicker(LocalDate.now());
         TextField horaInicio = new TextField();
-        horaInicio.setPromptText("00h00");
+        horaInicio.setPromptText("00:00");
         TextField local = new TextField();
 
         grid.add(new Label("Tipo do evento:"), 0, 0);
@@ -130,6 +130,7 @@ public class EventosController implements Initializable {
 
                     if(!matcher.matches()) {
                         ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Preencha os campos corretamente");
+                        onAdicionarPressed();
                         return null;
                     }
 
@@ -141,8 +142,16 @@ public class EventosController implements Initializable {
                     System.out.println(strDate[0]);
 
                     String data_hora = strDate[0] + " " + horaInicio.getText();
+
+                    if (data.getValue().compareTo(LocalDate.now()) < 0) {
+                        ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Data Invalida");
+                        onAdicionarPressed();
+                        return null;
+                    }
+
                     if (!connDB.adicionaEvento(LoginController.getNumero(),tipo.getText(), local.getText(), data_hora)) {
                         ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Não foi possível adicionar o evento!");
+                        onAdicionarPressed();
                         return null;
                     }
                 } catch (SQLException e) {
@@ -290,6 +299,7 @@ public class EventosController implements Initializable {
 
                 dialog2.setResultConverter(dialogButton -> {
                     if (dialogButton == ok) {
+
                         try {
 
                             String regex = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
@@ -301,6 +311,7 @@ public class EventosController implements Initializable {
 
                             if(!matcher.matches()) {
                                 ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Preencha os campos corretamente");
+                                onDiaPressed();
                                 return null;
                             }
 
@@ -312,6 +323,13 @@ public class EventosController implements Initializable {
                             System.out.println(strDate2[0]);
 
                             String data_hora = strDate2[0] + " " + horaInicio.getText();
+
+                            if (data.getValue().compareTo(LocalDate.now()) < 0) {
+                                ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Data Invalida");
+                                onDiaPressed();
+                                return null;
+                            }
+
                             if (!connDB.editaEvento(Integer.parseInt(eventosText.get(j).getText()),tipo.getText(), local.getText(), data_hora, LoginController.getNumero())) {
                                 ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Não foi possível editar o evento!");
                                 return null;

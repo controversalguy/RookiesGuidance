@@ -89,8 +89,18 @@ public class HomePageController implements Initializable {
             eventos = connDB.getEventos(strDate);
             for (int i = 0; i < eventos.size(); i++) {
                 Text t = new Text();
-                t.setText(eventos.get(i));
+                //t.setStyle("-fx-font-weight: bold");
+
+                String[] texto = eventos.get(i).split("\n");
+                t.setText(texto[0]);
+                t.setStyle("-fx-font-weight: bold");
+
+                Text q = new Text();
+                q.setText(texto[1] + "\n");
+
+                //t.setText(eventos.get(i));
                 eventosText.add(t);
+                eventosText.add(q);
             }
             detalhesCalendario.getChildren().addAll(eventosText);
         } catch (SQLException e) {

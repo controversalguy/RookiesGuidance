@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f8f332c7-0186-4121-a920-b23c03e6edad" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/GPS.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_39_3_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_39_3_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rookies.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/bd/ConnDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/bd/ConnDB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/EventosController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/EventosController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageGestoresController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageGestoresController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/InformacoesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/InformacoesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/InscreveEventoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/InscreveEventoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/bd/ConnDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/bd/ConnDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/EventosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/EventosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageGestoresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageGestoresController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/InformacoesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/InformacoesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/InscreveEventoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/InscreveEventoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/testes/Testes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/testes/Testes.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2JBD1GTEGlKRBwK00boa49cXIbX" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/uni/3ano/1semestre/GPS/GPS",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f8f332c7-0186-4121-a920-b23c03e6edad" name="Changes" comment="" />
+      <created>1671542365584</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1671542365584</updated>
+      <workItem from="1671542367067" duration="863000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

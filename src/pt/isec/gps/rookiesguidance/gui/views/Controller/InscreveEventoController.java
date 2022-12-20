@@ -132,7 +132,11 @@ public class InscreveEventoController implements Initializable {
                 SQLException e) {
             throw new RuntimeException(e);
         }
-        idEvento = EventosController.getIdEvento();
+        if(LoginController.isGestor)
+            idEvento = EventosController.getIdEvento();
+        else
+            idEvento = EventosEstudantesController.getIdEvento();
+
         submeterButton.setDisable(true);
 
         try {
