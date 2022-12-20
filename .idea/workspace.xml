@@ -1,30 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f8f332c7-0186-4121-a920-b23c03e6edad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/GPS.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_39_3_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_39_3_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rookies.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/bd/ConnDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/bd/ConnDB.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/EventosController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/EventosController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageGestoresController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageGestoresController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/InformacoesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/InformacoesController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/InscreveEventoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RookiesGuidance/pt/isec/gps/rookiesguidance/gui/views/Controller/InscreveEventoController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/bd/ConnDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/bd/ConnDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/Main.java" afterDir="false" />
+    <list default="true" id="f8f332c7-0186-4121-a920-b23c03e6edad" name="Changes" comment="finish">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rookies.db" beforeDir="false" afterPath="$PROJECT_DIR$/Rookies.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GPS/pt/isec/gps/rookiesguidance/gui/views/Controller/PerguntasEstudantesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GPS/pt/isec/gps/rookiesguidance/gui/views/Controller/PerguntasEstudantesController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/EventosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/EventosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageGestoresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/HomePageGestoresController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/InformacoesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/InformacoesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/InscreveEventoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/InscreveEventoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/testes/Testes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/testes/Testes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/PerguntasEstudantesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pt/isec/gps/rookiesguidance/gui/views/Controller/PerguntasEstudantesController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,8 +50,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1671542365584</updated>
-      <workItem from="1671542367067" duration="863000" />
+      <workItem from="1671542367067" duration="1916000" />
     </task>
+    <task id="LOCAL-00001" summary="finish">
+      <created>1671543287798</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1671543287798</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -85,5 +75,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="finish" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish" />
   </component>
 </project>

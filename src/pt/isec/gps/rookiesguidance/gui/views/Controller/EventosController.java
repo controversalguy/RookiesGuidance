@@ -348,7 +348,7 @@ public class EventosController implements Initializable {
             id.get(2).setOnAction(actionEvent -> {
                 try {
                     if (!connDB.removeEvento(Integer.parseInt(eventosText.get(j).getText()), LoginController.getNumero())) {
-                        ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Não existe evento para remover");
+                        ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Impossível remover evento!");
                     }
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
