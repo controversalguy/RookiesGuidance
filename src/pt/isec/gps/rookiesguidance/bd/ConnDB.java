@@ -299,13 +299,6 @@ public class ConnDB {
                     resultSet.close();
                     statement.close();
 
-                    ResultSet rsOrdena = statement.executeQuery("SELECT * FROM novidade");
-                    int i = 0;
-                    while(rsOrdena.next()){
-                        int idOrdena = rsOrdena.getInt("id");
-                        statement.executeUpdate("UPDATE novidade SET id='"+ i +"' WHERE id ='" + idOrdena+"'");
-                        i++;
-                    }
                     return true;
                 }
                 System.out.println("Local inexistente");
@@ -379,10 +372,26 @@ public class ConnDB {
         ResultSet rs = statement.executeQuery(verificaExistente);
         ArrayList<String> novidades = new ArrayList<>();
         while (rs.next()){
+            int id = rs.getInt("id");
             String titulo = rs.getString("titulo");
             String descricao = rs.getString("descricao");
-            novidades.add(titulo);
+            novidades.add(id + " - " + titulo);
             novidades.add(descricao);
+        }
+        /*if(novidades.size() == 0)
+            return null;*/
+        return novidades;
+    }
+
+    public ArrayList<String> getNovidadesId() throws SQLException {
+
+        Statement statement = dbConn.createStatement();
+        String verificaExistente = "SELECT * FROM novidade";
+        ResultSet rs = statement.executeQuery(verificaExistente);
+        ArrayList<String> novidades = new ArrayList<>();
+        while (rs.next()){
+            int id = rs.getInt("id");
+            novidades.add(String.valueOf(id));
         }
         /*if(novidades.size() == 0)
             return null;*/

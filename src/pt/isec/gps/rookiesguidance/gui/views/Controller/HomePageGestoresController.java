@@ -176,7 +176,7 @@ public class HomePageGestoresController implements Initializable {
     @FXML
     public void onRemoverNovidade() throws SQLException {
         try {
-            novidades = connDB.getNovidades();
+            novidades = connDB.getNovidadesId();
             if (novidades.isEmpty()) {
                 ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Não existe novidades para remover");
                 return;
@@ -184,70 +184,50 @@ public class HomePageGestoresController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        novidadesText = new ArrayList<>();
+        ChoiceBox<String> tipo = new ChoiceBox<>();
+        tipo.getItems().addAll(novidades);
 
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Novidades");
         dialog.setHeaderText("Remover Novidades");
 
-        //dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL);
+        ButtonType ok = new ButtonType("Remover", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
 
         // Create the username and password labels and fields.
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
-        ArrayList<Button> id = new ArrayList<>();
 
-        for (int i = 0; i < novidades.size(); i+=2) {
-            int index = i/2;
-            id.add(new Button(novidades.get(i)));
-            System.out.println("novidades.get(i): "+novidades.get(i));
-            System.out.println(novidades);
-            id.get(index).setOnAction(mouseEvent -> {
-                dialog.setResult(String.valueOf(index));
-            });
-            grid.add(new Label("Novidade:"), index, index);
-            grid.add(id.get(index), index + 1, index);
-        }
+        grid.add(new Label("Número da Novidade:"), 0, 0);
+        grid.add(tipo, 1, 0);
 
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL);
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == ok) {
+                if(tipo.getSelectionModel().isEmpty()) {
+                    ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Insira um número!");
+                    return null;
+                } else {
+                    try {
+                        if(connDB.removeNovidade(Integer.parseInt(tipo.getSelectionModel().getSelectedItem()), LoginController.getNumero()))
+                            ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Novidade eliminada com sucesso!");
+                        else
+                            ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Impossivel eliminar novidade!");
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
 
-        System.out.println("NOVIDADES: " + novidades);
+                    ViewSwitcher.switchTo(View.HOMEPAGE_GESTORES);
+
+                }
+            }
+            return null;
+        });
 
         dialog.getDialogPane().setContent(grid);
 
-        Optional<String> result = dialog.showAndWait();
-
-        try {
-            if (!connDB.removeNovidade(Integer.parseInt(result.get()), LoginController.getNumero())) {
-                ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Não existe novidades para remover");
-                return;
-            }
-
-            novidades = connDB.getNovidades();
-
-            if (novidades == null) {
-                ToastMessage.show(ViewSwitcher.getScene().getWindow(), "Não existe novidades para remover");
-            }
-            System.out.println("novidades:" + novidades);
-            Text t;
-            for (int i = 0; i < novidades.size(); i++) {
-                if (i % 2 == 0) {
-                    t = new Text();
-                    t.setText("\n" + novidades.get(i));
-                    t.setStyle("-fx-font-weight: bold;");
-                } else {
-                    t = new Text();
-                    t.setText(novidades.get(i));
-                }
-                novidadesText.add(t);
-            }
-            novidadesvBox.getChildren().clear();
-            novidadesvBox.getChildren().addAll(novidadesText);
-        }catch (ClassCastException e) {
-            dialog.close();
-       }
+        dialog.showAndWait();
 
     }
     @FXML
