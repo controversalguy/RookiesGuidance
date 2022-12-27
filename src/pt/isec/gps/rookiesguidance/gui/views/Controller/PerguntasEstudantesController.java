@@ -133,7 +133,7 @@ public class PerguntasEstudantesController implements Initializable {
                         throw new RuntimeException(e);
                     }
 
-                    ViewSwitcher.switchTo(View.PERGUNTAS);
+                    ViewSwitcher.switchTo(View.PERGUNTAS_ESTUDANTE);
 
                 }
             }

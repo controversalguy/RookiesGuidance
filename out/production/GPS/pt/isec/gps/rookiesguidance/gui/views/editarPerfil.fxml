@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="550.0" prefWidth="750.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.isec.gps.rookiesguidance.gui.views.Controller.EditarPerfilController">
+    <HBox prefHeight="63.0" prefWidth="750.0" style="-fx-background-color: #38819c;">
+        <ImageView fx:id="homePageIcon" accessibleRole="BUTTON" fitHeight="79.0" fitWidth="154.0" onMouseClicked="#onIconPressed" pickOnBounds="true" preserveRatio="true">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <Image url="@../../images/RookiesBanner.png" />
+        </ImageView>
+        <Button layoutX="350.0" layoutY="10.0" mnemonicParsing="false" onAction="#onEventosPressed" prefHeight="62.0" prefWidth="81.0" style="-fx-background-color: #38819c;" text="Eventos" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Button>
+        <Button mnemonicParsing="false" onAction="#onInformacoesPressed" prefHeight="62.0" prefWidth="118.0" style="-fx-background-color: #38819c;" text="Informações" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Button>
+        <Button layoutX="235.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPerguntasPressed" prefHeight="62.0" prefWidth="97.0" style="-fx-background-color: #38819c;" text="Perguntas" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Button>
+        <Button layoutX="306.0" layoutY="10.0" mnemonicParsing="false" onAction="#onPerfilPressed" prefHeight="62.0" prefWidth="76.0" style="-fx-background-color: #38819c;" text="Perfil">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Button>
+        <Button layoutX="390.0" layoutY="10.0" mnemonicParsing="false" onAction="#onTerminarSessaoPressed" prefHeight="28.0" prefWidth="129.0" text="Terminar sessão">
+            <HBox.margin>
+                <Insets left="120.0" right="10.0" top="20.0" />
+            </HBox.margin>
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
+    </HBox>
+    <Text layoutX="287.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Perfil" textAlignment="CENTER" wrappingWidth="112.3363037109375">
+        <font>
+            <Font name="System Bold" size="23.0" />
+        </font>
+    </Text>
+    <Text layoutX="326.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Curso" />
+    <Text layoutX="295.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Palavra-passe antiga" />
+    <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="278.0" layoutY="363.0" mnemonicParsing="false" onAction="#onConfirmarPressed" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: #38819c;" text="Confirmar" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font></Button>
+   <PasswordField fx:id="passAntiga" layoutX="239.0" layoutY="260.0" prefHeight="26.0" prefWidth="210.0" />
+   <Text layoutX="293.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Palavra-passe nova" />
+   <PasswordField fx:id="passNova" layoutX="236.0" layoutY="310.0" prefHeight="26.0" prefWidth="210.0" />
+   <Text fx:id="nomeUser" layoutX="236.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="210.4000000000001">
+      <font>
+         <Font name="System Bold" size="18.0" />
+      </font>
+   </Text>
+   <ChoiceBox fx:id="dropdownCurso" layoutX="239.0" layoutY="204.0" prefHeight="26.0" prefWidth="210.0" />
+
+</AnchorPane>
